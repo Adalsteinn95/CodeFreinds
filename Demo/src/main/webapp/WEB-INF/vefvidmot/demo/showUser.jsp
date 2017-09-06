@@ -1,3 +1,10 @@
+<!--Author: Aðalsteinn Ingi Pálsson
+    Email: aip7@hi.is
+
+-->
+
+<!DOCTYPE html>
+
 <html lang="en">
 
 <head>

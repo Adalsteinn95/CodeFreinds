@@ -1,3 +1,8 @@
+<!--Author: Aðalsteinn Ingi Pálsson
+    Email: aip7@hi.is
+
+-->
+
 <!DOCTYPE html>
 
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>

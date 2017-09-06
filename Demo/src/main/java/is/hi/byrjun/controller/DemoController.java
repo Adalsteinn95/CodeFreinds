@@ -20,9 +20,12 @@ public class DemoController {
 
 
      /*
-     Shows the user an page with input elements
+     @param
 
-     returns the page of askUser.jsp
+     Shows the user an page with form
+
+     @return String
+
       */
     @RequestMapping("/ask")
     public String askUser(){
@@ -31,10 +34,12 @@ public class DemoController {
     }
 
     /*
-    method that gets the value from the input and deliveries it
-    to showUser.jsp
+    @param String from askUser.jsp
 
-    returns the page of showUser.jsp
+    method that gets the value from the input in askUser.jsp
+    and deliveries it to showUser.jsp
+
+    @return String
      */
     @RequestMapping(value="/who", method = RequestMethod.POST)
     public String who(@RequestParam(value="name",required=false)
