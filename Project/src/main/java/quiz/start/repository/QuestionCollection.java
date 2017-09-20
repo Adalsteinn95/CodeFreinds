@@ -1,4 +1,4 @@
-package quiz.start.question;
+package quiz.start.repository;
 
 /*
 Aðalsteinn Ingi Pálsson

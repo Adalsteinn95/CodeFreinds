@@ -1,13 +1,10 @@
-package quiz.start.question;
+package quiz.start.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
-import quiz.start.user.UserCollection;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Hashtable;
-import java.util.Iterator;
 
 /*
  *  Aðalsteinn Ingi Pálsson

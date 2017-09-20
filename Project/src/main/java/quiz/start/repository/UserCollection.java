@@ -1,4 +1,4 @@
-package quiz.start.user;
+package quiz.start.repository;
 
 /*
  *  Aðalsteinn Ingi Pálsson
@@ -8,6 +8,8 @@ package quiz.start.user;
  *  geg42@hi.is
  *
  */
+
+import quiz.start.model.User;
 
 /*
     A java class that collects the users, just like an repository

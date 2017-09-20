@@ -1,4 +1,4 @@
-package quiz.start.user;
+package quiz.start.model;
 /*
  * Aðalsteinn Ingi Pálsson
  * aip7@hi.is

@@ -1,4 +1,4 @@
-package quiz.start.question;
+package quiz.start.model;
 
 /*
 Aðalsteinn Ingi Pálsson
