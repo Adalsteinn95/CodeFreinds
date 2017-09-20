@@ -19,7 +19,13 @@ public class UserCollection {
     }
 
     public void addUser(User newuser){
+
         current_user = newuser;
+    }
+
+
+    public User getUser(){
+        return current_user;
     }
 
 }

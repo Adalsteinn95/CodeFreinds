@@ -11,12 +11,8 @@
 </head>
 <body>
 
-<h1>Congratulations with the new account ${user.getName()}!</h1>
-<h1>Your Password is ${user.getPass()}!</h1>
-<h1>Your email is ${user.getEmail()}</h1>
-
-<h2>Please login</h2>
-<a href="login">here!</a>
+<h1>Your Logged in as ${user.getName()}</h1>
+<h1>And your password is ${user.getPass()}</h1>
 
 </body>
 

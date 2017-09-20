@@ -6,11 +6,14 @@
 <html lang="en">
 
 <head>
-    <title>SUPER-AWESOME-HELLOWORLD</title>
+    <title>SUPER-AWESOME</title>
+    <meta charset="UTF-8">
 </head>
 <body>
 
-<form method="POST" action="/user/showuser">
+<h1>WELCOME TO LOGIN</h1>
+
+<form method="POST" action="/user/login">
     <div>
         <label for="name">name:</label>
         <input name="name" id="name" type="text" />
@@ -19,17 +22,8 @@
         <label for="password">Password:</label>
         <input name="password" id="password" type="password" />
     </div>
-    <div>
-        <label for="email">email</label>
-        <input name="email" id="email" type="text" />
-    </div>
-    <button type="submit">Sign up</button>
+    <button type="submit">LOG IN</button>
 </form>
-
-<ul>
-
-</ul>
-
 </body>
 
 </html>
