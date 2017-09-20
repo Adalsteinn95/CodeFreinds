@@ -27,8 +27,9 @@ public class UserCollection {
     }
 
     /*
-      @param 
-    */
+     * @param User
+     * Function to add a new user to the collection
+     */
     public void addUser(User newuser){
 
         current_user = newuser;
