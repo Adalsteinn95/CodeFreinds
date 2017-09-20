@@ -27,7 +27,9 @@ public class UserControl {
 
 
     /*
+    @param String
     shows the sign up page
+    @return String
      */
 
     @RequestMapping("/signup")
@@ -36,9 +38,14 @@ public class UserControl {
     }
 
     /*
-    handles the sign up 4 user
+    @param String
+    @param String
+    @param String
+    @param ModelMap
+      handles the sign up for the user
+      and shows confirmation
+    @return String
      */
-
     @RequestMapping(value = "/showuser", method = RequestMethod.POST)
     public String showUser(@RequestParam(value = "name")String name,
                            @RequestParam(value = "password")String pass,
@@ -55,6 +62,11 @@ public class UserControl {
         return "user/show";
     }
 
+    /*
+    @param String
+
+    @return
+    */
     @RequestMapping("/login")
     public String login(){
         return "user/login";

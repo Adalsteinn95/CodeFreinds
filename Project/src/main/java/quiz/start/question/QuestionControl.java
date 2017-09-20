@@ -1,14 +1,4 @@
 package quiz.start.question;
-
-
-/*
- *
- *
- *  Aðalsteinn Ingi Pálsson
- *  aip7@hi.is
- *
- */
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
@@ -19,13 +9,22 @@ import java.util.Collection;
 import java.util.Hashtable;
 import java.util.Iterator;
 
+/*
+ *  Aðalsteinn Ingi Pálsson
+ *  aip7@hi.is
+ *
+ */
+
+
+/*
+Controller that manages the question pages
+*/
 @Controller
 @RequestMapping("/question")
 public class QuestionControl {
 
     /*
-    *
-    * API CALL
+    * API CALL NOT READY
      */
 
     @RequestMapping("/location")

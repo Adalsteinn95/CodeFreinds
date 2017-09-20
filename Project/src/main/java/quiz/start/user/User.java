@@ -8,19 +8,24 @@ package quiz.start.user;
  *
  *
  */
+
+ /*
+ class for users
+ */
 public class User {
 
     private String user_name;
     private String user_password;
     private String user_email;
 
+    /*constructor*/
     public User(String name, String password,String email){
           user_name = name;
           user_password = password;
           user_email = email;
     }
 
-
+    /*get and setters*/
     public String getName(){
         return user_name;
     }
