@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import quiz.start.model.User;
 import quiz.start.repository.UserCollection;
+import quiz.start.repository.SQLUser;
 
 /*
  *  Aðalsteinn Ingi Pálsson
@@ -56,7 +57,14 @@ public class UserControl {
         User u = new User(name,pass,email);
 
         //We put user into the collection
-        data.addUser(u);
+        //danna test
+        //data.addUser(u);
+        try {
+            data.deleteUser(u);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            System.out.println("villa í delete user");
+        }
 
 
         model.addAttribute("user",u);
