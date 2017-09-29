@@ -54,17 +54,11 @@ public class UserControl {
                            @RequestParam(value = "password")String pass,
                            @RequestParam(value = "email")String email,
                            ModelMap model){
-        User u = new User(name,pass,email);
+        User u = new User(name,pass,email, 0, 0, "", false);
 
         //We put user into the collection
         //danna test
-        //data.addUser(u);
-        try {
-            data.deleteUser(u);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            System.out.println("villa í delete user");
-        }
+        data.addUser(u);
 
 
         model.addAttribute("user",u);
@@ -86,7 +80,7 @@ public class UserControl {
     public String showLogin(@RequestParam(value = "name")String name,
                             @RequestParam(value = "password")String pass,
                             ModelMap model){
-        User u = new User("","","");
+        User u = new User("","","", 0, 0, "", false);
 
         u = data.getUser();
 

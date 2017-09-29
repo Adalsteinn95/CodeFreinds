@@ -21,7 +21,7 @@
     </div>
     <div>
         <label for="email">email</label>
-        <input name="email" id="email" type="text" />
+        <input name="email" id="email" type="email" />
     </div>
     <button type="submit">Sign up</button>
 </form>

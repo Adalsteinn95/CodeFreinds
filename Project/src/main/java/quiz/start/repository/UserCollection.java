@@ -7,6 +7,8 @@ package quiz.start.repository;
  *  Geir Garðarsson
  *  geg42@hi.is
  *
+ *  Daníel Guðnason
+ *  dag**@hi.is
  */
 
 import quiz.start.model.User;
@@ -17,9 +19,7 @@ import quiz.start.repository.SQLUser;
 */
 public class UserCollection {
 
-    /*
-      one user at the moment but will be an array of Users
-    */
+    //one user at the moment but will be an array of Users
     public User current_user;
     public SQLUser SQL;
 
