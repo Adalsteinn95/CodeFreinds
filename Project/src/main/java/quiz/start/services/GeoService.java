@@ -1,4 +1,5 @@
 package quiz.start.services;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -7,6 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.FileReader;
+import java.io.InputStream;
 import java.util.*;
 
 /*
@@ -104,6 +107,15 @@ public class GeoService {
         Hashtable hash = restTemplate.getForObject("https://maps.googleapis.com/maps/api/geocode/json?latlng=" + latString + "," + lngString + "&key=AIzaSyCkXt5PmbfwdeWqJFqAHt4bnKqRkHcfEwo",Hashtable.class);
 
         return hash;
+    }
+
+
+
+    @RequestMapping("/location/cities")
+    public void getCities(){
+
+        Hashtable hash = restTemplate.getForObject("https://notendur.hi.is/~aip7/API/countries.json",Hashtable.class);
+        System.out.print(hash);
     }
 
 
