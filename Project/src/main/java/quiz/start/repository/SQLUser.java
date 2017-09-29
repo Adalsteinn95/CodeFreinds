@@ -26,21 +26,20 @@ public class SQLUser {
         dbName = "Database1";
 
     }
-    public void newUser(int ID, String name, String Pass, String email, int score, String location) throws ClassNotFoundException{
+    public void newUser(String name, String Pass, String email, int score, String location) throws ClassNotFoundException{
 
         try
         {
 
             con = DriverManager.getConnection(url + dbName, userName, DBpassword);
             //con = DriverManager.getConnection(application.prperties.spring.datasource.url, userName, DBpassword);
-            String SQL = "INSERT INTO Users VALUES (?,?,?,?,?,?);";
+            String SQL = "INSERT INTO Users VALUES (?,?,?,?,?);";
             PreparedStatement stmt =  con.prepareStatement(SQL);
-            stmt.setInt(1, ID);
-            stmt.setString(2, name);
-            stmt.setString(3, Pass);
-            stmt.setString(4, email);
-            stmt.setInt(5, score);
-            stmt.setString(6, location);
+            stmt.setString(1, name);
+            stmt.setString(2, Pass);
+            stmt.setString(3, email);
+            stmt.setInt(4, score);
+            stmt.setString(5, location);
             stmt.executeUpdate();
 
             con.close();
