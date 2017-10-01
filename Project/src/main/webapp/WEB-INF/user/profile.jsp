@@ -10,10 +10,9 @@
     <meta charset="UTF-8">
 </head>
 <body>
-
-<h1>Your Logged in as ${user.getName()}</h1>
-<h1>And your password is ${user.getPass()}</h1>
-
+    <h1>Your Logged in as ${user.getName()}</h1>
+    <h1>And your password is ${user.getPass()}</h1>
+    <a href="question"><h2>Let's go to questions!</h2></a>
 </body>
 
 </html>

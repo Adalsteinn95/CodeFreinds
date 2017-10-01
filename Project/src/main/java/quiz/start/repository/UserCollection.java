@@ -56,19 +56,33 @@ public class UserCollection {
 
     /*
      * @param User
-     * Function to add a new user to the collection
+     * Function to add a new user to the database, the updates,
+     * the userCollection
      */
     public void addUser(User u) throws ClassNotFoundException {
 
         sqlUser.newUser(userCount++, u.getName(), u.getPass(), u.getEmail(), 0, u.getLocation());
     }
 
+    /*
+     * @param User
+     * Function to delete a user from the database, then updates
+     * the userCollection
+     */
     public void deleteUser(User newuser) throws ClassNotFoundException {
         current_user = newuser;
         sqlUser.deleteUser(current_user.getName(),current_user.getPass(),current_user.getEmail());
     }
 
 
+    /*
+     * @param String
+     * @param String
+     * Function to get a single user from the userCollection, if the
+     * user exists and the password is right
+     *
+     * @return User
+     */
     public User getUser(String userName, String passW) throws Exception {
 
         User tmp = new User(null,null,null,0,0,null, false);
@@ -124,6 +138,12 @@ public class UserCollection {
 
     }
 
+    /*
+     * @param String
+     * Checks if a username is taken
+     *
+     * @return boolean
+     */
     public boolean validateUser(String potentialUser) {
 
         Iterator<User> collectionIterator = collection.iterator();

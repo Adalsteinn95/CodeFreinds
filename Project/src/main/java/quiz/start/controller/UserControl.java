@@ -51,7 +51,6 @@ public class UserControl {
     shows the sign up page
     @return String
      */
-
     @RequestMapping("/signup")
     public String signUp() { return "user/signup"; }
 
@@ -88,15 +87,23 @@ public class UserControl {
     }
 
     /*
-    @param String
-
-    @return
-    */
+     * Shows a login page
+     * @return String
+     */
     @RequestMapping("/login")
     public String login(){
         return "user/login";
     }
 
+
+    /*
+     * @param String
+     * @param String
+     * @param ModelMap
+     * Shows a user profile page for successful logins
+     *
+     * @return String
+     */
     @RequestMapping(value = "/profile", method = RequestMethod.POST)
     public String showLogin(@RequestParam(value = "name")String name,
                             @RequestParam(value = "password")String pass,
@@ -116,7 +123,8 @@ public class UserControl {
 
 
     /*
-     *
+     * Shows a loginerror page
+     * @return String
      */
     @RequestMapping(value = "/error")
     public String error() { return "error/login_error"; }
