@@ -1,15 +1,21 @@
 package quiz.start.services;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.stereotype.Controller;
+
+import org.json.simple.JSONArray;
+import org.json.simple.parser.ParseException;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import javax.servlet.http.HttpServletRequest;
+
+import java.io.File;
 import java.io.FileReader;
-import java.io.InputStream;
+import java.io.IOException;
+import java.net.URL;
+
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+
+
 import java.util.*;
 
 /*
@@ -53,7 +59,7 @@ public class GeoService {
      * @Return Hashtable
      *
      */
-    public Hashtable apiCallBetweenTwoPlaces(){
+    public void apiCallBetweenTwoPlaces(){
 
         hash = restTemplate.getForObject("http://www.distance24.org/route.json?stops=" + locationA + "|" + locationB, Hashtable.class);
 
@@ -72,8 +78,6 @@ public class GeoService {
                     hash.get(key).getClass());
         }
 
-
-        return hash;
     }
 
 
@@ -85,7 +89,6 @@ public class GeoService {
 
         return distance;
     }
-
 
 
     /*
@@ -109,14 +112,6 @@ public class GeoService {
         return hash;
     }
 
-
-
-    @RequestMapping("/location/cities")
-    public void getCities(){
-
-        Hashtable hash = restTemplate.getForObject("https://notendur.hi.is/~aip7/API/countries.json",Hashtable.class);
-        System.out.print(hash);
-    }
 
 
 }
