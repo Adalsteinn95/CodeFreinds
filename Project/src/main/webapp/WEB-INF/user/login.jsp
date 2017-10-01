@@ -13,7 +13,7 @@
 
 <h1>WELCOME TO LOGIN</h1>
 
-<form method="POST" action="/user/login">
+<form method="POST" action="/user/profile">
     <div>
         <label for="name">name:</label>
         <input name="name" id="name" type="text" />

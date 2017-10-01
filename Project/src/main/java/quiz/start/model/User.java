@@ -52,7 +52,7 @@ public class User {
     }
     public int getScore() { return user_currentScore; }
     public int getHighScore() { return user_highScore; }
-    public String location() { return user_location; }
+    public String getLocation() { return user_location; }
     public boolean getLoginStatus() { return user_loginStatus; }
 
     public void setName(String name) {

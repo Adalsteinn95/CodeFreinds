@@ -8,11 +8,17 @@ import quiz.start.model.User;
 import quiz.start.repository.UserCollection;
 import quiz.start.repository.SQLUser;
 
+import java.sql.SQLException;
+
 /*
  *  Aðalsteinn Ingi Pálsson
  *  aip7@hi.is
  *
+ *  Geir Garðarsson
+ *  geg42@hi.is
  *
+ *  Fannar Gauti Guðmundsson
+ *  *@hi.is
  *
  */
 
@@ -28,6 +34,17 @@ public class UserControl {
 
     UserCollection data = new UserCollection();
 
+    public UserControl() throws SQLException {
+    }
+
+    /*
+     @param String
+     shows the home page
+     @return String
+     */
+    @RequestMapping("/")
+    public String home() { return "user/home"; }
+
 
     /*
     @param String
@@ -36,9 +53,7 @@ public class UserControl {
      */
 
     @RequestMapping("/signup")
-    public String signUp(){
-        return "user/signup";
-    }
+    public String signUp() { return "user/signup"; }
 
     /*
     @param String
@@ -53,13 +68,19 @@ public class UserControl {
     public String showUser(@RequestParam(value = "name")String name,
                            @RequestParam(value = "password")String pass,
                            @RequestParam(value = "email")String email,
-                           ModelMap model){
+                           ModelMap model) throws ClassNotFoundException {
         User u = new User(name,pass,email, 0, 0, "", false);
 
-        //We put user into the collection
-        //danna test
-        data.addUser(u);
+        //Validate username
+        if (data.validateUser(u.getName())) {
 
+            //We put user into the collection
+            data.addUser(u);
+
+        } else {
+            System.out.println("Username taken");
+            return "/user/signup";
+        }
 
         model.addAttribute("user",u);
 
@@ -76,19 +97,28 @@ public class UserControl {
         return "user/login";
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @RequestMapping(value = "/profile", method = RequestMethod.POST)
     public String showLogin(@RequestParam(value = "name")String name,
                             @RequestParam(value = "password")String pass,
                             ModelMap model){
         User u = new User("","","", 0, 0, "", false);
 
-        u = data.getUser();
-
-        if(u.getName().equals(name) && u.getPass().equals(pass) ){
+        try {
+            u = data.getUser(name, pass);
             model.addAttribute("user",u);
         }
-        System.out.print(name);
-        return "user/question";
+        catch (Exception e) {
+            return error();
+        }
+
+        return "user/profile";
     }
+
+
+    /*
+     *
+     */
+    @RequestMapping(value = "/error")
+    public String error() { return "error/login_error"; }
 
 }
