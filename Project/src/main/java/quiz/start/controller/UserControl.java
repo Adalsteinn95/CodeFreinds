@@ -18,7 +18,7 @@ import java.sql.SQLException;
  *  geg42@hi.is
  *
  *  Fannar Gauti Guðmundsson
- *  *@hi.is
+ *  fgg2@hi.is
  *
  */
 

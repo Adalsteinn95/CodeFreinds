@@ -8,10 +8,10 @@ package quiz.start.repository;
  *  geg42@hi.is
  *
  *  Daníel Guðnason
- *  dag**@hi.is
+ *  dag27@hi.is
  *
  *  Fannar Gauti Guðmundsson
- *  *@hi.is
+ *  fgg2@hi.is
  */
 
 import quiz.start.model.User;
@@ -98,7 +98,7 @@ public class UserCollection {
         }
 
         if (tmp.getName() == null) {
-            throw new Exception("login error");
+            throw new Exception("User not found");
         }
 
         return tmp;
