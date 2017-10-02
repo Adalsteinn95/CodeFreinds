@@ -1,7 +1,11 @@
 package quiz.start.controller;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
+import quiz.start.repository.QuestionCollection;
 
 import java.util.Collection;
 import java.util.Hashtable;
@@ -20,20 +24,41 @@ Controller that manages the question pages
 @RequestMapping("/question")
 public class QuestionControl {
 
-    /*
-    * API CALL NOT READY
-     */
+    QuestionCollection data;
+
+    public QuestionControl(){
+
+        data = new QuestionCollection("London");
+    }
 
     @RequestMapping("/location")
-    public String apiCall(){
-        RestTemplate restTemplate = new RestTemplate();
-        Hashtable hash = restTemplate.getForObject("http://www.distance24.org/route.json?stops=Newyork|London", Hashtable.class);
+    public String getLocation(ModelMap model){
 
-        Collection a = hash.values();
-        String b = hash.toString();
-        System.out.print(b);
+        model.addAttribute("Question",data);
+
+        return "question/location";
+
+    }
+
+    @RequestMapping(value = "/questionLocation", method = RequestMethod.POST)
+    public String getQuestion1(@RequestParam(value = "answer1")String answer, ModelMap model){
+
+        data.getData().compareDist(answer);
+
+        model.addAttribute("Question",data);
 
         return "question/location";
     }
+
+    @RequestMapping(value = "/questionLocation2", method = RequestMethod.POST)
+    public String getQuestion2(@RequestParam(value = "answer2")String answer, ModelMap model){
+
+        data.getData().compareDist(answer);
+
+        model.addAttribute("Question",data);
+
+        return "question/location";
+    }
+
 
 }
