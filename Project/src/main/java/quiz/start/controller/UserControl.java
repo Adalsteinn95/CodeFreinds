@@ -67,7 +67,7 @@ public class UserControl {
     public String showUser(@RequestParam(value = "name")String name,
                            @RequestParam(value = "password")String pass,
                            @RequestParam(value = "email")String email,
-                           ModelMap model) throws ClassNotFoundException {
+                           ModelMap model) throws ClassNotFoundException, SQLException {
         User u = new User(name,pass,email, 0, 0, "", false);
 
         //Validate username

@@ -32,8 +32,6 @@ public class UserCollection {
     public User current_user;
     public SQLUser sqlUser;
 
-    private int userCount = 666;
-
     /*
     constructor
     */
@@ -59,9 +57,10 @@ public class UserCollection {
      * Function to add a new user to the database, the updates,
      * the userCollection
      */
-    public void addUser(User u) throws ClassNotFoundException {
+    public void addUser(User u) throws ClassNotFoundException, SQLException {
 
-        sqlUser.newUser(userCount++, u.getName(), u.getPass(), u.getEmail(), 0, u.getLocation());
+        sqlUser.newUser(u.getName(), u.getPass(), u.getEmail(), 0, u.getLocation());
+        updateCollection();
     }
 
     /*
