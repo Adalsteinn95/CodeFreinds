@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /*
-ATH SQL SKIPANIR
+ATH sqlUser SKIPANIR
 Það þarf að gera \"\" í kringum column nöfn og '' í kringum strengi. Table nafnið er svo bara venjulegt
 
  */
@@ -148,12 +148,26 @@ public class SQLUser {
         }
     }
 
-    /*    <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>9.2-1004-jdbc4</version>
-        </dependency>
-        */
+    public ResultSet extractAllUsers() throws SQLException {
+        try{
+            con = DriverManager.getConnection(url + dbName, userName, DBpassword);
+
+            //Alternative resultset with nonconfidential data
+            //String SQL = "SELECT \"Name\", \"Score\", \"Location\" FROM USERS";
+
+            String SQL = "SELECT * FROM USERS";
+            PreparedStatement stmt =  con.prepareStatement(SQL);
+            ResultSet rs = stmt.executeQuery();
+            con.close();
+            return rs;
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+            con.close();
+            return null;
+        }
+    }
 
 
 }

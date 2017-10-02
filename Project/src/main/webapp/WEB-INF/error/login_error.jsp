@@ -4,16 +4,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <html lang="en">
-
 <head>
-    <title>SUPER-AWESOME</title>
+    <title>OMG</title>
     <meta charset="UTF-8">
 </head>
 <body>
-
-<h1>Your Logged in as ${user.getName()}</h1>
-<h1>And your password is ${user.getPass()}</h1>
-
+    <h1>Error</h1>
+    <h3>Username and/or password is wrong</h3>
+    <a href="login">Please try again</a>
 </body>
-
 </html>

@@ -9,7 +9,7 @@
     <title>SUPER-AWESOME-HELLOWORLD</title>
 </head>
 <body>
-
+<h1>Welcome to signup!</h1>
 <form method="POST" action="/user/showuser">
     <div>
         <label for="name">name:</label>
@@ -21,7 +21,7 @@
     </div>
     <div>
         <label for="email">email</label>
-        <input name="email" id="email" type="text" />
+        <input name="email" id="email" type="email" />
     </div>
     <button type="submit">Sign up</button>
 </form>
