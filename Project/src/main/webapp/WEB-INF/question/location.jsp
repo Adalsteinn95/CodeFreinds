@@ -29,7 +29,6 @@
 </head>
 <body>
 
-
 <h1>Question for you sir</h1>
 <p>Which city is closer to you ${Question.getData().getDest1()} || ${Question.getData().getDest2()}</p>
 <div class="questions">

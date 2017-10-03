@@ -7,9 +7,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /*
-ATH sqlUser SKIPANIR
-Það þarf að gera \"\" í kringum column nöfn og '' í kringum strengi. Table nafnið er svo bara venjulegt
-
+ * Daníel Guðnason
+ * dag27@hi.is
+ *
+ * Geir Garðarsson
+ * geg42@hi.is
+ *
  */
 
 public class SQLUser {

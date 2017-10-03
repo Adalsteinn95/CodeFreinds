@@ -82,7 +82,7 @@ public class UserCollection {
      *
      * @return User
      */
-    public User getUser(String userName, String passW) throws Exception {
+    public void loginUser(String userName, String passW) throws Exception {
 
         User tmp = new User(null,null,null,0,0,null, false);
 
@@ -101,7 +101,7 @@ public class UserCollection {
             throw new Exception("User not found");
         }
 
-        return tmp;
+        current_user = tmp;
     }
 
     /*
@@ -154,6 +154,14 @@ public class UserCollection {
             }
         }
         return true;
+    }
+
+    public void setCurrent_user(User u) {
+        current_user = u;
+    }
+
+    public User getCurrent_user() {
+        return current_user;
     }
 
 }

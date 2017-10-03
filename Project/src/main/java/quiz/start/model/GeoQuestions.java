@@ -28,7 +28,7 @@ public class GeoQuestions extends Question{
     public GeoQuestions(String location){
         super();
 
-        cities = new String[11];
+        cities = new String[20];
 
         cities[0] = "New York";
         cities[1] = "Reykjavik";
@@ -41,6 +41,15 @@ public class GeoQuestions extends Question{
         cities[8] = "Chicago";
         cities[9] = "Liverpool";
         cities[10] = "Moscow";
+        cities[11] = "Stockholm";
+        cities[12] = "Gothenburg";
+        cities[13] = "Vestmannaeyjar";
+        cities[14] = "28 de Noviembre";
+        cities[15] = "Dortmund";
+        cities[16] = "Lisbon";
+        cities[17] = "Seoul";
+        cities[18] = "Athens";
+        cities[19] = "Rome";
 
         currentLoc = location;
 

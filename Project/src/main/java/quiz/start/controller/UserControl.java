@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import quiz.start.model.User;
 import quiz.start.repository.UserCollection;
-import quiz.start.repository.SQLUser;
 
 import java.sql.SQLException;
 
@@ -32,9 +31,11 @@ handles the user pages
 @RequestMapping("/user")
 public class UserControl {
 
-    UserCollection data = new UserCollection();
+    private UserCollection data = new UserCollection();
+    private QuestionControl q;
 
     public UserControl() throws SQLException {
+
     }
 
     /*
@@ -42,7 +43,7 @@ public class UserControl {
      shows the home page
      @return String
      */
-    @RequestMapping("/")
+    @RequestMapping("")
     public String home() { return "user/home"; }
 
 
@@ -68,7 +69,7 @@ public class UserControl {
                            @RequestParam(value = "password")String pass,
                            @RequestParam(value = "email")String email,
                            ModelMap model) throws ClassNotFoundException, SQLException {
-        User u = new User(name,pass,email, 0, 0, "", false);
+        User u = new User(name,pass,email, 0, 0, "Reykjavik", false);
 
         //Validate username
         if (data.validateUser(u.getName())) {
@@ -108,10 +109,10 @@ public class UserControl {
     public String showLogin(@RequestParam(value = "name")String name,
                             @RequestParam(value = "password")String pass,
                             ModelMap model){
-        User u = new User("","","", 0, 0, "", false);
 
         try {
-            u = data.getUser(name, pass);
+            data.loginUser(name, pass);
+            User u = data.getCurrent_user();
             model.addAttribute("user",u);
         }
         catch (Exception e) {

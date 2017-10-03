@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 import quiz.start.repository.QuestionCollection;
+import quiz.start.model.User;
 
 import java.util.Collection;
 import java.util.Hashtable;
@@ -24,22 +25,32 @@ Controller that manages the question pages
 @RequestMapping("/question")
 public class QuestionControl {
 
-    QuestionCollection data;
+    private QuestionCollection data;
 
     public QuestionControl(){
-
-        data = new QuestionCollection("London");
+        this.data = new QuestionCollection("London");
     }
 
+    /*
+    *@param ModelMap
+    *
+    * Shows a page with questions
+    *@returns String
+    */
     @RequestMapping("/location")
     public String getLocation(ModelMap model){
-
         model.addAttribute("Question",data);
-
         return "question/location";
 
     }
 
+    /*
+    * @param String
+    * @param ModelMap
+    *
+    * Shows a page with questions, depending on your previous answer
+    * @returns String
+    */
     @RequestMapping(value = "/questionLocation", method = RequestMethod.POST)
     public String getQuestion1(@RequestParam(value = "answer1")String answer, ModelMap model){
 
@@ -50,6 +61,13 @@ public class QuestionControl {
         return "question/location";
     }
 
+    /*
+    * @param String
+    * @param ModelMap
+    *
+    * Shows a page with questions, depending on your previous answer
+    * @returns String
+    */
     @RequestMapping(value = "/questionLocation2", method = RequestMethod.POST)
     public String getQuestion2(@RequestParam(value = "answer2")String answer, ModelMap model){
 
@@ -59,6 +77,4 @@ public class QuestionControl {
 
         return "question/location";
     }
-
-
 }
