@@ -10,7 +10,9 @@ Hugbúnaðarverkefni í Háskóli Íslands
 
 ## 4. Run project. 
 
-## 5. Have fun!.
+## 5. Farðu á localhost:8080/user á vafra
+
+## 6. Have fun!.
 
 
 
