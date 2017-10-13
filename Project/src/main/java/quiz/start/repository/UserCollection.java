@@ -43,13 +43,6 @@ public class UserCollection {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        Iterator<User> collectionIterator = collection.iterator();
-        while (collectionIterator.hasNext()) {
-            System.out.println(collectionIterator.next().getName());
-        }
-
-        System.out.println(collection.size());
     }
 
     /*

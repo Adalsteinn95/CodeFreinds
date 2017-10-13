@@ -30,7 +30,7 @@
 <body>
 
 <h1>Question for you sir</h1>
-<p>Which city is closer to you ${Question.getData().getDest1()} || ${Question.getData().getDest2()}</p>
+<p>Which city is closer to you ${Question.getData().getDest1()} , ${Question.getData().getCountry()} || ${Question.getData().getDest2()} , ${Question.getData().getCountry2()}</p>
 <div class="questions">
     <div class="question1">
         <form action="/question/questionLocation" method="POST">
@@ -46,7 +46,7 @@
     </div>
 </div>
 <div>
-    <p> Your current location is ${Question.getData().getCurrentLoc()}</p>
+    <p> Your current location is ${Question.getData().getCurrentLoc()} , ${Question.getData().getCurrentCountry()}</p>
 </div>
 
 </body>
