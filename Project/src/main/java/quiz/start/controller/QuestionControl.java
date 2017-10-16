@@ -22,7 +22,7 @@ import java.util.Hashtable;
 Controller that manages the question pages
 */
 @Controller
-@RequestMapping("/question")
+@RequestMapping("/")
 public class QuestionControl {
 
     private QuestionCollection data;
@@ -39,8 +39,8 @@ public class QuestionControl {
     */
     @RequestMapping("/location")
     public String getLocation(ModelMap model){
-        model.addAttribute("Question",data);
-        return "question/location";
+
+        return "index";
 
     }
 
