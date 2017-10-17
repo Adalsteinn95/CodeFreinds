@@ -1,4 +1,6 @@
 package quiz.start.controller;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -7,10 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 import quiz.start.model.User;
 import quiz.start.repository.UserCollection;
 
+import java.lang.reflect.Field;
 import java.sql.SQLException;
 import java.util.Hashtable;
-import java.util.Map;
-
+import java.util.List;
 /*
  *  Aðalsteinn Ingi Pálsson
  *  aip7@hi.is
@@ -33,7 +35,6 @@ handles the user pages
 public class UserControl {
 
     private UserCollection data = new UserCollection();
-    private QuestionControl q;
 
 
     public UserControl() throws SQLException {
@@ -50,10 +51,14 @@ public class UserControl {
     @return String
      */
     @RequestMapping(value = "/showuser", method = RequestMethod.GET)
-    public Hashtable signUp(String name, String pass, String email) throws ClassNotFoundException, SQLException {
+    public Hashtable signUp(JSONObject o) throws ClassNotFoundException, SQLException, JSONException{
+        System.out.print(o.keys());
 
 
-        User u = new User(name,pass,email, 0, 0, "Reykjavik", false);
+
+
+
+        User u = new User("test","test","test", 0, 0, "Reykjavik", false);
 
         Hashtable convertedUser = convertUser(u);
 

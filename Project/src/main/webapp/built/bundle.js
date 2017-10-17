@@ -45646,6 +45646,14 @@
 	function fetchQuestion() {
 	  var request = _axios2.default.get('' + ROOT_URL);
 	
+	  var postRequest = _axios2.default.post("http://localhost:8080/showuser", {
+	    "name": "Fred",
+	    "pass": "1234",
+	    "email": "lala@hi.is"
+	  });
+	
+	  console.log(postRequest);
+	
 	  return {
 	    type: FETCH_DATA,
 	    payload: request
