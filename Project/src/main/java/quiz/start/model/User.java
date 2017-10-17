@@ -9,7 +9,9 @@ package quiz.start.model;
  *
  */
 
- /*
+import java.util.Hashtable;
+
+/*
  class for users
  */
 public class User {

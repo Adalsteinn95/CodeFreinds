@@ -4,6 +4,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import quiz.start.repository.QuestionCollection;
 import quiz.start.model.User;
@@ -21,8 +22,9 @@ import java.util.Hashtable;
 /*
 Controller that manages the question pages
 */
-@Controller
-@RequestMapping("/")
+
+
+@RestController
 public class QuestionControl {
 
     private QuestionCollection data;
@@ -31,50 +33,35 @@ public class QuestionControl {
         this.data = new QuestionCollection("London");
     }
 
-    /*
-    *@param ModelMap
-    *
-    * Shows a page with questions
-    *@returns String
-    */
-    @RequestMapping("/location")
-    public String getLocation(ModelMap model){
-
-        return "index";
-
-    }
 
     /*
     * @param String
-    * @param ModelMap
+    *
     *
     * Shows a page with questions, depending on your previous answer
     * @returns String
     */
-    @RequestMapping(value = "/questionLocation", method = RequestMethod.POST)
-    public String getQuestion1(@RequestParam(value = "answer1")String answer, ModelMap model){
 
-        data.getData().compareDist(answer);
 
-        model.addAttribute("Question",data);
+    @RequestMapping(value = "api/Question", method = RequestMethod.GET)
+    public Hashtable getQuestion1(String answer){
 
-        return "question/location";
+        Hashtable convertedQuestion = convertUser(data);
+
+        return convertedQuestion;
     }
 
-    /*
-    * @param String
-    * @param ModelMap
-    *
-    * Shows a page with questions, depending on your previous answer
-    * @returns String
-    */
-    @RequestMapping(value = "/questionLocation2", method = RequestMethod.POST)
-    public String getQuestion2(@RequestParam(value = "answer2")String answer, ModelMap model){
+    public Hashtable convertUser(final QuestionCollection data) {
+        Hashtable<String, String> newQuestion = new Hashtable<String, String>() {{
+            put("country1", data.getData().getCountry());
+            put("country2", data.getData().getCountry2());
+            put("city1", data.getData().getDest1());
+            put("city2", data.getData().getDest2());
+            put("currentCountry", data.getData().getCurrentCountry());
+            put("currentCity", data.getData().getCurrentLoc());
+        }};
 
-        data.getData().compareDist(answer);
-
-        model.addAttribute("Question",data);
-
-        return "question/location";
+        return newQuestion;
     }
+
 }
