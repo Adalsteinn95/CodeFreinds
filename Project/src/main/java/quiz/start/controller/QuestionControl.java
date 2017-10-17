@@ -1,10 +1,8 @@
 package quiz.start.controller;
+import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import quiz.start.repository.QuestionCollection;
 import quiz.start.model.User;
@@ -46,12 +44,12 @@ public class QuestionControl {
     @RequestMapping(value = "api/Question", method = RequestMethod.GET)
     public Hashtable getQuestion1(String answer){
 
-        Hashtable convertedQuestion = convertUser(data);
+        Hashtable convertedQuestion = convertQuestion(data);
 
         return convertedQuestion;
     }
 
-    public Hashtable convertUser(final QuestionCollection data) {
+    public Hashtable convertQuestion(final QuestionCollection data) {
         Hashtable<String, String> newQuestion = new Hashtable<String, String>() {{
             put("country1", data.getData().getCountry());
             put("country2", data.getData().getCountry2());

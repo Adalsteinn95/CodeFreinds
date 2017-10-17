@@ -45630,7 +45630,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.FETCH_DATA = undefined;
+	exports.CREATE_USER = exports.FETCH_DATA = undefined;
 	exports.fetchQuestion = fetchQuestion;
 	
 	var _axios = __webpack_require__(271);
@@ -45640,17 +45640,15 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var FETCH_DATA = exports.FETCH_DATA = 'fetch_city';
+	var CREATE_USER = exports.CREATE_USER = 'create_user';
 	
 	var ROOT_URL = "http://localhost:8080/api/Question";
 	
 	function fetchQuestion() {
 	  var request = _axios2.default.get('' + ROOT_URL);
+	  console.log(request);
 	
-	  var postRequest = _axios2.default.post("http://localhost:8080/showuser", {
-	    "name": "Fred",
-	    "pass": "1234",
-	    "email": "lala@hi.is"
-	  });
+	  var postRequest = _axios2.default.post(ROOT_URL + '/test', "HELLOlslsllsls");
 	
 	  console.log(postRequest);
 	

@@ -1,18 +1,16 @@
 package quiz.start.controller;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.http.HttpStatus;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
+import org.springframework.web.bind.annotation.*;
 import quiz.start.model.User;
 import quiz.start.repository.UserCollection;
 
-import java.lang.reflect.Field;
+import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
 import java.util.Hashtable;
-import java.util.List;
 /*
  *  Aðalsteinn Ingi Pálsson
  *  aip7@hi.is
@@ -41,6 +39,8 @@ public class UserControl {
 
     }
 
+
+
     /*
     @param String
     @param String
@@ -50,33 +50,12 @@ public class UserControl {
       and shows confirmation
     @return String
      */
-    @RequestMapping(value = "/showuser", method = RequestMethod.GET)
-    public Hashtable signUp(JSONObject o) throws ClassNotFoundException, SQLException, JSONException{
-        System.out.print(o.keys());
+    @RequestMapping(value = "api/user", method = RequestMethod.POST)
+    public @ResponseBody String getUser(@RequestBody String username){
+        return username;
 
-
-
-
-
-        User u = new User("test","test","test", 0, 0, "Reykjavik", false);
-
-        Hashtable convertedUser = convertUser(u);
-
-
-        //Validate username
-        if (data.validateUser(u.getName())) {
-
-            //We put user into the collection
-            data.addUser(u);
-
-        } else {
-            System.out.println("Username taken");
-            return null;
-        }
-
-
-        return convertedUser;
     }
+
 
     /*convert user to hashtable*/
     public Hashtable convertUser(final User u){
