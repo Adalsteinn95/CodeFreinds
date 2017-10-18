@@ -37,9 +37,6 @@ public class GeoService {
 
 
     /*
-     * @param String
-     * @param String
-     *
      * function that takes a name of place a and place b and returns info about them
      * distance between them and more
      *

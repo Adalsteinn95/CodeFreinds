@@ -4,6 +4,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import quiz.start.repository.QuestionCollection;
 import quiz.start.model.User;
@@ -21,6 +22,8 @@ import java.util.Hashtable;
 /*
 Controller that manages the question pages
 */
+
+
 @Controller
 @RequestMapping("/question")
 public class QuestionControl {
@@ -31,18 +34,21 @@ public class QuestionControl {
         this.data = new QuestionCollection("London");
     }
 
+
     /*
-    *@param ModelMap
+    * @param ModelMap
     *
     * Shows a page with questions
-    *@returns String
-    */
+    *
+    * @return String
+    * */
     @RequestMapping("/location")
     public String getLocation(ModelMap model){
         model.addAttribute("Question",data);
         return "question/location";
-
     }
+
+
 
     /*
     * @param String
@@ -51,9 +57,25 @@ public class QuestionControl {
     * Shows a page with questions, depending on your previous answer
     * @returns String
     */
-    @RequestMapping(value = "/questionLocation", method = RequestMethod.POST)
-    public String getQuestion1(@RequestParam(value = "answer1")String answer, ModelMap model){
 
+    @RequestMapping(value= "/questionLocation", method=RequestMethod.POST)
+    public String getQuestion1(@RequestParam(value="answer1")String answer, ModelMap model){
+        data.getData().compareDist(answer);
+        model.addAttribute("Question",data);
+
+        return "question/location";
+    }
+
+    /**
+     *
+     * @param String
+     * @param ModelMap
+     *
+     * @return String
+     */
+
+    @RequestMapping(value="/questionLocation2", method=RequestMethod.POST)
+    public String getQuestion2(@RequestParam(value="answer2")String answer, ModelMap model){
         data.getData().compareDist(answer);
 
         model.addAttribute("Question",data);
@@ -61,20 +83,9 @@ public class QuestionControl {
         return "question/location";
     }
 
-    /*
-    * @param String
-    * @param ModelMap
-    *
-    * Shows a page with questions, depending on your previous answer
-    * @returns String
-    */
-    @RequestMapping(value = "/questionLocation2", method = RequestMethod.POST)
-    public String getQuestion2(@RequestParam(value = "answer2")String answer, ModelMap model){
 
-        data.getData().compareDist(answer);
 
-        model.addAttribute("Question",data);
 
-        return "question/location";
-    }
+
+
 }
