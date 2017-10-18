@@ -1,13 +1,18 @@
 package quiz.start.controller;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import quiz.start.model.User;
 import quiz.start.repository.UserCollection;
+import quiz.start.repository.UserRepository;
+import quiz.start.services.UserService;
 
 import java.sql.SQLException;
+import java.util.List;
 
 /*
  *  Aðalsteinn Ingi Pálsson
@@ -27,16 +32,21 @@ handles the user pages
  */
 
 
-@Controller
+@RestController
 @RequestMapping("/user")
 public class UserControl {
 
     private UserCollection data = new UserCollection();
     private QuestionControl q;
 
-    public UserControl() throws SQLException {
+    public UserControl() throws SQLException {}
 
-    }
+    @Autowired
+    UserService userService;
+
+
+    User test = new User("Kalli","1234",false,"kalli","Djamm", 9);
+
 
     /*
      @param String
@@ -64,12 +74,13 @@ public class UserControl {
       and shows confirmation
     @return String
      */
+    /*
     @RequestMapping(value = "/showuser", method = RequestMethod.POST)
     public String showUser(@RequestParam(value = "name")String name,
                            @RequestParam(value = "password")String pass,
                            @RequestParam(value = "email")String email,
                            ModelMap model) throws ClassNotFoundException, SQLException {
-        User u = new User(name,pass,email, 0, 0, "Reykjavik", false);
+        User u = new User(id, name,pass,email, 0, "Reykjavik");
 
         //Validate username
         if (data.validateUser(u.getName())) {
@@ -85,7 +96,7 @@ public class UserControl {
         model.addAttribute("user",u);
 
         return "user/show";
-    }
+    }*/
 
     /*
      * Shows a login page
@@ -93,7 +104,12 @@ public class UserControl {
      */
     @RequestMapping("/login")
     public String login(){
-        return "user/login";
+
+        //System.out.println(userService.getAllUsers().size());
+
+        userService.addUser(test);
+
+        return Integer.toString(userService.getAllUsers().size());
     }
 
 

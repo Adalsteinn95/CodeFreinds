@@ -1,6 +1,6 @@
 package quiz.start.repository;
 
-/*
+/**
  *  Aðalsteinn Ingi Pálsson
  *  aip7@hi.is
  *
@@ -34,7 +34,7 @@ public class UserCollection {
 
     /*
     constructor
-    */
+    *//*
     public UserCollection() throws SQLException {
         sqlUser = new SQLUser();
 
@@ -43,25 +43,18 @@ public class UserCollection {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }*/
 
-        Iterator<User> collectionIterator = collection.iterator();
-        while (collectionIterator.hasNext()) {
-            System.out.println(collectionIterator.next().getName());
-        }
-
-        System.out.println(collection.size());
-    }
-
-    /*
-     * @param User
+    /**
+     * param User
      * Function to add a new user to the database, the updates,
      * the userCollection
-     */
+     *//*
     public void addUser(User u) throws ClassNotFoundException, SQLException {
 
         sqlUser.newUser(u.getName(), u.getPass(), u.getEmail(), 0, u.getLocation());
         updateCollection();
-    }
+    }*/
 
     /*
      * @param User
@@ -84,7 +77,7 @@ public class UserCollection {
      */
     public void loginUser(String userName, String passW) throws Exception {
 
-        User tmp = new User(null,null,null,0,0,null, false);
+        User tmp = new User(null,null,false,"", null, 9);
 
         Iterator<User> collectionIterator = collection.iterator();
         while (collectionIterator.hasNext()) {
@@ -108,6 +101,7 @@ public class UserCollection {
      * Function to initialize and update the usercollection,
      * gets all the users' data from the database.
      */
+    /*
     private void updateCollection() throws SQLException {
         ResultSet rs = sqlUser.extractAllUsers();
 
@@ -121,9 +115,7 @@ public class UserCollection {
                         rs.getString("Pass"),
                         rs.getString("Email"),
                         0,
-                        rs.getInt("Score"),
-                        rs.getString("Location"),
-                        false
+                        rs.getString("Location")
                 );
 
                 collection.add(tmp);
@@ -135,7 +127,7 @@ public class UserCollection {
             System.out.println(e);
         }
 
-    }
+    }*/
 
     /*
      * @param String
