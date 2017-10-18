@@ -61,6 +61,7 @@ public class QuestionControl {
             put("currentCity", data.getData().getCurrentLoc());
         }};
 
+
         return newQuestion;
     }
 

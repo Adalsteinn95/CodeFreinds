@@ -40,6 +40,8 @@ public class User {
           user_highScore = highScore;
           user_location = location;
           user_loginStatus = loginStatus;
+
+
     }
 
     /*get and setters*/

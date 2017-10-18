@@ -49,9 +49,8 @@ public class SQLUser {
         }
         catch(Exception e)
         {
-            System.out.println("já hér");
+
             System.out.println("Error  " + email + "     " + e.getMessage());
-            System.out.println("já hér");
 
         }
     }
@@ -106,7 +105,7 @@ public class SQLUser {
         try
         {
             con = DriverManager.getConnection(url + dbName, userName, DBpassword);
-            String SQLusers = "DELETE FROM Users WHERE (\"Name\" = ? AND \"Email\" = ? AND \"Pass\" = ?);";
+            String SQLusers = "DELETE FROM Users WHERE (\"Name\" = ? AND \"Email\" = ? AND \"Pass\" = ?)";
             // test dót:String SQLusers = "DELETE FROM Users WHERE \"Name\" = 'delete';";
             System.out.println(SQLusers);
             PreparedStatement deleteUserUsers = con.prepareStatement(SQLusers);
@@ -119,8 +118,9 @@ public class SQLUser {
         }
         catch(Exception e)
         {
+
             System.out.println("Error " + e.getMessage());
-            System.out.println("ah herna");
+
         }
 
     }
@@ -128,26 +128,33 @@ public class SQLUser {
     public void updatescore(String name, String email, int score){
         try
         {
-            String SQLprevscore = "SELECT \"score\" FROM Users WHERE (\"name\" = ? AND \"email\" = ?)";
+            con = DriverManager.getConnection(url + dbName, userName, DBpassword);
+            String SQLprevscore = "SELECT \"Score\" FROM Users WHERE (\"Name\" = ? AND \"Email\" = ?)";
             PreparedStatement oldscore =  con.prepareStatement(SQLprevscore);
             oldscore.setString(1,name);
-            oldscore.setString(1,email);
+            oldscore.setString(2,email);
+            System.out.println(oldscore);
             ResultSet rs1 = oldscore.executeQuery();
-            int prevscore = Integer.parseInt(String.valueOf(rs1));
-            System.out.println(prevscore);
-            if( score > prevscore) {
-                String SQLnewscore = "UPDATE Users SET \"score\" = ? WHERE (\"name\" = ? AND \"email\" = ?)";
-                PreparedStatement  updatescore =  con.prepareStatement(SQLnewscore);
+            rs1.next();
+            int prevScore = rs1.getInt(1);
+
+            //int prevScore = 0;
+
+            if( score > prevScore) {
+                String SQLnewscore = "UPDATE Users SET \"Score\" = ? WHERE (\"Name\" = ? AND \"Email\" = ?)";
+                PreparedStatement updatescore = con.prepareStatement(SQLnewscore);
                 updatescore.setInt(1,score);
                 updatescore.setString(2,name);
                 updatescore.setString(3,email);
-                ResultSet rs2 = updatescore.executeQuery();
+                updatescore.executeUpdate();
 
             }
+            con.close();
+
         }
         catch(Exception e)
         {
-            System.out.println("upps");
+            System.out.println("upps " + e);
         }
     }
 

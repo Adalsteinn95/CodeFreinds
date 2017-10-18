@@ -37,6 +37,9 @@ public class UserCollection {
     */
     public UserCollection() throws SQLException {
         sqlUser = new SQLUser();
+        System.out.println("þetta þarf að koma til þess að þetta virki");
+
+        sqlUser.updatescore("Alli", "Alli@hi.is", -10000);
 
         try {
             updateCollection();
@@ -83,6 +86,7 @@ public class UserCollection {
         while (collectionIterator.hasNext()) {
 
             User u = collectionIterator.next();
+
 
             if (u.getName().equals(userName) && u.getPass().equals(passW)) {
                 tmp = u;

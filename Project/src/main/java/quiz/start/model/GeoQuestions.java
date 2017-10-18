@@ -66,6 +66,8 @@ public class GeoQuestions extends Question{
 
         allcountries = new String[allobjects.length];
         allcities = new String[allobjects.length];
+        System.out.println("omg2");
+
 
         Enumeration names;
         String key;
@@ -113,7 +115,7 @@ public class GeoQuestions extends Question{
 
         distance1 = api.getDist(currentLoc,dest1);
         distance2 = api.getDist(currentLoc,dest2);
-
+        System.out.println("omg");
         if(answer.equals(dest1)){
            if(distance2 >= distance1){
                currentLoc = dest1;
