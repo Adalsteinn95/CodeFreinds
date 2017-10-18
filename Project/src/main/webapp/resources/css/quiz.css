@@ -64,6 +64,7 @@ body {
   font-weight: 100;
   border: none;
   transition: transform 0.3s ease-in-out;
+  outline: none;
 
 }
 .answear:hover {
@@ -104,9 +105,8 @@ body {
   text-align: right;
 }
 
-input {
-  outline: none;
-}
+
+
 @-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
 @-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
 @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
