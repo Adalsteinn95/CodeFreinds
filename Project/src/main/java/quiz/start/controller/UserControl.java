@@ -1,5 +1,6 @@
 package quiz.start.controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,7 +30,8 @@ handles the user pages
  */
 
 
-@RestController
+@Controller
+@RequestMapping("/user")
 public class UserControl {
 
     private UserCollection data = new UserCollection();
@@ -40,6 +42,16 @@ public class UserControl {
 
     }
 
+    /*  @param String
+        shows the home page
+        @return String
+    */
+    @RequestMapping("")
+    public String home(){ return "user/home"; }
+
+
+    @RequestMapping("/signup")
+    public String signUp(){ return "user/signup"; }
     /*
     @param String
     @param String
@@ -49,13 +61,11 @@ public class UserControl {
       and shows confirmation
     @return String
      */
-    @RequestMapping(value = "/showuser", method = RequestMethod.GET)
-    public Hashtable signUp(String name, String pass, String email) throws ClassNotFoundException, SQLException {
+    @RequestMapping(value = "/showuser", method = RequestMethod.POST)
+    public String signUp(@RequestParam(value = "name")String name,@RequestParam(value ="password") String pass,@RequestParam(value ="email") String email, ModelMap model) throws ClassNotFoundException, SQLException {
 
 
         User u = new User(name,pass,email, 0, 0, "Reykjavik", false);
-
-        Hashtable convertedUser = convertUser(u);
 
 
         //Validate username
@@ -66,25 +76,21 @@ public class UserControl {
 
         } else {
             System.out.println("Username taken");
-            return null;
+            return "/user/signup";
         }
+        model.addAttribute("user",u);
 
-
-        return convertedUser;
+        return "user/show";
     }
 
-    /*convert user to hashtable*/
-    public Hashtable convertUser(final User u){
-        Hashtable<String,String> newUser = new Hashtable<String,String>(){{
-           put("name", u.getName());
-           put("pass", u.getPass());
-           put("email", u.getEmail());
-           put("location", u.getLocation());
-           put("Highscore", Integer.toString(u.getHighScore()));
-           put("score", Integer.toString(u.getScore()));
-        }};
-
-        return newUser;
+    /*
+    *
+    * @return String
+    *
+    */
+    @RequestMapping("/login")
+    public String login(){
+      return "user/login";
     }
 
     /*
@@ -95,7 +101,7 @@ public class UserControl {
      *
      * @return String
      */
-    @RequestMapping(value = "/profile", method = RequestMethod.GET)
+    @RequestMapping(value = "/profile", method = RequestMethod.POST)
     public String showLogin(@RequestParam(value = "name")String name,
                             @RequestParam(value = "password")String pass,
                             ModelMap model){

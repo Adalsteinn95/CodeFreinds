@@ -101,6 +101,18 @@ public class GeoQuestions extends Question{
         destCountry = allcountries[randomNum];
         destCountry2 = allcountries[randomNum2];
 
+        if(dest1.compareTo(dest2) > 0){
+
+            randomNum = ThreadLocalRandom.current().nextInt(0, allcities.length + 1);
+            dest1 = allcities[randomNum];
+        }
+
+        if(destCountry.compareTo(destCountry2) > 0){
+
+            randomNum = ThreadLocalRandom.current().nextInt(0, allcities.length + 1);
+            destCountry = allcities[randomNum];
+        }
+
 
         api = new GeoService();
 
@@ -140,6 +152,19 @@ public class GeoQuestions extends Question{
 
         destCountry = allcountries[randomNum];
         destCountry2 = allcountries[randomNum2];
+
+        if(dest1.compareTo(dest2) > 0){
+
+            randomNum = ThreadLocalRandom.current().nextInt(0, allcities.length + 1);
+            dest1 = allcities[randomNum];
+        }
+
+        if(destCountry.compareTo(destCountry2) > 0){
+
+            randomNum = ThreadLocalRandom.current().nextInt(0, allcities.length + 1);
+            destCountry = allcities[randomNum];
+        }
+
 
     }
 

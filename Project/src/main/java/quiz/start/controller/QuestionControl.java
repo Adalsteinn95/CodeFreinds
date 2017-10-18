@@ -24,7 +24,8 @@ Controller that manages the question pages
 */
 
 
-@RestController
+@Controller
+@RequestMapping("/question")
 public class QuestionControl {
 
     private QuestionCollection data;
@@ -35,33 +36,56 @@ public class QuestionControl {
 
 
     /*
-    * @param String
+    * @param ModelMap
     *
+    * Shows a page with questions
+    *
+    * @return String
+    * */
+    @RequestMapping("/location")
+    public String getLocation(ModelMap model){
+        model.addAttribute("Question",data);
+        return "question/location";
+    }
+
+
+
+    /*
+    * @param String
+    * @param ModelMap
     *
     * Shows a page with questions, depending on your previous answer
     * @returns String
     */
 
+    @RequestMapping(value= "/questionLocation", method=RequestMethod.POST)
+    public String getQuestion1(@RequestParam(value="answer1")String answer, ModelMap model){
+        data.getData().compareDist(answer);
+        model.addAttribute("Question",data);
 
-    @RequestMapping(value = "api/Question", method = RequestMethod.GET)
-    public Hashtable getQuestion1(String answer){
-
-        Hashtable convertedQuestion = convertUser(data);
-
-        return convertedQuestion;
+        return "question/location";
     }
 
-    public Hashtable convertUser(final QuestionCollection data) {
-        Hashtable<String, String> newQuestion = new Hashtable<String, String>() {{
-            put("country1", data.getData().getCountry());
-            put("country2", data.getData().getCountry2());
-            put("city1", data.getData().getDest1());
-            put("city2", data.getData().getDest2());
-            put("currentCountry", data.getData().getCurrentCountry());
-            put("currentCity", data.getData().getCurrentLoc());
-        }};
+    /**
+     *
+     * @param String
+     * @param ModelMap
+     *
+     * @return String
+     */
 
-        return newQuestion;
+    @RequestMapping(value="/questionLocation2", method=RequestMethod.POST)
+    public String getQuestion2(@RequestParam(value="answer2")String answer, ModelMap model){
+        data.getData().compareDist(answer);
+
+        model.addAttribute("Question",data);
+
+        return "question/location";
     }
+
+
+
+
+
 
 }
