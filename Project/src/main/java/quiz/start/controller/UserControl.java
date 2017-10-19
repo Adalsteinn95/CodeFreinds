@@ -45,7 +45,7 @@ public class UserControl {
     UserService userService;
 
 
-    User test = new User("Kalli","1234",false,"kalli","Djamm", 9);
+    User test = new User(0,"Kalli","1234",false,"kalli","Djamm", 9);
 
 
     /*
@@ -120,7 +120,7 @@ public class UserControl {
      * Shows a user profile page for successful logins
      *
      * @return String
-     */
+     *//*
     @RequestMapping(value = "/profile", method = RequestMethod.POST)
     public String showLogin(@RequestParam(value = "name")String name,
                             @RequestParam(value = "password")String pass,
@@ -136,7 +136,7 @@ public class UserControl {
         }
 
         return "user/profile";
-    }
+    }*/
 
 
     /*

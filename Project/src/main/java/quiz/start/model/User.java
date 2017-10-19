@@ -14,9 +14,9 @@ import javax.persistence.*;
 @Table(name = "users")
 public class User {
 
-
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long user_id;
     private String user_email;
     private String user_location;
     private boolean user_loginStatus;
@@ -24,8 +24,11 @@ public class User {
     private String user_password;
     private int user_score;
 
+    public User() {}
+
     /*constructor*/
-    public User(String email,
+    public User(long id,
+                String email,
                 String location,
                 boolean loginStatus,
                 String name,

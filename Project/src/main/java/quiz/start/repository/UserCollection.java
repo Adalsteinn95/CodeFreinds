@@ -74,7 +74,7 @@ public class UserCollection {
      * user exists and the password is right
      *
      * @return User
-     */
+     *//*
     public void loginUser(String userName, String passW) throws Exception {
 
         User tmp = new User(null,null,false,"", null, 9);
@@ -95,7 +95,7 @@ public class UserCollection {
         }
 
         current_user = tmp;
-    }
+    }*/
 
     /*
      * Function to initialize and update the usercollection,
