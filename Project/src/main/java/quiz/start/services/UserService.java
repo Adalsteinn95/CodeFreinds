@@ -11,17 +11,47 @@ import java.util.List;
 
 public interface UserService {
 
+    /**
+     * add a new user to the db
+     * @param u
+     */
     void addUser(User u);
 
+    /**
+     * gets list with all users
+     * @return List<User>
+     */
     List<User> getAllUsers();
 
-    void loginUser(String name, String pass);
+    /**
+     * @param name
+     * @param pass
+     *
+     * handles user logins
+     * @return boolean
+     */
+    boolean validateLogin(String name, String pass);
 
-    void logoutUser();
+    /**
+     * @param name
+     *
+     * checks username, returns false if user
+     * exists, true otherwise
+     * @return boolean
+     */
+    boolean validateName(String name);
 
-    boolean validateUser(String name);
+    /**
+     * TODO
+     * destroys user
+     * @param name
+     */
+    void deleteUser(String name);
 
-    void deleteUser();
-
-    void update();
+    /**
+     * gets single user by name
+     * @param name
+     * @return User
+     */
+    User getUser(String name);
 }

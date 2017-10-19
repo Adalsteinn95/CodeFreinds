@@ -2,6 +2,7 @@ package quiz.start.services;
 
 /**
  * @author Geir Gardarsson - geg42@hi.is
+ *         Daníel Guðnason - dag27@hi.is
  * @date october 2017
  */
 
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import quiz.start.model.User;
 import quiz.start.repository.UserRepository;
 
+import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -25,8 +27,6 @@ public class UserServiceImp implements UserService {
         tmp.add(u);
 
         userRepository.save(tmp);
-
-
     }
 
     @Override
@@ -35,27 +35,41 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public void loginUser(String name, String pass) {
+    public boolean validateLogin(String name, String pass) {
 
-    }
+        // note: validateName will return false if the user exists
+        if (validateName(name)) { return false; }
 
-    @Override
-    public void logoutUser() {
+        User tmp = userRepository.getOne(name);
 
-    }
+        if (pass.equals(tmp.getPass())) { return true; }
 
-    @Override
-    public boolean validateUser(String name) {
         return false;
     }
 
     @Override
-    public void deleteUser() {
+    public boolean validateName(String name) {
+
+        List<User> tmp = userRepository.findAll();
+
+        Iterator<User> nameIterator = tmp.iterator();
+
+        while (nameIterator.hasNext()) {
+            User u = nameIterator.next();
+
+            if (name.equals(u.getName())) { return false; }
+        }
+        return true;
+    }
+
+    @Override
+    public void deleteUser(String name) {
 
     }
 
     @Override
-    public void update() {
-       // userRepository.updateRepository();
+    public User getUser(String name) {
+        return userRepository.getOne(name);
     }
+
 }

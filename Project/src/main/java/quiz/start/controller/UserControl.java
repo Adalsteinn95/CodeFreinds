@@ -1,149 +1,116 @@
 package quiz.start.controller;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import quiz.start.model.User;
-import quiz.start.repository.UserCollection;
-import quiz.start.repository.UserRepository;
 import quiz.start.services.UserService;
 
-import java.sql.SQLException;
-import java.util.List;
+import java.util.ArrayList;
 
-/*
- *  Aðalsteinn Ingi Pálsson
- *  aip7@hi.is
+/**
+ * @author Aðalsteinn Ingi Pálsson - aip7@hi.is
+ *                    Geir Garðarsson - geg42@hi.is
+ *                    Fannar Gauti Guðmundsson - fgg2@hi.is
+ *                    Daníel Guðnason - dag27@hi.is
  *
- *  Geir Garðarsson
- *  geg42@hi.is
- *
- *  Fannar Gauti Guðmundsson
- *  fgg2@hi.is
- *
+ * Control class for user functions
+ * @date october 2017
  */
-
-
-/*
-handles the user pages
- */
-
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/API")
 public class UserControl {
 
-    private UserCollection data = new UserCollection();
     private QuestionControl q;
 
-    public UserControl() throws SQLException {}
+    public UserControl() {}
 
     @Autowired
     UserService userService;
 
-
-    User test = new User(0,"Kalli","1234",false,"kalli","Djamm", 9);
-
-
-    /*
-     @param String
-     shows the home page
-     @return String
+    /**
+     * shows the home page
+     * @return String
      */
     @RequestMapping("")
     public String home() { return "user/home"; }
 
 
-    /*
-    @param String
-    shows the sign up page
-    @return String
+    /**
+     * @param name
+     * @param email
+     * @param pass
+     * @param location
+     *
+     * function to handle user signups
+     * @return String
      */
     @RequestMapping("/signup")
-    public String signUp() { return "user/signup"; }
+    public String signUp(String name, String email, String pass, String location) {
 
-    /*
-    @param String
-    @param String
-    @param String
-    @param ModelMap
-      handles the sign up for the user
-      and shows confirmation
-    @return String
-     */
-    /*
-    @RequestMapping(value = "/showuser", method = RequestMethod.POST)
-    public String showUser(@RequestParam(value = "name")String name,
-                           @RequestParam(value = "password")String pass,
-                           @RequestParam(value = "email")String email,
-                           ModelMap model) throws ClassNotFoundException, SQLException {
-        User u = new User(id, name,pass,email, 0, "Reykjavik");
+        if (!userService.validateName(name)) { return "username taken"; }
 
-        //Validate username
-        if (data.validateUser(u.getName())) {
+        User u = new User(name, email, pass, location, 0, false);
 
-            //We put user into the collection
-            data.addUser(u);
+        userService.addUser(u);
 
-        } else {
-            System.out.println("Username taken");
-            return "/user/signup";
-        }
+        return "signup successful";
+    }
 
-        model.addAttribute("user",u);
 
-        return "user/show";
-    }*/
-
-    /*
+    /**
+     * @param name
+     * @param pass
+     *
      * Shows a login page
      * @return String
      */
     @RequestMapping("/login")
-    public String login(){
+    public String login(String name, String pass){
 
-        //System.out.println(userService.getAllUsers().size());
+        if (!userService.validateLogin(name, pass)) { return "username or password wrong"; }
 
-        userService.addUser(test);
+        User tmp = userService.getUser(name);
+        tmp.setloginStatus(true);
 
-        return Integer.toString(userService.getAllUsers().size());
+        System.out.println(tmp.getName() + "'s login status is: " + tmp.getLoginStatus());
+
+        return "login successful";
     }
 
-
-    /*
-     * @param String
-     * @param String
-     * @param ModelMap
-     * Shows a user profile page for successful logins
-     *
-     * @return String
-     *//*
-    @RequestMapping(value = "/profile", method = RequestMethod.POST)
-    public String showLogin(@RequestParam(value = "name")String name,
-                            @RequestParam(value = "password")String pass,
-                            ModelMap model){
-
-        try {
-            data.loginUser(name, pass);
-            User u = data.getCurrent_user();
-            model.addAttribute("user",u);
-        }
-        catch (Exception e) {
-            return error();
-        }
-
-        return "user/profile";
-    }*/
-
-
-    /*
-     * Shows a loginerror page
-     * @return String
+    /**
+     * @return Arraylist<User>
      */
-    @RequestMapping(value = "/error")
-    public String error() { return "error/login_error"; }
+    @RequestMapping("/users")
+    public ArrayList<User> showUsers() {
 
+        ArrayList<User> tmp = (ArrayList<User>) userService.getAllUsers();
+
+        return tmp;
+    }
+
+    /**
+     * @param name
+     *
+     * displays User object as json
+     * @return
+     */
+    @RequestMapping(value = "/users/{user_name}")
+    public User showUser(@PathVariable(value = "user_name") String name) {
+
+        User tmp = userService.getUser(name);
+
+        User u = new User(tmp.getName(), tmp.getEmail(), tmp.getPass(), tmp.getLocation(), tmp.getScore(), tmp.getLoginStatus());
+
+        return u;
+    }
+
+    /**
+     * function to test the other functions
+     * in this class before react is connected
+     */
+    @RequestMapping(value = "/tests")
+    public String routTest() {
+        return login("Harrison Ford", "1234");
+        //return signUp(name, email, pass, location);
+    }
 }

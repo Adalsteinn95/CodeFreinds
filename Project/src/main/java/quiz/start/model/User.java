@@ -15,32 +15,30 @@ import javax.persistence.*;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long user_id;
-    private String user_email;
-    private String user_location;
-    private boolean user_loginStatus;
     private String user_name;
+    @Column(unique = true)
+    private String user_email;
     private String user_password;
+    private String user_location;
     private int user_score;
+    private boolean user_loginStatus;
 
     public User() {}
 
     /*constructor*/
-    public User(long id,
+    public User(String name,
                 String email,
-                String location,
-                boolean loginStatus,
-                String name,
                 String password,
-                int score) {
+                String location,
+                int score,
+                boolean loginStatus) {
 
-        this.user_email = email;
-        this.user_location = location;
-        this.user_loginStatus = loginStatus;
         this.user_name = name;
+        this.user_email = email;
         this.user_password = password;
+        this.user_location = location;
         this.user_score = score;
+        this.user_loginStatus = loginStatus;
     }
 
     /*get and setters*/
@@ -65,5 +63,5 @@ public class User {
         this.user_email = email;
     }
     public void setLocation(String location) { this.user_location = location; }
-    public void setloginStatus() { this.user_loginStatus = !this.user_loginStatus; }
+    public void setloginStatus(boolean b) { this.user_loginStatus = b; }
 }
