@@ -1,4 +1,6 @@
 package quiz.start.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
@@ -6,96 +8,116 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.*;
 import quiz.start.model.User;
-import quiz.start.repository.UserCollection;
+import quiz.start.services.UserService;
 
-import javax.servlet.http.HttpServletRequest;
-import java.sql.SQLException;
-import java.util.Hashtable;
-/*
- *  Aðalsteinn Ingi Pálsson
- *  aip7@hi.is
+import java.util.ArrayList;
+
+/**
+ * @author Aðalsteinn Ingi Pálsson - aip7@hi.is
+ *                    Geir Garðarsson - geg42@hi.is
+ *                    Fannar Gauti Guðmundsson - fgg2@hi.is
+ *                    Daníel Guðnason - dag27@hi.is
+
  *
- *  Geir Garðarsson
- *  geg42@hi.is
- *
- *  Fannar Gauti Guðmundsson
- *  fgg2@hi.is
- *
+ * Control class for user functions
+ * @date october 2017
  */
-
-
-/*
-handles the user pages
- */
-
 
 @RestController
+@RequestMapping("/API")
 public class UserControl {
 
-    private UserCollection data = new UserCollection();
+    private QuestionControl q;
 
+    public UserControl() {}
 
-    public UserControl() throws SQLException {
+    @Autowired
+    UserService userService;
 
-    }
-
-
-
-    /*
-    @param String
-    @param String
-    @param String
-    @param ModelMap
-      handles the sign up for the user
-      and shows confirmation
-    @return String
-     */
-    @RequestMapping(value = "api/user", method = RequestMethod.POST)
-    public @ResponseBody String getUser(@RequestBody String username){
-        return username;
-
-    }
-
-
-    /*convert user to hashtable*/
-    public Hashtable convertUser(final User u){
-        Hashtable<String,String> newUser = new Hashtable<String,String>(){{
-           put("name", u.getName());
-           put("pass", u.getPass());
-           put("email", u.getEmail());
-           put("location", u.getLocation());
-           put("Highscore", Integer.toString(u.getHighScore()));
-           put("score", Integer.toString(u.getScore()));
-        }};
-
-        return newUser;
-    }
-
-    /*
-     * @param String
-     * @param String
-     * @param ModelMap
-     * Shows a user profile page for successful logins
-     *
+    /**
+     * shows the home page
      * @return String
      */
-    @RequestMapping(value = "/profile", method = RequestMethod.GET)
-    public String showLogin(@RequestParam(value = "name")String name,
-                            @RequestParam(value = "password")String pass,
-                            ModelMap model){
+    @RequestMapping("")
+    public String home() { return "user/home"; }
 
-        try {
-            data.loginUser(name, pass);
-            User u = data.getCurrent_user();
-            model.addAttribute("user",u);
-        }
-        catch (Exception e) {
 
-        }
+    /**
+     * @param name
+     * @param email
+     * @param pass
+     * @param location
+     *
+     * function to handle user signups
+     * @return String
+     */
+    @RequestMapping("/signup")
+    public String signUp(String name, String email, String pass, String location) {
 
-        return "user/profile";
+        if (!userService.validateName(name)) { return "username taken"; }
+
+        User u = new User(name, email, pass, location, 0, false);
+
+        userService.addUser(u);
+
+        return "signup successful";
     }
 
 
+    /**
+     * @param name
+     * @param pass
+     *
+     * Shows a login page
+     * @return String
+     */
+    @RequestMapping("/login")
+    public String login(String name, String pass){
 
+        if (!userService.userExists(name, pass)) { return "username or password wrong"; }
+
+        User tmp = userService.getUser(name);
+        tmp.setloginStatus(true);
+
+        System.out.println(tmp.getName() + "'s login status is: " + tmp.getLoginStatus());
+
+        return "login successful";
+    }
+
+    /**
+     * @return Arraylist<User>
+     */
+    @RequestMapping("/users")
+    public ArrayList<User> showUsers() {
+
+        ArrayList<User> tmp = (ArrayList<User>) userService.getAllUsers();
+
+        return tmp;
+    }
+
+    /**
+     * @param name
+     *
+     * displays User object as json
+     * @return
+     */
+    @RequestMapping(value = "/users/{user_name}")
+    public User showUser(@PathVariable(value = "user_name") String name) {
+
+        User tmp = userService.getUser(name);
+
+        User u = new User(tmp.getName(), tmp.getEmail(), tmp.getPass(), tmp.getLocation(), tmp.getScore(), tmp.getLoginStatus());
+
+        return u;
+    }
+
+    /**
+     * function to test the other functions
+     * in this class before react is connected
+     */
+    @RequestMapping(value = "/tests")
+    public String routTest() {
+        return login("Harrison Ford", "lala");
+        //return signUp("Harrison Ford", "hf@hollywood", "lala", "California");
+    }
 }

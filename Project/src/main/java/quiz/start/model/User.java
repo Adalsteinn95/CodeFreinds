@@ -1,73 +1,68 @@
 package quiz.start.model;
-/*
- * Aðalsteinn Ingi Pálsson
- * aip7@hi.is
- *
- * Geir Garðarsson
- * geg42@hi.is
- *
- *
- */
 
-import java.util.Hashtable;
+import javax.persistence.*;
 
-/*
- class for users
+/**
+ * @authors Aðalsteinn Ingi Pálsson - aip@hi.is
+ *          Geir Garðarsson - geg42@hi.is
+ *
+ * @date october 2017
+ *
+ * model class for users
  */
+@Entity
+@Table(name = "users")
+
 public class User {
 
-    private String user_name;
-    private String user_password;
-    private String user_email;
-    private int user_currentScore;
-    private int user_highScore;
-    private String user_location;
-    private boolean user_loginStatus;
+    @Id
+    private String userName;
+    @Column(unique = true)
+    private String email;
+    private String password;
+    private String location;
+    private int score;
+    private boolean loginStatus;
+
+    public User() {}
 
     /*constructor*/
     public User(String name,
-                String password,
                 String email,
-                int score,
-                int highScore,
+                String password,
                 String location,
+                int score,
                 boolean loginStatus) {
 
-          user_name = name;
-          user_password = password;
-          user_email = email;
-          user_currentScore = score;
-          user_highScore = highScore;
-          user_location = location;
-          user_loginStatus = loginStatus;
+        this.userName = name;
+        this.email = email;
+        this.password = password;
+        this.location = location;
+        this.score = score;
+        this.loginStatus = loginStatus;
     }
 
     /*get and setters*/
-    public String getName(){
-        return user_name;
-    }
+    public String getName(){ return this.userName; }
     public String getPass(){
-        return user_password;
+        return this.password;
     }
     public String getEmail() {
-        return user_email;
+        return this.email;
     }
-    public int getScore() { return user_currentScore; }
-    public int getHighScore() { return user_highScore; }
-    public String getLocation() { return user_location; }
-    public boolean getLoginStatus() { return user_loginStatus; }
+    public int getScore() { return this.score; }
+    public String getLocation() { return this.location; }
+    public boolean getLoginStatus() { return this.loginStatus; }
 
     public void setName(String name) {
-         user_name = name;
+         this.userName = name;
      }
     public void setPass(String pass) {
-         user_password = pass;
+         this.password = pass;
      }
     public void setEmail(String email) {
-        user_email = email;
+        this.email = email;
     }
-    public void incScore() { user_currentScore++; }
-    public void setHighscore(int newHiScore) { user_highScore = newHiScore; }
-    public void setLocation(String location) { user_location = location; }
-    public void setloginStatus() { user_loginStatus = !user_loginStatus; }
+    public void setLocation(String location) { this.location = location; }
+    public void setloginStatus(boolean b) { this.loginStatus = b; }
 }
