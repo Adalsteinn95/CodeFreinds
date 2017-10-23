@@ -5,7 +5,6 @@ Aðalsteinn Ingi Pálsson
 aip7@hi.is
 */
 
-import org.mockito.Answers;
 
 public class Question {
 

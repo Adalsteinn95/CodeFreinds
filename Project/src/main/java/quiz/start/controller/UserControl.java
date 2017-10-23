@@ -1,5 +1,11 @@
 package quiz.start.controller;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.springframework.http.HttpStatus;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.*;
 import quiz.start.model.User;
 import quiz.start.services.UserService;
@@ -11,6 +17,7 @@ import java.util.ArrayList;
  *                    Geir Garðarsson - geg42@hi.is
  *                    Fannar Gauti Guðmundsson - fgg2@hi.is
  *                    Daníel Guðnason - dag27@hi.is
+
  *
  * Control class for user functions
  * @date october 2017
