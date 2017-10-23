@@ -15,7 +15,7 @@ class Signup extends Component {
 
     render() {
         return (
-          <div>
+          <div className="signup-container">
             <LoginForm onSubmit={this.submitLogin}/>
             <SignuUpInputs onSubmit={this.submitSignup}/>
             <Link to={'/question'}> Question </Link>

@@ -2,6 +2,7 @@ import axios from 'axios';
 
 
 export const FETCH_DATA = 'fetch_city';
+export const POST_ANSWER = 'post_answer';
 export const CREATE_USER = 'create_user';
 
 const ROOT_URL = "https://notendur.hi.is/~aip7/API/tester/test.json";
@@ -23,6 +24,17 @@ export function fetchQuestion(){
     payload: request
   };
 }
+
+export function postAnswer(value){
+  //const request = axios.get(`${ROOT_URL}`;
+  console.log(value);
+  /*
+  return {
+    type: POST_ANSWER,
+    payload: request
+  };*/
+}
+
 
 export function createUser(){
   const postRequest = axios.post(`${ROOT_URL}/user`);
