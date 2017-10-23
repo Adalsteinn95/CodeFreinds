@@ -15,13 +15,13 @@ import javax.persistence.*;
 public class User {
 
     @Id
-    private String user_name;
+    private String userName;
     @Column(unique = true)
-    private String user_email;
-    private String user_password;
-    private String user_location;
-    private int user_score;
-    private boolean user_loginStatus;
+    private String email;
+    private String password;
+    private String location;
+    private int score;
+    private boolean loginStatus;
 
     public User() {}
 
@@ -33,35 +33,35 @@ public class User {
                 int score,
                 boolean loginStatus) {
 
-        this.user_name = name;
-        this.user_email = email;
-        this.user_password = password;
-        this.user_location = location;
-        this.user_score = score;
-        this.user_loginStatus = loginStatus;
+        this.userName = name;
+        this.email = email;
+        this.password = password;
+        this.location = location;
+        this.score = score;
+        this.loginStatus = loginStatus;
     }
 
     /*get and setters*/
-    public String getName(){ return this.user_name; }
+    public String getName(){ return this.userName; }
     public String getPass(){
-        return this.user_password;
+        return this.password;
     }
     public String getEmail() {
-        return this.user_email;
+        return this.email;
     }
-    public int getScore() { return this.user_score; }
-    public String getLocation() { return this.user_location; }
-    public boolean getLoginStatus() { return this.user_loginStatus; }
+    public int getScore() { return this.score; }
+    public String getLocation() { return this.location; }
+    public boolean getLoginStatus() { return this.loginStatus; }
 
     public void setName(String name) {
-         this.user_name = name;
+         this.userName = name;
      }
     public void setPass(String pass) {
-         this.user_password = pass;
+         this.password = pass;
      }
     public void setEmail(String email) {
-        this.user_email = email;
+        this.email = email;
     }
-    public void setLocation(String location) { this.user_location = location; }
-    public void setloginStatus(boolean b) { this.user_loginStatus = b; }
+    public void setLocation(String location) { this.location = location; }
+    public void setloginStatus(boolean b) { this.loginStatus = b; }
 }

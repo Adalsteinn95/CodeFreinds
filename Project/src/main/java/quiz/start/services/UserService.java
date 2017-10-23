@@ -30,7 +30,7 @@ public interface UserService {
      * handles user logins
      * @return boolean
      */
-    boolean validateLogin(String name, String pass);
+    boolean userExists(String name, String pass);
 
     /**
      * @param name

@@ -67,7 +67,7 @@ public class UserControl {
     @RequestMapping("/login")
     public String login(String name, String pass){
 
-        if (!userService.validateLogin(name, pass)) { return "username or password wrong"; }
+        if (!userService.userExists(name, pass)) { return "username or password wrong"; }
 
         User tmp = userService.getUser(name);
         tmp.setloginStatus(true);
@@ -110,7 +110,7 @@ public class UserControl {
      */
     @RequestMapping(value = "/tests")
     public String routTest() {
-        return login("Harrison Ford", "1234");
-        //return signUp(name, email, pass, location);
+        return login("Harrison Ford", "lala");
+        //return signUp("Harrison Ford", "hf@hollywood", "lala", "California");
     }
 }

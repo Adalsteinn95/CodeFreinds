@@ -35,9 +35,8 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public boolean validateLogin(String name, String pass) {
+    public boolean userExists(String name, String pass) {
 
-        // note: validateName will return false if the user exists
         if (validateName(name)) { return false; }
 
         User tmp = userRepository.getOne(name);
