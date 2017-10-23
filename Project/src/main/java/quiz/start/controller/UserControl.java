@@ -1,111 +1,177 @@
 package quiz.start.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+<<<<<<< HEAD
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.*;
+=======
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+>>>>>>> parent of 3b61c60... JPA connection og base fyrir API komid.
 import quiz.start.model.User;
+import quiz.start.repository.UserCollection;
+import quiz.start.repository.UserRepository;
 import quiz.start.services.UserService;
 
-import java.util.ArrayList;
+import java.sql.SQLException;
+import java.util.List;
 
+<<<<<<< HEAD
 /**
  * @author Aðalsteinn Ingi Pálsson - aip7@hi.is
  *                    Geir Garðarsson - geg42@hi.is
  *                    Fannar Gauti Guðmundsson - fgg2@hi.is
  *                    Daníel Guðnason - dag27@hi.is
 
+=======
+/*
+ *  Aðalsteinn Ingi Pálsson
+ *  aip7@hi.is
  *
- * Control class for user functions
- * @date october 2017
+ *  Geir Garðarsson
+ *  geg42@hi.is
+ *
+ *  Fannar Gauti Guðmundsson
+ *  fgg2@hi.is
+>>>>>>> parent of 3b61c60... JPA connection og base fyrir API komid.
+ *
  */
 
+
+/*
+handles the user pages
+ */
+
+
 @RestController
-@RequestMapping("/API")
+@RequestMapping("/user")
 public class UserControl {
 
+    private UserCollection data = new UserCollection();
     private QuestionControl q;
 
-    public UserControl() {}
+    public UserControl() throws SQLException {}
 
     @Autowired
     UserService userService;
 
-    /**
-     * shows the home page
-     * @return String
+
+    User test = new User(0,"Kalli","1234",false,"kalli","Djamm", 9);
+
+
+    /*
+     @param String
+     shows the home page
+     @return String
      */
     @RequestMapping("")
     public String home() { return "user/home"; }
 
 
-    /**
-     * @param name
-     * @param email
-     * @param pass
-     * @param location
-     *
-     * function to handle user signups
-     * @return String
+    /*
+    @param String
+    shows the sign up page
+    @return String
      */
     @RequestMapping("/signup")
-    public String signUp(String name, String email, String pass, String location) {
+    public String signUp() { return "user/signup"; }
 
-        if (!userService.validateName(name)) { return "username taken"; }
+    /*
+    @param String
+    @param String
+    @param String
+    @param ModelMap
+      handles the sign up for the user
+      and shows confirmation
+    @return String
+     */
+    /*
+    @RequestMapping(value = "/showuser", method = RequestMethod.POST)
+    public String showUser(@RequestParam(value = "name")String name,
+                           @RequestParam(value = "password")String pass,
+                           @RequestParam(value = "email")String email,
+                           ModelMap model) throws ClassNotFoundException, SQLException {
+        User u = new User(id, name,pass,email, 0, "Reykjavik");
 
-        User u = new User(name, email, pass, location, 0, false);
+        //Validate username
+        if (data.validateUser(u.getName())) {
 
-        userService.addUser(u);
+            //We put user into the collection
+            data.addUser(u);
 
-        return "signup successful";
-    }
+        } else {
+            System.out.println("Username taken");
+            return "/user/signup";
+        }
 
+        model.addAttribute("user",u);
 
-    /**
-     * @param name
-     * @param pass
-     *
+        return "user/show";
+    }*/
+
+    /*
      * Shows a login page
      * @return String
      */
     @RequestMapping("/login")
+<<<<<<< HEAD
     public String login(String name, String pass){
 
         if (!userService.userExists(name, pass)) { return "username or password wrong"; }
+=======
+    public String login(){
+>>>>>>> parent of 3b61c60... JPA connection og base fyrir API komid.
 
-        User tmp = userService.getUser(name);
-        tmp.setloginStatus(true);
+        //System.out.println(userService.getAllUsers().size());
 
-        System.out.println(tmp.getName() + "'s login status is: " + tmp.getLoginStatus());
+        userService.addUser(test);
 
-        return "login successful";
+        return Integer.toString(userService.getAllUsers().size());
     }
 
-    /**
-     * @return Arraylist<User>
-     */
-    @RequestMapping("/users")
-    public ArrayList<User> showUsers() {
 
-        ArrayList<User> tmp = (ArrayList<User>) userService.getAllUsers();
-
-        return tmp;
-    }
-
-    /**
-     * @param name
+    /*
+     * @param String
+     * @param String
+     * @param ModelMap
+     * Shows a user profile page for successful logins
      *
-     * displays User object as json
-     * @return
+     * @return String
+     *//*
+    @RequestMapping(value = "/profile", method = RequestMethod.POST)
+    public String showLogin(@RequestParam(value = "name")String name,
+                            @RequestParam(value = "password")String pass,
+                            ModelMap model){
+
+        try {
+            data.loginUser(name, pass);
+            User u = data.getCurrent_user();
+            model.addAttribute("user",u);
+        }
+        catch (Exception e) {
+            return error();
+        }
+
+        return "user/profile";
+    }*/
+
+
+    /*
+     * Shows a loginerror page
+     * @return String
      */
-    @RequestMapping(value = "/users/{user_name}")
-    public User showUser(@PathVariable(value = "user_name") String name) {
+    @RequestMapping(value = "/error")
+    public String error() { return "error/login_error"; }
 
-        User tmp = userService.getUser(name);
-
+<<<<<<< HEAD
         User u = new User(tmp.getName(), tmp.getEmail(), tmp.getPass(), tmp.getLocation(), tmp.getScore(), tmp.getLoginStatus());
 
         return u;
@@ -120,4 +186,6 @@ public class UserControl {
         return login("Harrison Ford", "lala");
         //return signUp("Harrison Ford", "hf@hollywood", "lala", "California");
     }
+=======
+>>>>>>> parent of 3b61c60... JPA connection og base fyrir API komid.
 }

@@ -12,13 +12,12 @@ import java.util.List;
  * User repository interface
  */
 
-public interface UserRepository extends JpaRepository<User, String> {
+public interface UserRepository extends JpaRepository<User, Long> {
 
     List<User> findAll();
 
     User save(User u);
 
-    User getOne(String s);
 }
 
 

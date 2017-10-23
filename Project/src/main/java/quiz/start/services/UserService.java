@@ -11,18 +11,11 @@ import java.util.List;
 
 public interface UserService {
 
-    /**
-     * add a new user to the db
-     * @param u
-     */
     void addUser(User u);
 
-    /**
-     * gets list with all users
-     * @return List<User>
-     */
     List<User> getAllUsers();
 
+<<<<<<< HEAD
     /**
      * @param name
      * @param pass
@@ -54,4 +47,15 @@ public interface UserService {
      * @return User
      */
     User getUser(String name);
+=======
+    void loginUser(String name, String pass);
+
+    void logoutUser();
+
+    boolean validateUser(String name);
+
+    void deleteUser();
+
+    void update();
+>>>>>>> parent of 3b61c60... JPA connection og base fyrir API komid.
 }
