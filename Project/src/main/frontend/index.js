@@ -9,7 +9,7 @@ import promise from 'redux-promise';
 /*components*/
 import reducers from './reducers';
 import Signup from './components/signup_form';
-import Question from './components/question';
+import MainPage from './components/main_page';
 import NotFound from './components/not_found';
 
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
@@ -18,7 +18,7 @@ ReactDOM.render(
   <Provider store={createStoreWithMiddleware(reducers)}>
     <Router history={browserHistory}>
       <Switch>
-        <Route exact path="/Question" component={Question} />
+        <Route exact path="/Question" component={MainPage} />
         <Route exact path="/" component={Signup} />
         <Route path="*" component={NotFound} />
       </Switch>

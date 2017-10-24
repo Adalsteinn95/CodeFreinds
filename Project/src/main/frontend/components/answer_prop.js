@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { postAnswer } from '../actions';
+import { connect } from 'react-redux';
 
 class Answer extends Component {
   constructor(props){
@@ -20,11 +20,13 @@ class Answer extends Component {
   render() {
 
     const value = this.props.city;
+
+
     return (
-      <div className="answer-container">
-        <span className= "answer-container_item" onClick={this.handleClick}>
+      <div>
+        <button className= "answer right fade-in" onClick={this.handleClick}>
           {this.props.city}
-        </span>
+        </button>
       </div>
     );
   }

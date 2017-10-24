@@ -5,19 +5,12 @@ export const FETCH_DATA = 'fetch_city';
 export const POST_ANSWER = 'post_answer';
 export const CREATE_USER = 'create_user';
 
-const ROOT_URL = "https://notendur.hi.is/~aip7/API/tester/test.json";
+const ROOT_URL = "http://localhost:8080/api/Question";
 
 
 export function fetchQuestion(){
-  //const request = axios.get(`${ROOT_URL}`;
-  const request = {
-      "currentLoc": "London",
-      "currentCountry": "Britain",
-      "city1": "Berlin",
-      "city2": "Paris",
-      "country1": "Germany",
-      "country2": "France"
-    }
+  const request = axios.get(`${ROOT_URL}`);
+
 
   return {
     type: FETCH_DATA,
