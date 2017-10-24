@@ -1,4 +1,4 @@
-package quiz.start.user;
+package quiz.start.repository;
 
 /**
  * @author Geir Gardarsson - geg42@hi.is
@@ -7,6 +7,7 @@ package quiz.start.user;
  */
 
 import org.springframework.stereotype.Repository;
+import quiz.start.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,11 +15,11 @@ import java.util.List;
 @Repository
 public class UserRepositoryImp {
 
-    private final List<quiz.start.model.User> users;
+    private final List<User> users;
 
 
     public UserRepositoryImp() {
-        this.users = new ArrayList<quiz.start.model.User>();
+        this.users = new ArrayList<User>();
     }
 
 

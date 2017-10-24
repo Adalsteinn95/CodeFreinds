@@ -1,4 +1,4 @@
-package quiz.start.user;
+package quiz.start.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import quiz.start.model.User;
@@ -14,11 +14,11 @@ import java.util.List;
 
 public interface UserRepository extends JpaRepository<User, String> {
 
-	List<User> findAll();
+    List<User> findAll();
 
-	User save(User u);
+    User save(User u);
 
-	User getOne(String s);
+    User getOne(String s);
 }
 
 
