@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { postAnswer } from '../actions';
 import { connect } from 'react-redux';
+import { fetchQuestion } from '../actions';
 
 class Answer extends Component {
   constructor(props){
@@ -14,6 +15,7 @@ class Answer extends Component {
   handleClick(event){
     const value = event.target.innerHTML;
     postAnswer(value);
+
   }
 
 
@@ -33,4 +35,4 @@ class Answer extends Component {
 
 }
 
-export default connect(null, {postAnswer})(Answer);
+export default connect(null, {postAnswer,fetchQuestion})(Answer);

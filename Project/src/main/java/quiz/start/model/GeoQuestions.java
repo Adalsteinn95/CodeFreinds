@@ -115,6 +115,9 @@ public class GeoQuestions extends Question {
         distance1 = api.getDist(currentLoc,dest1);
         distance2 = api.getDist(currentLoc,dest2);
 
+        System.out.println(distance1);
+        System.out.println(distance2);
+
         if(answer.equals(dest1)){
             if(distance2 >= distance1){
                 currentLoc = dest1;

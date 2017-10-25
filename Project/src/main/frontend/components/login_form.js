@@ -8,7 +8,7 @@ let LoginForm = props => {
       <div className="page-login">
         <h1>Log In</h1>
       </div>
-      <form onSubmit={ handleSubmit}>
+      <form onSubmit={ handleSubmit }>
         <div className="form-group">
           <label className="name">Name</label>
           <Field name="username-login" component="input" type="text" className="form-control" />
@@ -18,6 +18,7 @@ let LoginForm = props => {
           <Field name="password-login" component="input" type="text" className="form-control" />
         </div>
       </form>
+      <button type="submit" className="btn btn-primary">Submit</button>
     </div>
   );
 }

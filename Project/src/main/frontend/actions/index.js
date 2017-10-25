@@ -19,13 +19,17 @@ export function fetchQuestion(){
 }
 
 export function postAnswer(value){
-  //const request = axios.get(`${ROOT_URL}`;
-  console.log(value);
-  /*
+
+  const feedback = {
+    answer: value
+  };
+
+  const request = axios.post("http://localhost:8080/api/answer/Question",feedback);
+
   return {
     type: POST_ANSWER,
     payload: request
-  };*/
+  };
 }
 
 

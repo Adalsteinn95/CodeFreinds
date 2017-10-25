@@ -1,8 +1,6 @@
 package quiz.start.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import quiz.start.repository.QuestionCollection;
 
 import java.util.Hashtable;
@@ -24,6 +22,8 @@ public class QuestionControl {
 
     private QuestionCollection data;
 
+    Hashtable convertedQuestion;
+
     public QuestionControl(){
         this.data = new QuestionCollection("London");
     }
@@ -41,7 +41,7 @@ public class QuestionControl {
     @RequestMapping(value = "api/Question", method = RequestMethod.GET)
     public Hashtable getQuestion1(String answer){
 
-        Hashtable convertedQuestion = convertQuestion(data);
+        convertedQuestion = convertQuestion(data);
 
         return convertedQuestion;
     }
@@ -57,6 +57,14 @@ public class QuestionControl {
         }};
 
         return newQuestion;
+    }
+
+    @RequestMapping(value = "api/answer/Question", method = RequestMethod.POST )
+    public void saveReview(@RequestBody String answer) {
+
+        String answers = answer.split(":")[1].split("}")[0];
+        String finalAnswer = answers.substring(1,answers.length()-1);
+        data.getData().compareDist(finalAnswer);
     }
 
 }

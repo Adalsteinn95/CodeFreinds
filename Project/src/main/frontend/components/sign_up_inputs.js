@@ -25,8 +25,8 @@ let SignuUpInputs = props => {
           <label className="email">Location</label>
           <Field name="location" component="input" type="text" className="form-control" />
         </div>
-        <button type="submit" className="btn btn-primary">Submit</button>
       </form>
+      <button type="submit" className="btn btn-primary">Submit</button>
     </div>
   );
 }
