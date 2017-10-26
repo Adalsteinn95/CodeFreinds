@@ -46,15 +46,10 @@ public class UserControl {
      * @return String
      */
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
-    public String signUp(String name, String email, String pass, String location) {
-
-        if (!userService.validateName(name)) { return "username taken"; }
-
-        User u = new User(name, email, pass, location, 0, false);
-
-        userService.addUser(u);
-
-        return "signup successful";
+    public void signUp(@RequestBody User user) {
+        userService.addUser(user);
+        currentUser = user;
+        currentUser.setloginStatus(true);
     }
 
 
@@ -66,19 +61,17 @@ public class UserControl {
      * @return String
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(String name, String pass){
+    public void login(@RequestBody User user){
 
-        if (!userService.userExists(name, pass)) { return "username or password wrong"; }
+        if (!userService.userExists(user.getName(), user.getPass())) {
+          //do something
+        }
 
-        User tmp = userService.getUser(name);
+        User tmp = userService.getUser(user.getName());
         tmp.setloginStatus(true);
         userService.update(tmp);
-
         currentUser = tmp;
 
-        System.out.println(tmp.getName() + "'s login status is: " + tmp.getLoginStatus());
-
-        return "login successful";
     }
 
     /**

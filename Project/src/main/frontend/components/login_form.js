@@ -11,14 +11,14 @@ let LoginForm = props => {
       <form onSubmit={ handleSubmit }>
         <div className="form-group">
           <label className="name">Name</label>
-          <Field name="username-login" component="input" type="text" className="form-control" />
+          <Field name="name" component="input" type="text" className="form-control" />
         </div>
         <div className="form-group">
-          <label className="password">Password</label>
-          <Field name="password-login" component="input" type="text" className="form-control" />
+          <label className="pass">Password</label>
+          <Field name="pass" component="input" type="password" className="form-control" />
         </div>
+        <button type="submit" className="btn btn-primary">Submit</button>
       </form>
-      <button type="submit" className="btn btn-primary">Submit</button>
     </div>
   );
 }

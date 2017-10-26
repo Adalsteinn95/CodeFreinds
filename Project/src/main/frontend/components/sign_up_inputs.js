@@ -11,22 +11,22 @@ let SignuUpInputs = props => {
       <form onSubmit={ handleSubmit }>
         <div className="form-group">
           <label className="name">Name</label>
-          <Field name="username" component="input" type="text" className="form-control" />
+          <Field name="name" component="input" type="text" className="form-control" />
         </div>
         <div className="form-group">
-          <label className="password">Password</label>
-          <Field name="password" component="input" type="password" className="form-control" />
+          <label className="pass">Password</label>
+          <Field name="pass" component="input" type="password" className="form-control" />
         </div>
         <div className="form-group">
           <label className="email">Email</label>
           <Field name="email" component="input" type="email" className="form-control" />
         </div>
         <div className="form-group">
-          <label className="email">Location</label>
+          <label className="location">Location</label>
           <Field name="location" component="input" type="text" className="form-control" />
         </div>
+        <button type="submit" className="btn btn-primary">Submit</button>
       </form>
-      <button type="submit" className="btn btn-primary">Submit</button>
     </div>
   );
 }

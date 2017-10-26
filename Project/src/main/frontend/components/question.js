@@ -46,10 +46,15 @@ class Question extends Component {
 
     if(!this.props.questions.data || this.state.clicked){
       return (
-        <div>
-          loading....
-
-          <button onClick={this.getNewQuestion}>Get new question</button>
+        <div className="waiting-container">
+          <div className="waiting-container__header">
+            <h1>
+              loading....
+            </h1>
+          </div>
+          <div className = "waiting-container__button">
+            <button  onClick={this.getNewQuestion}>Get new question</button>
+          </div>
         </div>
       );
     } else {

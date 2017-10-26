@@ -71,4 +71,9 @@ public class UserServiceImp implements UserService {
         return userRepository.getOne(name);
     }
 
+    @Override
+    public void update(User u) {
+        userRepository.save(u);
+    }
+
 }

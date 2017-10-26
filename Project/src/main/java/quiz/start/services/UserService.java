@@ -2,78 +2,63 @@ package quiz.start.services;
 
 /**
  * @author Geir Gardarsson - geg42@hi.is
- *         Daníel Guðnason - dag27@hi.is
  * @date october 2017
  */
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import quiz.start.model.User;
-import quiz.start.repository.UserRepository;
 
-import java.util.Iterator;
 import java.util.List;
 
-@Service
-public class UserServiceImp implements UserService {
+public interface UserService {
 
-    @Autowired
-    UserRepository userRepository;
+    /**
+     * add a new user to the db
+     * @param u
+     */
+    void addUser(User u);
 
-    @Override
-    public void addUser(User u) {
-        List<User> tmp = userRepository.findAll();
+    /**
+     * gets list with all users
+     * @return List<User>
+     */
+    List<User> getAllUsers();
 
-        tmp.add(u);
+    /**
+     * @param name
+     * @param pass
+     *
+     * handles user logins
+     * @return boolean
+     */
+    boolean userExists(String name, String pass);
 
-        userRepository.save(tmp);
-    }
+    /**
+     * @param name
+     *
+     * checks username, returns false if user
+     * exists, true otherwise
+     * @return boolean
+     */
+    boolean validateName(String name);
 
-    @Override
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
-    }
+    /**
+     * TODO
+     * destroys user
+     * @param name
+     */
+    void deleteUser(String name);
 
-    @Override
-    public boolean userExists(String name, String pass) {
+    /**
+     * gets single user by name
+     * @param name
+     * @return User
+     */
+    User getUser(String name);
 
-        if (validateName(name)) { return false; }
-
-        User tmp = userRepository.getOne(name);
-
-        if (pass.equals(tmp.getPass())) { return true; }
-
-        return false;
-    }
-
-    @Override
-    public boolean validateName(String name) {
-
-        List<User> tmp = userRepository.findAll();
-
-        Iterator<User> nameIterator = tmp.iterator();
-
-        while (nameIterator.hasNext()) {
-            User u = nameIterator.next();
-
-            if (name.equals(u.getName())) { return false; }
-        }
-        return true;
-    }
-
-    @Override
-    public void deleteUser(String name) {
-
-    }
-
-    @Override
-    public User getUser(String name) {
-        return userRepository.getOne(name);
-    }
-
-    @Override
-    public void update(User u) {
-        userRepository.save(u);
-    }
-
+    /**
+     * updates user
+     * @param u
+     * @return
+     */
+    void update(User u);
 }

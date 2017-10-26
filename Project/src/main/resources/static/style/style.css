@@ -82,7 +82,19 @@ body {
   animation-delay: 2.5s;
 }
 
-
-
-
 @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
+
+
+/*Loading site*/
+
+.waiting-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10em;
+}
+
+.main-container {
+  display: flex;
+  justify-content: center;
+}
