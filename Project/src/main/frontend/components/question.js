@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Answer from './answer_prop';
 import { fetchQuestion } from '../actions';
-
+import { Link } from 'react-router-dom';
 
 class Question extends Component {
 
@@ -69,6 +69,7 @@ class Question extends Component {
               <Answer onClick={this.handleClick} country={value.country2} city={value.city2} />
             </div>
           </div>
+          <Link className="question-title fade-in" to={`/userpage`} >Userpage</Link>
         </div>
       );
 

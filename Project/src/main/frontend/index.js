@@ -11,6 +11,7 @@ import reducers from './reducers';
 import Signup from './components/signup_form';
 import MainPage from './components/main_page';
 import NotFound from './components/not_found';
+import UserPage from './components/user_page';
 
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
 
@@ -18,8 +19,9 @@ ReactDOM.render(
   <Provider store={createStoreWithMiddleware(reducers)}>
     <Router history={browserHistory}>
       <Switch>
-        <Route exact path="/Question" component={MainPage} />
-        <Route exact path="/" component={Signup} />
+        <Route path="/question" component={MainPage} />
+        <Route path="/userpage" component={UserPage} />
+        <Route path="/" component={Signup} />
         <Route path="*" component={NotFound} />
       </Switch>
     </Router>

@@ -140,15 +140,4 @@ public class UserControl {
         return currentUser;
     }
 
-    /**
-     * function to test the other functions
-     * in this class before react is connected
-     */
-    @RequestMapping(value = "/tests")
-    public String routTest() {
-        //return login("Geir", "lala");
-        //return logout("Geir");
-        //return signUp("", "", "", "");
-        return "";
-    }
 }
