@@ -140,4 +140,12 @@ public class UserControl {
         return currentUser;
     }
 
+    @RequestMapping (value = "/alive", method = RequestMethod.GET)
+    public String alive() {
+        if (userService.isAlive()) {
+            return "alive";
+        }
+        return "dead";
+    }
+
 }

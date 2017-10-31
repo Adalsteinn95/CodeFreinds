@@ -1,7 +1,6 @@
-package hello;
+package quiz.start.awesomeTests;
 
 import static org.hamcrest.Matchers.containsString;
-import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -14,21 +13,29 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import quiz.start.controller.QuestionControl;
+import quiz.start.controller.UserControl;
+import quiz.start.services.UserService;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(GreetingController.class)
-public class WebMockTest {
+@WebMvcTest(UserControl.class)
+//tag::test[]
+public class WebLayerTest {
 
+    /**
+     * þjónninn ekki keyrður upp
+     */
     @Autowired
     private MockMvc mockMvc;
 
-    @MockBean
-    private GreetingService service;
-
+    /**
+     * Test til að athuga hvort HttpRequest sé sent á "/"
+     * @throws Exception
+     */
     @Test
-    public void greetingShouldReturnMessageFromService() throws Exception {
-        when(service.greet()).thenReturn("Hello Mock");
-        this.mockMvc.perform(get("/greeting")).andDo(print()).andExpect(status().isOk())
-                .andExpect(content().string(containsString("Hello Mock")));
+    public void webLayerTest() throws Exception {
+        this.mockMvc.perform(get("/")).andDo(print()).andExpect(status().isOk())
+                .andExpect(content().string(containsString("")));
     }
 }
+//end::test[]
