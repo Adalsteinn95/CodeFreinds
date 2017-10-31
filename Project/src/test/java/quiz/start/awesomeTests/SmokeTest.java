@@ -16,6 +16,10 @@ public class SmokeTest {
     @Autowired
     private UserControl controller;
 
+    /**
+     * Aðferð sem athugar hvort controller klasi hafi orðið til
+     * @throws Exception
+     */
     @Test
     public void contexLoads() throws Exception {
         assertThat(controller).isNotNull();

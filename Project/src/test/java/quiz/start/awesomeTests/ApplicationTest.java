@@ -22,9 +22,13 @@ public class ApplicationTest {
     @Autowired
     private MockMvc mockMvc;
 
+    /**
+     * Test til að athuga hvort spring-boot hafi tekist
+     * @throws Exception
+     */
     @Test
     public void applicationTest() throws Exception {
-        this.mockMvc.perform(get("/")).andDo(print()).andExpect(status().isOk())
-                .andExpect(content().string(containsString("")));
+        this.mockMvc.perform(get("/API/users")).andDo(print()).andExpect(status().isOk())
+                .andExpect(content().string(containsString("[{")));
     }
 }

@@ -15,12 +15,20 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class HttpRequestTest {
 
+    // fyrir random port
     @LocalServerPort
     private int port;
+
 
     @Autowired
     private TestRestTemplate restTemplate;
 
+    /**
+     * Aðferð til að prófa heimaslóðina.
+     * Heimaslóðin inniheldur "container" í HTMLinu
+     *
+     * @throws Exception
+     */
     @Test
     public void HttpRequestTest() throws Exception {
         assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/",

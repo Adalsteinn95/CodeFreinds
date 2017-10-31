@@ -31,6 +31,10 @@ public class WebMockTest {
     @MockBean
     UserService userService;
 
+    /**
+     * Athugar hvort controller og service séu 'lifandi'
+     * @throws Exception
+     */
     @Test
     public void testLife() throws Exception {
         when(userService.isAlive()).thenReturn(true);
@@ -42,6 +46,11 @@ public class WebMockTest {
                         .string(containsString("alive")));
     }
 
+    /**
+     * Athugar hvort controller og service séu 'lifandi', nema
+     * núna með isAlive() sem false
+     * @throws Exception
+     */
     @Test
     public void testDeath() throws Exception {
         when(userService.isAlive()).thenReturn(false);
