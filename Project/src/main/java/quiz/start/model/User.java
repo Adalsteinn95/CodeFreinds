@@ -1,6 +1,7 @@
 package quiz.start.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 /**
  * @authors Aðalsteinn Ingi Pálsson - aip@hi.is
@@ -15,9 +16,12 @@ import javax.persistence.*;
 public class User {
 
     @Id
+    @Pattern(regexp = ".{4,}", message = "Notendanafn verður að vera a.m.k. 4 stafir")
     private String userName;
     @Column(unique = true)
+    @Pattern(regexp = "^[a-zA-Z0-9+._-]+@[a-z]+\\.[a-z]+$", message = "Netfang verður að vera á réttu formi")
     private String email;
+    @Pattern(regexp = ".{6,}", message = "Lykilorð verður að vera a.m.k 6 stafir")
     private String password;
     private String location;
     private int score;

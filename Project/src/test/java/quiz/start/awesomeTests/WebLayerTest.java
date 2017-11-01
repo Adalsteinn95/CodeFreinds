@@ -45,8 +45,8 @@ public class WebLayerTest {
      */
     @Test
     public void userControlTest() throws Exception {
-        this.mockMvc.perform(get("/")).andDo(print()).andExpect(status().isOk())
-                .andExpect(content().string(containsString("")));
+        this.mockMvc.perform(get("/API")).andDo(print()).andExpect(status().isOk())
+                .andExpect(content().string(containsString("user/home")));
     }
 }
 //end::test[]

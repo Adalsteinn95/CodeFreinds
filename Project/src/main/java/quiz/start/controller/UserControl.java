@@ -1,11 +1,17 @@
 package quiz.start.controller;
 import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import quiz.start.model.User;
 import quiz.start.services.UserService;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author Aðalsteinn Ingi Pálsson - aip7@hi.is
@@ -25,6 +31,8 @@ public class UserControl {
 
     private User currentUser = new User();
 
+    private List globalErrorMessage = null;
+
     @Autowired
     UserService userService;
 
@@ -36,26 +44,35 @@ public class UserControl {
     public String home() { return "user/home"; }
 
 
+    @RequestMapping(value = "/error", method = RequestMethod.GET)
+    public List errorStatus() {
+        return globalErrorMessage;
+    }
+
+
     /**
-     * @param name
-     * @param email
-     * @param pass
-     * @param location
+     * @param user
      *
      * function to handle user signups
      * @return String
      */
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
-    public void signUp(@RequestBody User user) {
-        userService.addUser(user);
-        currentUser = user;
-        currentUser.setloginStatus(true);
+    public void signUp(@Valid @RequestBody User user, BindingResult errors) {
+
+        if (!errors.hasErrors()) {
+            currentUser = user;
+            userService.addUser(user);
+            currentUser.setloginStatus(true);
+        }
+
+        globalErrorMessage = errors.getAllErrors();
+
+        System.out.println("[[ signup error: " + errors.getAllErrors().get(0) + "error endar her ]]");
     }
 
 
     /**
-     * @param name
-     * @param pass
+     * @param user
      *
      * logs in user, will be void or boolean in the future
      * @return String
@@ -75,19 +92,15 @@ public class UserControl {
     }
 
     /**
-     * logs out user, will be void in the future
-     * @param name
-     * @return
+     * logs out user
+     * @param user
      */
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
-    public String logout(String name) {
-        User tmp = userService.getUser(name);
-        tmp.setloginStatus(false);
-        userService.update(tmp);
+    public void logout(@RequestBody User user) {
+        user.setloginStatus(false);
+        userService.update(user);
 
         currentUser = new User();
-
-        return "logout successful";
     }
 
     /**
@@ -119,23 +132,10 @@ public class UserControl {
 
     /**
      * returns the object for the current user if logged in
-     * @param name
      * @return User
      */
-    @RequestMapping(value = "/{userName}", method = RequestMethod.GET)
-    public User showCurrentUser(@PathVariable(value = "userName") String name) {
-
-        User tmp = userService.getUser(name);
-
-        if (tmp.getLoginStatus()) {
-            currentUser = tmp;
-        }
-
-        else {
-            return new User();
-        }
-
-        currentUser = new User(tmp.getName(), tmp.getEmail(), tmp.getPass(), tmp.getLocation(), tmp.getScore(), tmp.getLoginStatus());
+    @RequestMapping(value = "/currentuser", method = RequestMethod.GET)
+    public User showCurrentUser() {
 
         return currentUser;
     }
@@ -146,6 +146,12 @@ public class UserControl {
             return "alive";
         }
         return "dead";
+    }
+
+    private String cutMessage(String err) {
+
+        return "";
+
     }
 
 }
