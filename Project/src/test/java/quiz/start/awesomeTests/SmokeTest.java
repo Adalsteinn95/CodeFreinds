@@ -9,6 +9,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import quiz.start.controller.UserControl;
 
+/**
+ * @author Geir Gardarsson
+ * @date october 2017
+ *
+ * Test class for initialization of a controller class
+ */
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class SmokeTest {

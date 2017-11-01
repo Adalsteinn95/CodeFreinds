@@ -18,6 +18,13 @@ import quiz.start.controller.QuestionControl;
 import quiz.start.controller.UserControl;
 import quiz.start.services.UserService;
 
+/**
+ * @author Geir Gardarsson
+ * @date october 2017
+ *
+ * Test class for the web layer
+ */
+
 @RunWith(SpringRunner.class)
 @WebMvcTest(UserControl.class)
 //tag::test[]
