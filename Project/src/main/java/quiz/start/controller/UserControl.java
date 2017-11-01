@@ -61,13 +61,12 @@ public class UserControl {
 
         if (!errors.hasErrors()) {
             currentUser = user;
-            userService.addUser(user);
             currentUser.setloginStatus(true);
+            userService.addUser(user);
         }
 
         globalErrorMessage = errors.getAllErrors();
 
-        System.out.println("[[ signup error: " + errors.getAllErrors().get(0) + "error endar her ]]");
     }
 
 

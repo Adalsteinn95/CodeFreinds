@@ -9,15 +9,23 @@ class UserPage extends Component {
   }
 
   render() {
+    if(!this.props.user.data){
+      return (
+        <div>
+          <h1>loading....</h1>
+        </div>
+      );
 
-    const user = this.props.name ? this.props.name : this.props.user.data.name;
+    } else {
 
-    return (
-      <div>
-        <h1 className="title fade-in">Welcom to kewlkvis {user}</h1>
+      return (
+        <div>
+        <h1 className="title fade-in">Welcom to kewlkvis {this.props.user.data.name}</h1>
         <Link className="question-title fade-in" to={`/question`} >Click me to get to the fun</Link>
-      </div>
-    );
+        </div>
+      );
+    }
+
   }
 
 }

@@ -38,7 +38,7 @@ public class QuestionControl {
     */
 
 
-    @RequestMapping(value = "api/Question", method = RequestMethod.GET)
+    @RequestMapping(value = "API/question", method = RequestMethod.GET)
     public Hashtable getQuestion1(String answer){
 
         convertedQuestion = convertQuestion(data);
@@ -59,7 +59,7 @@ public class QuestionControl {
         return newQuestion;
     }
 
-    @RequestMapping(value = "api/answer/Question", method = RequestMethod.POST )
+    @RequestMapping(value = "API/answer/question", method = RequestMethod.POST )
     public void saveReview(@RequestBody String answer) {
 
         String answers = answer.split(":")[1].split("}")[0];

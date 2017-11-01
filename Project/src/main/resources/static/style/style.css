@@ -86,7 +86,7 @@ body {
 
 
 
-/*Loading site*/
+/*Loading site delete this fannar*/
 
 .waiting-container {
   display: flex;
@@ -97,4 +97,8 @@ body {
 .main-container {
   display: flex;
   justify-content: center;
+}
+
+.userpage {
+  margin-top: 5em !important;
 }

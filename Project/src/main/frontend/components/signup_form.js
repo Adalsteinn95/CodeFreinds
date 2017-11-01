@@ -14,23 +14,25 @@ class Signup extends Component {
       this.state = {
         login: false,
         signup: false,
-        user: {
-          name: null,
-          email: null,
-          location: null,
-          score: null,
-        },
         loading: false,
       };
     }
 
 
     submitSignup = (values) => {
+      this.setState({
+        loading: true,
+      });
+
+
       createUser(values);
 
       this.setState({
-        signup: true
+        signup: true,
+        loading: false,
+
       });
+
     }
 
     submitLogin = (values) => {
@@ -39,13 +41,9 @@ class Signup extends Component {
       });
 
       loginUser(values).payload
-      . then((result) => {
+      .then((result) => {
             this.setState({
               login: true,
-              name: result.data.name,
-              email: result.data.email,
-              location: result.data.location,
-              score: result.data.score,
               loading: false,
             })
 
@@ -71,7 +69,7 @@ class Signup extends Component {
         if(this.state.login){
           return(
             <div>
-              <UserPage name={this.state.name} email={this.state.email}/>
+              <UserPage />
             </div>
           );
         }
@@ -93,4 +91,4 @@ function mapStateToProps(state){
   return { user: state.user}
 }
 
-export default connect(mapStateToProps, {createUser, loginUser})(Signup);
+export default connect(mapStateToProps, {createUser})(Signup);

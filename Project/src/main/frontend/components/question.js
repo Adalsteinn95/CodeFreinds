@@ -43,17 +43,22 @@ class Question extends Component {
     const value = this.props.questions.data;
 
 
+    if(!this.props.questions.data){
+      return(
+        <div className="waiting-container__header">
+          <h1>
+            loading....
+          </h1>
+        </div>
+      );
+    }
 
-    if(!this.props.questions.data || this.state.clicked){
+
+    if(this.state.clicked){
       return (
         <div className="waiting-container">
-          <div className="waiting-container__header">
-            <h1>
-              loading....
-            </h1>
-          </div>
           <div className = "waiting-container__button">
-            <button  onClick={this.getNewQuestion}>Get new question</button>
+            <button className="btn btn-primary" onClick={this.getNewQuestion}>Get new question</button>
           </div>
         </div>
       );
@@ -69,7 +74,9 @@ class Question extends Component {
               <Answer onClick={this.handleClick} country={value.country2} city={value.city2} />
             </div>
           </div>
-          <Link className="question-title fade-in" to={`/userpage`} >Userpage</Link>
+          <div className = "userpage">
+            <Link className="question-title fade-in" to={`/userpage`} >Userpage</Link>
+          </div>
         </div>
       );
 

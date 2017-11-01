@@ -7,13 +7,12 @@ export const CREATE_USER = 'create_user';
 export const LOGIN_USER = 'login_user';
 export const GET_USER = 'get_user';
 
-const ROOT_URL = "http://localhost:8080/api/Question";
-
-let currentUser = '';
-
+const ROOT_URL = "http://localhost:8080/API";
 
 export function fetchQuestion(){
-  const request = axios.get(`${ROOT_URL}`);
+  const request = axios.get(`${ROOT_URL}/question`);
+
+  console.log(request);
 
   return {
     type: FETCH_DATA,
@@ -27,7 +26,7 @@ export function postAnswer(value){
     answer: value
   };
 
-  const postrequest = axios.post("http://localhost:8080/api/answer/Question",feedback);
+  const postrequest = axios.post(`${ROOT_URL}/answer/question`,feedback);
 
   return {
     type: POST_ANSWER,
@@ -37,7 +36,7 @@ export function postAnswer(value){
 
 
 export function createUser(value){
-  const postRequest = axios.post("http://localhost:8080/API/signup",value);
+  const postRequest = axios.post(`${ROOT_URL}/signup`,value);
 
 
   return {
@@ -47,26 +46,21 @@ export function createUser(value){
 }
 
 export function loginUser(value){
-  const postRequest = axios.post("http://localhost:8080/API/login",value);
+  const postRequest = axios.post(`${ROOT_URL}/login`,value);
 
-  const request = axios.get(`http://localhost:8080/API/users/${value.name}`);
-
-
-  currentUser = value.name;
 
   return {
     type: LOGIN_USER,
-    payload: request,
+    payload: postRequest,
   }
 }
 
 
 export function getUserPage(){
-  const request = axios.get(`http://localhost:8080/API/Alli`);
+  const request = axios.get(`${ROOT_URL}/currentuser`);
 
   return {
     type: GET_USER,
     payload: request,
   }
-
 }
