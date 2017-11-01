@@ -1,10 +1,17 @@
 # KewlKwiz
-Hugbúnaðarverkefni í Háskóli Íslands
+Hugbúnaðarverkefni í Háskóli Íslands 
 
-Keyrið þessar skipanir í terminal:
-1. mvn spring-boot:run
+React frontend and Spring backend
 
-ef upp kemur villa þá þarf að ná í maven.
+
+Keyrið þessa skipun í terminal:
+
+      mvn spring-boot:run
+
+Til að byggja verkefnið
+
+ef upp kemur villa þá þarf líklegast að ná í maven
+
 
 Eftir það er hægt að keyra þetta eins og venjulega í intellij.
 
