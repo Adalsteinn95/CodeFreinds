@@ -76,4 +76,9 @@ public class UserServiceImp implements UserService {
         userRepository.save(u);
     }
 
+    @Override
+    public boolean isAlive() {
+        return true;
+    }
+
 }

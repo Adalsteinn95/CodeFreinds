@@ -61,4 +61,11 @@ public interface UserService {
      * @return
      */
     void update(User u);
+
+    /**
+     * Checks if the userService is active
+     * @return boolean
+     */
+    boolean isAlive();
 }
+
