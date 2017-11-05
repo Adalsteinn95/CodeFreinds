@@ -9,29 +9,26 @@ class UserPage extends Component {
   }
 
   render() {
-    if(!this.props.user.data){
+    if (!this.props.user.data) {
       return (
         <div>
           <h1>loading....</h1>
         </div>
       );
-
     } else {
-
       return (
         <div>
-        <h1 className="title fade-in">Welcom to kewlkvis {this.props.user.data.name}</h1>
-        <Link className="question-title fade-in" to={`/question`} >Click me to get to the fun</Link>
+        <h1 className="title fade-in">Welcome to kewlkvis {this.props.user.data.name}</h1>
+        <Link className="question-title fade-in" to={'/question'} >Click me to get to the fun</Link>
         </div>
       );
     }
-
   }
 
 }
 
-function mapStateToProps(state){
-  return { user: state.user}
+function mapStateToProps(state) {
+  return { user: state.user };
 }
 
-export default connect(mapStateToProps, {getUserPage})(UserPage);
+export default connect(mapStateToProps, { getUserPage })(UserPage);

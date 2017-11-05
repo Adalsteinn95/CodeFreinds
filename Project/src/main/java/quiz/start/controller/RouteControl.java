@@ -23,7 +23,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 /**
  *
- * @author Ebba Þóra Hvannberg
+ * @author Fannar Gauti Guðmundsson
+ *
  */
 @Controller
 public class RouteControl   implements ErrorController{

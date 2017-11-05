@@ -7,60 +7,73 @@ export const CREATE_USER = 'create_user';
 export const LOGIN_USER = 'login_user';
 export const GET_USER = 'get_user';
 
-const ROOT_URL = "http://localhost:8080/API";
+const ROOT_URL = 'http://localhost:8080/API';
 
-export function fetchQuestion(){
+export function fetchQuestion() {
   const request = axios.get(`${ROOT_URL}/question`);
 
   console.log(request);
 
   return {
     type: FETCH_DATA,
-    payload: request
+    payload: request,
   };
 }
 
-export function postAnswer(value){
-
+export function postAnswer(value) {
   const feedback = {
-    answer: value
+    answer: value,
   };
 
-  const postrequest = axios.post(`${ROOT_URL}/answer/question`,feedback);
+  const postrequest = axios.post(`${ROOT_URL}/answer/question`, feedback);
 
   return {
     type: POST_ANSWER,
-    payload: postrequest
+    payload: postrequest,
   };
 }
 
 
-export function createUser(value){
-  const postRequest = axios.post(`${ROOT_URL}/signup`,value);
+export function createUser(value) {
+  const postRequest = axios.post(`${ROOT_URL}/signup`, value);
 
 
   return {
     type: CREATE_USER,
-    payload: postRequest
-  }
+    payload: postRequest,
+  };
 }
 
-export function loginUser(value){
-  const postRequest = axios.post(`${ROOT_URL}/login`,value);
+export function loginUser(value) {
+  const postRequest = axios.post(`${ROOT_URL}/login`, value);
 
 
   return {
     type: LOGIN_USER,
     payload: postRequest,
-  }
+  };
 }
 
 
-export function getUserPage(){
+export function getUserPage() {
   const request = axios.get(`${ROOT_URL}/currentuser`);
 
   return {
     type: GET_USER,
     payload: request,
-  }
+  };
 }
+
+// sorry alli, mátt færa þetta eitthvað annað ef þú vilt, kv fannar
+
+function showSignIn() {
+  document.getElementById('signup').style.display = 'none';
+  document.getElementById('signin').style.display = 'flex';
+  console.log('hello from react0');
+}
+function showSignUp() {
+  document.getElementById('signup').style.display = 'flex';
+  document.getElementById('signin').style.display = 'none';
+  console.log('hello from react1');
+}
+console.log('hello from react2');
