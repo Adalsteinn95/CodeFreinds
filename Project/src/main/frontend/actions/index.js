@@ -11,9 +11,7 @@ const ROOT_URL = "http://localhost:8080/API";
 
 export function fetchQuestion(){
   const request = axios.get(`${ROOT_URL}/question`);
-
-  console.log(request);
-
+  
   return {
     type: FETCH_DATA,
     payload: request

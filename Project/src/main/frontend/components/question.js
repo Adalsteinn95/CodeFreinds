@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Answer from './answer_prop';
 import { fetchQuestion } from '../actions';
 import { Link } from 'react-router-dom';
+import Loading from './loading';
 
 class Question extends Component {
 
@@ -15,20 +16,25 @@ class Question extends Component {
     super(props);
 
     this.state = {
-      clicked: false
+      clicked: false,
+      loading: false
     };
 
     this.handleClick = this.handleClick.bind(this);
-
     this.getNewQuestion = this.getNewQuestion.bind(this);
 
   }
 
   handleClick(event){
     this.setState({
-      clicked: true
+      clicked: true,
+      loading: true,
     });
     setTimeout(this.props.fetchQuestion, 2000);
+
+    this.setState({
+      loading: false,
+    });
   }
 
 
@@ -42,19 +48,19 @@ class Question extends Component {
   render() {
     const value = this.props.questions.data;
 
+    console.log(value);
 
-    if(!this.props.questions.data){
+
+    if(!this.props.questions.data || this.state.loading === true){
       return(
-        <div className="waiting-container__header">
-          <h1>
-            loading....
-          </h1>
+        <div>
+          <Loading />
         </div>
       );
     }
 
 
-    if(this.state.clicked){
+    if(this.state.clicked && this.state.loading === false){
       return (
         <div className="waiting-container">
           <div className = "waiting-container__button">

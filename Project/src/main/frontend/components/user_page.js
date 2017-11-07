@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getUserPage } from '../actions';
+import Loading from './loading';
 
 class UserPage extends Component {
   componentDidMount() {
@@ -12,7 +13,7 @@ class UserPage extends Component {
     if(!this.props.user.data){
       return (
         <div>
-          <h1>loading....</h1>
+          <Loading />
         </div>
       );
 
