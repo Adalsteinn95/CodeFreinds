@@ -1,29 +1,29 @@
-import React from 'react'
-import { Field, reduxForm} from 'redux-form'
+import React from 'react';
+import { Field, reduxForm } from 'redux-form';
 
 let SignuUpInputs = props => {
-  const { handleSubmit } = props
+  const { handleSubmit } = props;
   return (
-    <div className="main-content">
-      <h1 className="title fade-in">kewlkvis</h1>
 
-      <div id="signup"className="form-container fade-in signup">
+    <div className = "middle-container">
+      <div id="signup" className="form-container fade-in signup">
         <h2 className="subtitle">Sign up to get started!</h2>
-        <h3 onClick="showSignIn()"id="alreadyAccount"className="sub-subtitle subtitle">I'm cool and have an account already</h3>
+        <a id="alreadyAccount"className="sub-subtitle subtitle">Click here if you're kewl and have an account</a>
 
         <form className="form" onSubmit={handleSubmit }>
           <div className="form_input-fields">
-            <input component="input" className="input" type="text" placeholder="name">
-            <input component="input" className="input" type="password" placeholder="password">
-            <input component="input" className="input" type="text" placeholder="email">
-            <input component="input" className="input" type="text" placeholder="location">
-
+              <Field name="name" component="input" className="input form-control" type="text" placeholder="name" />
+              <Field name="pass" component="input" className="input form-control" type="password" placeholder="password" />
+              <Field name="email" component="input" className="input form-control" type="text" placeholder="email" />
+              <Field name="location" component="input" className="input form-control" type="text" placeholder="location" />
           </div>
-            <button type="submit" className="submit-button">All set!</button>
+          <button type="submit" className="btn btn-primary submit-button">All set!</button>
         </form>
       </div>
     </div>
-    /*
+
+
+/*
     <div className="form-control">
       <div className="page-signup">
         <h1>Sign Up</h1>
@@ -48,12 +48,13 @@ let SignuUpInputs = props => {
         <button type="submit" className="btn btn-primary">Submit</button>
       </form>
     </div>
-    */
-  );
-}
+*/
 
-//handle errors
-function validate(values){
+  );
+};
+
+// handle errors
+function validate(values) {
   const errors = {};
 
   return errors;
@@ -62,7 +63,7 @@ function validate(values){
 
 SignuUpInputs = reduxForm({
   validate,
-  form: 'contact'
-})(SignuUpInputs)
+  form: 'contact',
+})(SignuUpInputs);
 
 export default SignuUpInputs;

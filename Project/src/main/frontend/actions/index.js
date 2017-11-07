@@ -63,17 +63,3 @@ export function getUserPage() {
     payload: request,
   };
 }
-
-// sorry alli, mátt færa þetta eitthvað annað ef þú vilt, kv fannar
-
-function showSignIn() {
-  document.getElementById('signup').style.display = 'none';
-  document.getElementById('signin').style.display = 'flex';
-  console.log('hello from react0');
-}
-function showSignUp() {
-  document.getElementById('signup').style.display = 'flex';
-  document.getElementById('signin').style.display = 'none';
-  console.log('hello from react1');
-}
-console.log('hello from react2');

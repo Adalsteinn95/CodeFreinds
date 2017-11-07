@@ -1,27 +1,27 @@
 import React from 'react';
-import { Field, reduxForm} from 'redux-form';
+import { Field, reduxForm } from 'redux-form';
 
 let LoginForm = props => {
-  const { handleSubmit } = props
+  const { handleSubmit } = props;
   return (
-    <div class="main-content">
-      <div id ="signin" class="form-container fade-in login">
-        <h2 class="subtitle">Sign in to get started!</h2>
+    <div>
+      <div id ="signin" className="form-container fade-in login">
+        <h2 className="subtitle">Sign in to get started!</h2>
 
-        <form class="form" onSubmit={handleSubmit}>
-          <div class="form_input-fields">
-            <input  component="input" class="input" type="text" placeholder="email">
-            <input  component="input" class="input" type="password" placeholder="password">
+        <form className="form" onSubmit={handleSubmit}>
+          <div className="form_input-fields">
+            <Field name="name" component="input" className="input form-control" type="text" placeholder="email" />
+            <Field name="pass" component="input" className="input form-control" type="password" placeholder="password" />
           </div>
-            <button type="submit" class="submit-button">Ready</button>
-          <hr class="hr-line">
+            <button type="submit" className="submit-button">Ready</button>
         </form>
-        <div class="card-footer">
-          <a onClick="showSignUp()"id="alreadyAccount" class="sub-subtitle subtitle">Signup here!</a>
+        <div className="card-footer">
+          <a id="notAlreadyAccount" className="sub-subtitle subtitle">Signup here!</a>
 
         </div>
     </div>
-    /*
+  </div>
+  /*
     <div className="form-control">
       <div className="page-login">
         <h1>Log In</h1>
@@ -40,16 +40,16 @@ let LoginForm = props => {
     </div>
     */
   );
-}
+};
 
-function validate(values){
+function validate(values) {
 
 }
 
 
 LoginForm = reduxForm({
   validate,
-  form: 'loginForm'
-})(LoginForm)
+  form: 'loginForm',
+})(LoginForm);
 
 export default LoginForm;

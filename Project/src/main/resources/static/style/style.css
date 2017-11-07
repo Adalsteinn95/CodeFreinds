@@ -1,7 +1,7 @@
 body {
   font-size: 16px;
   max-height: 800px;
-  background: linear-gradient(to right, #f85032, #e73827); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, blue, #e73827); /* Chrome 10-25, Safari 5.1-6 */
 }
 .fade-in{
   opacity:0;
