@@ -16,6 +16,7 @@ import javax.validation.constraints.*;
 public class User {
 
     @Id
+    @Column(unique = true)
     @Pattern(regexp = ".{4,}", message = "Notendanafn verður að vera a.m.k. 4 stafir")
     private String userName;
     @Column(unique = true)
