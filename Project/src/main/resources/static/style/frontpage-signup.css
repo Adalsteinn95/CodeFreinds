@@ -121,7 +121,7 @@ body {
 
 }
 .submit-button:hover {
-  cursor: hand;
+  cursor: pointer;
   border-radius: 30px;
   background-color: tomato;
   border: white;

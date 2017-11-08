@@ -10,14 +10,14 @@ let SignuUpInputs = props => {
         <h2 className="subtitle">Sign up to get started!</h2>
         <a id="alreadyAccount"className="sub-subtitle subtitle">Click here if you're kewl and have an account</a>
 
-        <form className="form" onSubmit={handleSubmit }>
+        <form id="signup-form" className="form" onSubmit={handleSubmit }>
           <div className="form_input-fields">
               <Field name="name" component="input" className="input form-control" type="text" placeholder="name" />
               <Field name="pass" component="input" className="input form-control" type="password" placeholder="password" />
               <Field name="email" component="input" className="input form-control" type="text" placeholder="email" />
               <Field name="location" component="input" className="input form-control" type="text" placeholder="location" />
           </div>
-          <button type="submit" className="btn btn-primary submit-button">All set!</button>
+            <button id="signupbutton"type="submit" className="btn btn-primary submit-button">All set!</button>
         </form>
       </div>
     </div>
