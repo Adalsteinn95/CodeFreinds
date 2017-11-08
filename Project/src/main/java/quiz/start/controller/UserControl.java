@@ -1,8 +1,5 @@
 package quiz.start.controller;
-import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import quiz.start.model.User;
@@ -10,7 +7,7 @@ import quiz.start.services.UserService;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -110,6 +107,11 @@ public class UserControl {
 
         ArrayList<User> tmp = (ArrayList<User>) userService.getAllUsers();
 
+        Iterator<User> iter = tmp.iterator();
+        while (iter.hasNext()) {
+            iter.next().setPass(null);
+        }
+
         return tmp;
     }
 
@@ -124,7 +126,7 @@ public class UserControl {
 
         User tmp = userService.getUser(name);
 
-        User u = new User(tmp.getName(), tmp.getEmail(), tmp.getPass(), tmp.getLocation(), tmp.getScore(), tmp.getLoginStatus());
+        User u = new User(tmp.getName(), tmp.getEmail(), null, tmp.getLocation(), tmp.getScore(), tmp.getLoginStatus());
 
         return u;
     }
