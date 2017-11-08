@@ -6,10 +6,10 @@ import { BrowserRouter as Router, Route, browserHistory, Switch} from 'react-rou
 import promise from 'redux-promise';
 
 
-/*components*/
 import reducers from './reducers';
+/*components*/
 import Signup from './components/signup_form';
-import MainPage from './components/main_page';
+import Question from './components/question';
 import NotFound from './components/not_found';
 import UserPage from './components/user_page';
 
@@ -19,7 +19,7 @@ ReactDOM.render(
   <Provider store={createStoreWithMiddleware(reducers)}>
     <Router history={browserHistory}>
       <Switch>
-        <Route path="/question" component={MainPage} />
+        <Route path="/question" component={Question} />
         <Route path="/userpage" component={UserPage} />
         <Route path="/" component={Signup} />
         <Route path="*" component={NotFound} />

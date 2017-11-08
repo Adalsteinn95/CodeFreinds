@@ -102,3 +102,35 @@ body {
 .userpage {
   margin-top: 5em !important;
 }
+
+
+
+
+/* LOADING SYMBOL */
+
+@keyframes lds-dual-ring {
+      0% {
+        -webkit-transform: rotate(0);
+        transform: rotate(0);
+      }
+      100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+      }
+    }
+
+    .lds-dual-ring div {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      border: 6px solid #000;
+      border-color: #ffb347 transparent #ffcc33 transparent;
+
+      animation: lds-dual-ring 1s linear infinite;
+    }
+    .lds-dual-ring {
+      margin-top: 10em;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
