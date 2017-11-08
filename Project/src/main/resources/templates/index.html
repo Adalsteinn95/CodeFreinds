@@ -2,12 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       th:with="lang=${#locale.language}" th:lang="${lang}">
 <head>
-    <link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/48938155eb24b4ccdde09426066869504c6dab3c/dist/css/bootstrap.min.css" />
+    <!--<link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/48938155eb24b4ccdde09426066869504c6dab3c/dist/css/bootstrap.min.css" /> -->
     <link rel="stylesheet" href="../static/style/style.css" th:href="@{/style/style.css}" />
+    <link rel="stylesheet" href="../static/style/frontpage-signup.css" th:href="@{/style/frontpage-signup.css}" />
     <link href="https://fonts.googleapis.com/css?family=Lobster|Playball|Overpass:100,400|Raleway:200|Open+Sans" rel="stylesheet" />
 </head>
 <body>
-    <div class="container"></div>
+    <div class="container main-container"></div>
     <script src="/bundle.js"></script>
+    <script src="/scripts/cssscripts.js"></script>
 </body>
 </html>
