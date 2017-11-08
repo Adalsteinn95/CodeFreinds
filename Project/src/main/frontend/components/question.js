@@ -4,6 +4,9 @@ import Answer from './answer_prop';
 import { fetchQuestion } from '../actions';
 import { Link } from 'react-router-dom';
 import Loading from './loading';
+import GoogleMap from './google_map';
+import axios from 'axios';
+
 
 class Question extends Component {
 
@@ -17,7 +20,11 @@ class Question extends Component {
 
     this.state = {
       clicked: false,
-      loading: false
+      loading: false,
+      city1: "",
+      city2: "",
+      location1: {},
+      location2: {}
     };
 
     this.handleClick = this.handleClick.bind(this);
@@ -29,7 +36,36 @@ class Question extends Component {
     this.setState({
       clicked: true,
       loading: true,
+      city1: this.props.questions.data.city1,
+      city2: this.props.questions.data.city2
     });
+
+
+    axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.props.questions.data.city1}&key=AIzaSyDHku5UVOWtBX0jL20kOs581txm_h9joHE`)
+    .then((result) => {
+          this.setState({
+            location1 : result.data.results[0].geometry.location
+          });
+
+      })
+      .catch((error) => {
+          console.log(error);
+      });
+
+      axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.props.questions.data.city2}&key=AIzaSyDHku5UVOWtBX0jL20kOs581txm_h9joHE`)
+      .then((result) => {
+        console.log(result);
+            this.setState({
+              location2 : result.data.results[0].geometry.location
+
+            });
+
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+
+
     setTimeout(this.props.fetchQuestion, 2000);
 
     this.setState({
@@ -40,7 +76,9 @@ class Question extends Component {
 
   getNewQuestion(){
     this.setState({
-      clicked: false
+      clicked: false,
+      city1: this.props.questions.data.city1,
+      city2: this.props.questions.data.city2
     });
   }
 
@@ -48,7 +86,21 @@ class Question extends Component {
   render() {
     const value = this.props.questions.data;
 
-    console.log(value);
+    var mapContainerStyle = {
+      display: "flex",
+      flexDirection: "row",
+      width: "100%",
+      height: "500px"
+    };
+
+    var mapItemStyle = {
+      display: "flex",
+      flexDirection: "column",
+      width: "50%",
+      height: "50%",
+      margin: "10px",
+      textAlign: "center"
+    };
 
 
     if(!this.props.questions.data || this.state.loading === true){
@@ -65,6 +117,16 @@ class Question extends Component {
         <div className="waiting-container">
           <div className = "waiting-container__button">
             <button className="btn btn-primary" onClick={this.getNewQuestion}>Get new question</button>
+          </div>
+          <div style={mapContainerStyle} className="map-container">
+            <div style={mapItemStyle} className="map-item">
+              <h1>{this.state.city1}</h1>
+              <GoogleMap lon={this.state.location1.lat} lat={this.state.location1.lng} />
+            </div>
+            <div style={mapItemStyle} className="map-item">
+              <h1>{this.state.city2}</h1>
+              <GoogleMap lon={this.state.location2.lat} lat={this.state.location2.lng} />
+            </div>
           </div>
         </div>
       );
