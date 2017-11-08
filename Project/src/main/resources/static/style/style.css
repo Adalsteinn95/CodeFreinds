@@ -1,7 +1,7 @@
 body {
   font-size: 16px;
   max-height: 800px;
-  background: linear-gradient(to right, #f85032, #e73827); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, blue, #e73827); /* Chrome 10-25, Safari 5.1-6 */
 }
 .fade-in{
   opacity:0;
@@ -91,7 +91,8 @@ body {
 .waiting-container {
   display: flex;
   flex-direction: column;
-  margin-top: 10em;
+  margin: 5em auto;
+
 }
 
 .main-container {
@@ -102,3 +103,39 @@ body {
 .userpage {
   margin-top: 5em !important;
 }
+
+
+/*Google maps */
+
+
+
+
+/* LOADING SYMBOL */
+
+@keyframes lds-dual-ring {
+      0% {
+        -webkit-transform: rotate(0);
+        transform: rotate(0);
+      }
+      100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+      }
+    }
+
+.lds-dual-ring div {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      border: 6px solid #000;
+      border-color: #ffb347 transparent #ffcc33 transparent;
+
+      animation: lds-dual-ring 1s linear infinite;
+    }
+
+.lds-dual-ring {
+      margin-top: 10em;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }

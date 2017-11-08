@@ -7,52 +7,49 @@ export const CREATE_USER = 'create_user';
 export const LOGIN_USER = 'login_user';
 export const GET_USER = 'get_user';
 
-const ROOT_URL = "http://localhost:8080/API";
+const ROOT_URL = 'http://localhost:8080/API';
 
-export function fetchQuestion(){
+export function fetchQuestion() {
   const request = axios.get(`${ROOT_URL}/question`);
-
-  console.log(request);
-
+  
   return {
     type: FETCH_DATA,
-    payload: request
+    payload: request,
   };
 }
 
-export function postAnswer(value){
-
+export function postAnswer(value) {
   const feedback = {
-    answer: value
+    answer: value,
   };
 
-  const postrequest = axios.post(`${ROOT_URL}/answer/question`,feedback);
+  const postrequest = axios.post(`${ROOT_URL}/answer/question`, feedback);
 
   return {
     type: POST_ANSWER,
-    payload: postrequest
+    payload: postrequest,
   };
 }
 
 
-export function createUser(value){
-  const postRequest = axios.post(`${ROOT_URL}/signup`,value);
+export function createUser(value) {
+  const postRequest = axios.post(`${ROOT_URL}/signup`, value);
 
 
   return {
     type: CREATE_USER,
-    payload: postRequest
-  }
+    payload: postRequest,
+  };
 }
 
-export function loginUser(value){
-  const postRequest = axios.post(`${ROOT_URL}/login`,value);
+export function loginUser(value) {
+  const postRequest = axios.post(`${ROOT_URL}/login`, value);
 
 
   return {
     type: LOGIN_USER,
     payload: postRequest,
-  }
+  };
 }
 
 export function logoutUser(value){
@@ -60,11 +57,11 @@ export function logoutUser(value){
 }
 
 
-export function getUserPage(){
+export function getUserPage() {
   const request = axios.get(`${ROOT_URL}/currentuser`);
 
   return {
     type: GET_USER,
     payload: request,
-  }
+  };
 }
