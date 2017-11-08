@@ -86,26 +86,11 @@ body {
 
 
 
-/*Loading site delete this fannar*/
-
-.waiting-container {
-  display: flex;
-  flex-direction: column;
-  margin: 5em auto;
-
-}
-
-.main-container {
-  display: flex;
-  justify-content: center;
-}
 
 .userpage {
   margin-top: 5em !important;
 }
 
-
-/*Google maps */
 
 
 

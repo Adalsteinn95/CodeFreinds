@@ -5,7 +5,7 @@ import { fetchQuestion } from '../actions';
 import { Link } from 'react-router-dom';
 import Loading from './loading';
 import GoogleMap from './google_map';
-import axios from 'axios';
+
 
 
 class Question extends Component {
@@ -14,6 +14,7 @@ class Question extends Component {
     this.props.fetchQuestion();
 
   }
+
 
   constructor(props){
     super(props);
@@ -41,31 +42,6 @@ class Question extends Component {
     });
 
 
-    axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.props.questions.data.city1}&key=AIzaSyDHku5UVOWtBX0jL20kOs581txm_h9joHE`)
-    .then((result) => {
-          this.setState({
-            location1 : result.data.results[0].geometry.location
-          });
-
-      })
-      .catch((error) => {
-          console.log(error);
-      });
-
-      axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.props.questions.data.city2}&key=AIzaSyDHku5UVOWtBX0jL20kOs581txm_h9joHE`)
-      .then((result) => {
-        console.log(result);
-            this.setState({
-              location2 : result.data.results[0].geometry.location
-
-            });
-
-        })
-        .catch((error) => {
-            console.log(error);
-        });
-
-
     setTimeout(this.props.fetchQuestion, 2000);
 
     this.setState({
@@ -86,6 +62,18 @@ class Question extends Component {
   render() {
     const value = this.props.questions.data;
 
+    if(!value || this.state.loading === true){
+
+      return(
+        <div>
+          <Loading />
+        </div>
+      );
+    }
+
+
+
+
     var mapContainerStyle = {
       display: "flex",
       flexDirection: "row",
@@ -97,22 +85,20 @@ class Question extends Component {
       display: "flex",
       flexDirection: "column",
       width: "50%",
-      height: "50%",
       margin: "10px",
       textAlign: "center"
     };
 
+    var waitingContainerStyle = {
+      width:"100%"
+    };
 
-    if(!this.props.questions.data || this.state.loading === true){
-      return(
-        <div>
-          <Loading />
-        </div>
-      );
-    }
+
+
 
 
     if(this.state.clicked && this.state.loading === false){
+
       return (
         <div className="waiting-container">
           <div className = "waiting-container__button">
@@ -121,11 +107,11 @@ class Question extends Component {
           <div style={mapContainerStyle} className="map-container">
             <div style={mapItemStyle} className="map-item">
               <h1>{this.state.city1}</h1>
-              <GoogleMap lon={this.state.location1.lat} lat={this.state.location1.lng} />
+              <GoogleMap address={value.city1}/>
             </div>
             <div style={mapItemStyle} className="map-item">
               <h1>{this.state.city2}</h1>
-              <GoogleMap lon={this.state.location2.lat} lat={this.state.location2.lng} />
+              <GoogleMap address={value.city2}/>
             </div>
           </div>
         </div>
@@ -141,9 +127,6 @@ class Question extends Component {
               <Answer country={value.country1} city={value.city1} />
               <Answer onClick={this.handleClick} country={value.country2} city={value.city2} />
             </div>
-          </div>
-          <div className = "userpage">
-            <Link className="question-title fade-in" to={`/userpage`} >Userpage</Link>
           </div>
         </div>
       );
