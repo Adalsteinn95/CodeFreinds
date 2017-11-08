@@ -55,6 +55,10 @@ export function loginUser(value){
   }
 }
 
+export function logoutUser(value){
+  const postRequest = axios.post(`${ROOT_URL}/logout`, value);
+}
+
 
 export function getUserPage(){
   const request = axios.get(`${ROOT_URL}/currentuser`);

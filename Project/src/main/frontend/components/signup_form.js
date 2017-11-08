@@ -5,6 +5,7 @@ import { createUser , loginUser} from '../actions';
 import { connect } from 'react-redux';
 import UserPage from './user_page';
 import { Link } from 'react-router-dom';
+import Navbar from './navbar';
 
 class Signup extends Component {
 

@@ -146,11 +146,4 @@ public class UserControl {
         }
         return "dead";
     }
-
-    private String cutMessage(String err) {
-
-        return "";
-
-    }
-
 }
