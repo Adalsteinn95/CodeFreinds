@@ -10,7 +10,7 @@ let LoginForm = props => {
 
         <form className="form" onSubmit={handleSubmit}>
           <div className="form_input-fields">
-            <Field name="name" component="input" className="input form-control" type="text" placeholder="email" />
+            <Field name="name" component="input" className="input form-control" type="text" placeholder="name" />
             <Field name="pass" component="input" className="input form-control" type="password" placeholder="password" />
           </div>
             <button type="submit" className="submit-button">Ready</button>
