@@ -2,16 +2,18 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import { BrowserRouter as Router, Route, browserHistory, Switch} from 'react-router-dom';
+import { BrowserRouter as Router, Route, browserHistory, Switch } from 'react-router-dom';
 import promise from 'redux-promise';
 
 
-/*components*/
+/* components*/
 import reducers from './reducers';
 import Signup from './components/signup_form';
 import MainPage from './components/main_page';
 import NotFound from './components/not_found';
 import UserPage from './components/user_page';
+import NavBar from './components/navbar';
+
 
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
 
