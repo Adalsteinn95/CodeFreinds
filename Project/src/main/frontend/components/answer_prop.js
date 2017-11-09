@@ -21,9 +21,6 @@ class Answer extends Component {
 
   render() {
 
-    const value = this.props.city;
-
-
     return (
       <div>
         <button className= "answer right fade-in" onClick={this.handleClick}>

@@ -3,6 +3,10 @@ import { connect } from 'react-redux';
 import Answer from './answer_prop';
 import { fetchQuestion } from '../actions';
 import { Link } from 'react-router-dom';
+import Loading from './loading';
+import GoogleMap from './google_map';
+
+
 
 class Question extends Component {
 
@@ -11,30 +15,46 @@ class Question extends Component {
 
   }
 
+
   constructor(props){
     super(props);
 
     this.state = {
-      clicked: false
+      clicked: false,
+      loading: false,
+      city1: "",
+      city2: "",
+      location1: {},
+      location2: {}
     };
 
     this.handleClick = this.handleClick.bind(this);
-
     this.getNewQuestion = this.getNewQuestion.bind(this);
 
   }
 
   handleClick(event){
     this.setState({
-      clicked: true
+      clicked: true,
+      loading: true,
+      city1: this.props.questions.data.city1,
+      city2: this.props.questions.data.city2
     });
+
+
     setTimeout(this.props.fetchQuestion, 2000);
+
+    this.setState({
+      loading: false,
+    });
   }
 
 
   getNewQuestion(){
     this.setState({
-      clicked: false
+      clicked: false,
+      city1: this.props.questions.data.city1,
+      city2: this.props.questions.data.city2
     });
   }
 
@@ -42,23 +62,57 @@ class Question extends Component {
   render() {
     const value = this.props.questions.data;
 
+    if(!value || this.state.loading === true){
 
-    if(!this.props.questions.data){
       return(
-        <div className="waiting-container__header">
-          <h1>
-            loading....
-          </h1>
+        <div>
+          <Loading />
         </div>
       );
     }
 
 
-    if(this.state.clicked){
+
+
+    var mapContainerStyle = {
+      display: "flex",
+      flexDirection: "row",
+      width: "100%",
+      height: "500px"
+    };
+
+    var mapItemStyle = {
+      display: "flex",
+      flexDirection: "column",
+      width: "50%",
+      margin: "10px",
+      textAlign: "center"
+    };
+
+    var waitingContainerStyle = {
+      width:"100%"
+    };
+
+
+
+
+
+    if(this.state.clicked && this.state.loading === false){
+
       return (
         <div className="waiting-container">
           <div className = "waiting-container__button">
             <button className="btn btn-primary" onClick={this.getNewQuestion}>Get new question</button>
+          </div>
+          <div style={mapContainerStyle} className="map-container">
+            <div style={mapItemStyle} className="map-item">
+              <h1>{this.state.city1}</h1>
+              <GoogleMap address={value.city1}/>
+            </div>
+            <div style={mapItemStyle} className="map-item">
+              <h1>{this.state.city2}</h1>
+              <GoogleMap address={value.city2}/>
+            </div>
           </div>
         </div>
       );
@@ -73,9 +127,6 @@ class Question extends Component {
               <Answer country={value.country1} city={value.city1} />
               <Answer onClick={this.handleClick} country={value.country2} city={value.city2} />
             </div>
-          </div>
-          <div className = "userpage">
-            <Link className="question-title fade-in" to={`/userpage`} >Userpage</Link>
           </div>
         </div>
       );
