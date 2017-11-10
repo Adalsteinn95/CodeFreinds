@@ -7,7 +7,6 @@ class MainPage extends Component {
   render() {
     return (
       <div className="main-container">
-        <NavBar />
         <Question />
       </div>
     );

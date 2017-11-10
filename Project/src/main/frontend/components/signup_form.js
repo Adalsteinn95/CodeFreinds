@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import UserPage from './user_page';
 import { Link } from 'react-router-dom';
 import Loading from './loading';
+import NavBar from './navbar';
 
 class Signup extends Component {
 
@@ -72,10 +73,13 @@ class Signup extends Component {
     }
     else {
       return (
-            <div className="signup-container">
-              <h1 className="title fade-in">Welcome to kewlkvis</h1>
-              <LoginForm onSubmit={this.submitLogin} />
-              <SignuUpInputs onSubmit={this.submitSignup} />
+            <div>
+              <NavBar />
+              <div className="signup-container">
+                <h1 className="title fade-in">Welcome to kewlkvis</h1>
+                <LoginForm onSubmit={this.submitLogin} />
+                <SignuUpInputs onSubmit={this.submitSignup} />
+              </div>
             </div>
           );
     }

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-// import MainPage from './main_page'
+import { getUserPage } from '../actions';
+import { connect } from 'react-redux';
+import DropDown from './dropdown';
 
 class NavBar extends Component {
 
@@ -9,21 +11,18 @@ class NavBar extends Component {
         <nav className="nav-container">
           <a href="#" className="kewl-subtitle title">kewlkvis</a>
           <div className="nav-right-side">
-            <div className="dropbtn">
-              <img src="https://www.hi.is/sites/default/files/styles/simaskra_stor/public/staffmyndir/sn-snorri_agnarsson1398308014_90x120.jpg" alt="userpic" className="userpic" />
-              <span className="username">Snorri Agnarson</span>
-              <div className="dropdown-content">
-                <a className="dropdown-item" href="#">Userpage</a>
-                <a className="dropdown-item" href="#">Log out</a>
-              </div>
-            </div>
+            <DropDown />
           </div>
         </nav>
       </div>
 
-    );
+      );
   }
 
+
+}
+function mapStateToProps(state) {
+  return { user: state.user };
 }
 
-export default NavBar;
+export default connect(mapStateToProps, { getUserPage })(NavBar);
