@@ -88,21 +88,42 @@ class Question extends Component {
       width: '100%',
     };
 
+    var buttonContainer = {
+      display: "flex",
+      justifyContent: "center",
+      height: "10em",
+      marginTop: "40px"
+    };
+
+
+    var button = {
+      width: "30%",
+      borderRadius: "30px",
+      fontFamily: "'Overpass', sans-serif",
+      fontWeight: "100",
+      fontSize: "3em",
+      background: "linear-gradient(to bottom, #ffb347, #ffcc33)",
+      border: '2px'
+
+    };
+
+
+
 
     if (this.state.clicked && this.state.loading === false) {
       return (
         <div className="waiting-container">
-          <div className = "waiting-container__button">
-            <button className="btn btn-primary" onClick={this.getNewQuestion}>Get new question</button>
+          <div style={buttonContainer}>
+            <button className="answer" style={button} onClick={this.getNewQuestion}>Get new question</button>
           </div>
           <div style={mapContainerStyle} className="map-container">
             <div style={mapItemStyle} className="map-item">
-              <h1>{this.state.city1}</h1>
-              <GoogleMap address={value.city1} />
+              <h1 className="answer" >{this.state.city1}</h1>
+              <GoogleMap address={value.city1}/>
             </div>
             <div style={mapItemStyle} className="map-item">
-              <h1>{this.state.city2}</h1>
-              <GoogleMap address={value.city2} />
+              <h1 className="answer" >{this.state.city2}</h1>
+              <GoogleMap address={value.city2}/>
             </div>
           </div>
         </div>

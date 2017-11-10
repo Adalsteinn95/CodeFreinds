@@ -35,7 +35,8 @@ class GoogleMap extends Component {
   render() {
     var divStyle = {
       width: "100%",
-      height: "100%"
+      height: "100%",
+      borderRadius: "10px"
     };
     return (
       <div style={divStyle} className="maps" ref="map"></div>
