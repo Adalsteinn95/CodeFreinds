@@ -37,9 +37,11 @@ class Signup extends Component {
   }
 
   submitLogin = (values) => {
+    console.log(values);
     this.setState({
       loading: true,
     });
+    console.log(values);
 
     loginUser(values).payload
       .then((result) => {
