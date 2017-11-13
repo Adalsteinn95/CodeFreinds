@@ -36,11 +36,11 @@ class DropDown extends Component {
       return (
           <div>
             <div className="dropbtn">
-              <img src="https://www.hi.is/sites/default/files/styles/simaskra_stor/public/staffmyndir/sn-snorri_agnarsson1398308014_90x120.jpg" alt="userpic" className="userpic" />
+              <img src="http://gazettereview.com/wp-content/uploads/2016/03/facebook-avatar.jpg" alt="userpic" className="userpic" />
               <span className="username">{this.props.user.data.name}</span>
               <div className="dropdown-content">
                 <Link className="dropdown-item" to="/profile">Profile</Link>
-                <form onSubmit = {this.handleLogout.bind(this)}>
+                <form className="logout-form" onSubmit = {this.handleLogout.bind(this)}>
                   <button type="submit" className="dropdown-item logout-button">Log out</button>
                 </form>
               </div>
