@@ -76,15 +76,16 @@ public class UserControl {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public void login(@RequestBody User user){
 
-        if (!userService.userExists(user.getName(), user.getPass())) {
-          //do something
+        if (userService.userExists(user.getName(), user.getPass())) {
+            User tmp = userService.getUser(user.getName());
+            tmp.setloginStatus(true);
+            userService.update(tmp);
+            currentUser = tmp;
         }
 
-        User tmp = userService.getUser(user.getName());
-        tmp.setloginStatus(true);
-        userService.update(tmp);
-        currentUser = tmp;
-
+        else {
+            System.out.println("notendanafn eda lykilord vitlaust");
+        }
     }
 
     /**
@@ -141,11 +142,12 @@ public class UserControl {
         return currentUser;
     }
 
-    @RequestMapping (value = "/alive", method = RequestMethod.GET)
-    public String alive() {
-        if (userService.isAlive()) {
-            return "alive";
+    @RequestMapping(value = "/updateScore", method = RequestMethod.POST)
+    public void updateScore(@RequestBody User user, int newScore) {
+
+        if (newScore > user.getScore()) {
+            user.setScore(newScore);
         }
-        return "dead";
+        userService.update(user);
     }
 }

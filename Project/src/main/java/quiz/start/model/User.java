@@ -69,4 +69,5 @@ public class User {
     }
     public void setLocation(String location) { this.location = location; }
     public void setloginStatus(boolean b) { this.loginStatus = b; }
+    public void setScore(int s) { this.score = s; }
 }
