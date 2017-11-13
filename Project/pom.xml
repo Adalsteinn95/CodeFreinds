@@ -6,7 +6,7 @@
 	<groupId>Codefriends</groupId>
 	<artifactId>project</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>Spring Boot and Reactr</name>
 	<description>Spring Boot and React</description>
@@ -116,6 +116,10 @@
                             <destFileName>webapp-runner.jar</destFileName>
                         </artifactItem>
                     </artifactItems>
+                    <warSourceDirectory>src/main/webapp</warSourceDirectory>
+                    <warName>kewlkvis</warName>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+
                 </configuration>
             </execution>
         </executions>
