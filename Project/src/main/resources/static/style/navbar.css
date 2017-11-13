@@ -68,7 +68,7 @@ body {
     font-size: 1em;
     border: none;
     cursor: pointer;
-    height: 7vh;
+    height: 100%;
     display: flex;
 }
 

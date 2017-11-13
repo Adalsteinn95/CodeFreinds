@@ -48,6 +48,10 @@ public class GeoQuestions extends Question {
     int randomNum;
     int randomNum2;
 
+    /*score*/
+    public boolean correct = false;
+    public int score = 0;
+
 
 
     public GeoQuestions(String location){
@@ -120,17 +124,26 @@ public class GeoQuestions extends Question {
 
         if(answer.equals(dest1)){
             if(distance2 >= distance1){
+                score++;
                 currentLoc = dest1;
                 currentCountry = allcountries[randomNum];
+            }
+            else {
+              score = 0;
             }
         }
 
         if(answer.equals(dest2)){
             if(distance1 >= distance2){
+                score++;
                 currentLoc = dest2;
                 currentCountry = allcountries[randomNum2];
             }
+            else {
+              score = 0;
+            }
         }
+
 
 
         /*Random generator*/
@@ -169,6 +182,9 @@ public class GeoQuestions extends Question {
 
     public String getCurrentCountry(){
         return currentCountry;
+    }
+    public String wasPreviousQuestionCorrect() {
+        return Integer.toString(score);
     }
 
 }

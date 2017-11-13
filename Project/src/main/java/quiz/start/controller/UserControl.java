@@ -1,5 +1,7 @@
 package quiz.start.controller;
 import com.sun.org.apache.regexp.internal.RE;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.ResponseEntity;
@@ -151,6 +153,21 @@ public class UserControl {
     private String cutMessage(String err) {
 
         return "";
+
+    }
+
+    @RequestMapping(value = "/updateScore", method = RequestMethod.POST)
+    public void updateScore(@RequestBody String newScore) {
+        int intScore = Integer.parseInt(newScore.substring(0, newScore.length() - 1));
+        System.out.println(intScore);
+        //System.out.println(newScore.get("score"));
+        System.out.println(currentUser.getScore());
+
+        if (intScore > currentUser.getScore()) {
+          currentUser.setScore(intScore);
+        }
+        userService.update(currentUser);
+
 
     }
 

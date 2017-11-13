@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Answer from './answer_prop';
-import { fetchQuestion } from '../actions';
+import { fetchQuestion, maybeUpdateHighScore } from '../actions';
 import { Link } from 'react-router-dom';
 import Loading from './loading';
 import GoogleMap from './google_map';
@@ -25,6 +25,7 @@ class Question extends Component {
       city2: '',
       location1: {},
       location2: {},
+      score: 0,
     };
 
     this.handleClick = this.handleClick.bind(this);
@@ -37,6 +38,7 @@ class Question extends Component {
       loading: true,
       city1: this.props.questions.data.city1,
       city2: this.props.questions.data.city2,
+      score: this.props.questions.data.score,
     });
 
 
@@ -45,6 +47,10 @@ class Question extends Component {
     this.setState({
       loading: false,
     });
+
+    console.log('THIS.PROPS.QUESTIONS.DATA.SCORE', this.props.questions.data.score);
+    maybeUpdateHighScore(this.props.questions.data.score);
+    console.log('MAYBEUPDATEHIGHSCORE(THIS.PROPS.QUESTIONS.DATA.SCORE).PAYLOAD', maybeUpdateHighScore(this.props.questions.data.score).payload);
   }
 
 
@@ -89,25 +95,23 @@ class Question extends Component {
     };
 
     var buttonContainer = {
-      display: "flex",
-      justifyContent: "center",
-      height: "10em",
-      marginTop: "40px"
+      display: 'flex',
+      justifyContent: 'center',
+      height: '10em',
+      marginTop: '40px',
     };
 
 
     var button = {
-      width: "30%",
-      borderRadius: "30px",
+      width: '30%',
+      borderRadius: '30px',
       fontFamily: "'Overpass', sans-serif",
-      fontWeight: "100",
-      fontSize: "3em",
-      background: "linear-gradient(to bottom, #ffb347, #ffcc33)",
-      border: '2px'
+      fontWeight: '100',
+      fontSize: '3em',
+      background: 'linear-gradient(to bottom, #ffb347, #ffcc33)',
+      border: '2px',
 
     };
-
-
 
 
     if (this.state.clicked && this.state.loading === false) {
@@ -119,11 +123,11 @@ class Question extends Component {
           <div style={mapContainerStyle} className="map-container">
             <div style={mapItemStyle} className="map-item">
               <h1 className="answer" >{this.state.city1}</h1>
-              <GoogleMap address={value.city1}/>
+              <GoogleMap address={value.city1} />
             </div>
             <div style={mapItemStyle} className="map-item">
               <h1 className="answer" >{this.state.city2}</h1>
-              <GoogleMap address={value.city2}/>
+              <GoogleMap address={value.city2} />
             </div>
           </div>
         </div>
@@ -139,6 +143,7 @@ class Question extends Component {
               <Answer country={value.country1} city={value.city1} />
               <Answer onClick={this.handleClick} country={value.country2} city={value.city2} />
             </div>
+            <div>Score: {value.score}</div>
           </div>
         </div>
       );

@@ -26,6 +26,7 @@ public class QuestionControl {
 
     public QuestionControl(){
         this.data = new QuestionCollection("London");
+
     }
 
 
@@ -54,6 +55,7 @@ public class QuestionControl {
             put("city2", data.getData().getDest2());
             put("currentCountry", data.getData().getCurrentCountry());
             put("currentCity", data.getData().getCurrentLoc());
+            put("score",data.getData().wasPreviousQuestionCorrect());
         }};
 
         return newQuestion;
