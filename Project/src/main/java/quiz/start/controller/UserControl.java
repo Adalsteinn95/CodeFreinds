@@ -96,6 +96,7 @@ public class UserControl {
      */
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
     public void logout(@RequestBody User user) {
+        System.out.println(user.getName());
         user.setloginStatus(false);
         userService.update(user);
 
