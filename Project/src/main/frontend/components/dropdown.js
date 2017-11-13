@@ -1,14 +1,31 @@
 import React, { Component } from 'react';
 import { getUserPage } from '../actions';
 import { connect } from 'react-redux';
+import { logoutUser } from '../actions';
 
 class DropDown extends Component {
+
+  handleLogout() {
+    logoutUser(this.props.user.data).payload
+      .then((result) => {
+        this.setState({
+          login: false,
+          loading: true,
+        });
+      })
+        .catch((error) => {
+          this.setState({
+            login: true,
+            loading: false,
+          });
+        });
+  }
+
   componentDidMount() {
     this.props.getUserPage();
   }
 
   render() {
-    console.log(this.props.user.data);
     if (this.props.user.data == null) {
       return (
         <div></div>
@@ -22,7 +39,9 @@ class DropDown extends Component {
               <span className="username">{this.props.user.data.name}</span>
               <div className="dropdown-content">
                 <a className="dropdown-item" href="#">Userpage</a>
-                <a className="dropdown-item" href="#">Log out</a>
+                <form onSubmit = {this.handleLogout.bind(this)}>
+                  <button type="submit" className="dropdown-item logout-button">Log out</button>
+                </form>
               </div>
             </div>
           </div>
@@ -39,5 +58,6 @@ class DropDown extends Component {
 function mapStateToProps(state) {
   return { user: state.user };
 }
+
 
 export default connect(mapStateToProps, { getUserPage })(DropDown);
