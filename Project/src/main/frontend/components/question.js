@@ -123,7 +123,6 @@ class Question extends Component {
 
     var responseContainer = {
       textAlign: 'center',
-
     };
 
 
@@ -133,8 +132,8 @@ class Question extends Component {
           <div style={buttonContainer}>
             <button className="answer" style={button} onClick={this.getNewQuestion}>Get new question</button>
           </div>
-          <div style={responseContainer}>
-            <h1></h1>
+          <div className="responseContainer" style={responseContainer}>
+            <h1 className = "error-item">{this.state.correct} was correct fucking idiot!</h1>
           </div>
           <div style={mapContainerStyle} className="map-container">
             <div style={mapItemStyle} className="map-item">

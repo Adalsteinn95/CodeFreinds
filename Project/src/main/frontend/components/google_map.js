@@ -18,13 +18,13 @@ class GoogleMap extends Component {
         }
       });
       var b = new google.maps.LatLng(result.lat, result.lng);
-      new google.maps.Marker({map: map, position: b, draggable: true, animation: google.maps.Animation.DROP});
+      new google.maps.Marker({map: map, position: b});
 
       axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.props.currentAddress}&key=AIzaSyDHku5UVOWtBX0jL20kOs581txm_h9joHE`).then((result) => {
         result = result.data.results[0].geometry.location;
         var b2 = new google.maps.LatLng(result.lat, result.lng);
         console.log(b.lat());
-        new google.maps.Marker({map: map, position: b2, draggable: true, animation: google.maps.Animation.DROP});
+        new google.maps.Marker({map: map, position: b2});
 
         var line = new google.maps.Polyline({
           path: [
