@@ -118,7 +118,9 @@ class Signup extends Component {
               <NavBar />
               <div className="signup-container">
                 <h1 className="title fade-in">Welcome to kewlkvis</h1>
-                <div>{this.state.error}</div>
+                <div className="error-container fade-in">
+                  <h3 className="error-item">{this.state.error}</h3>
+                </div>
                 <LoginForm onSubmit={this.submitLogin} />
                 <SignuUpInputs onSubmit={this.submitSignup} />
               </div>
