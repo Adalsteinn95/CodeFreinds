@@ -76,6 +76,11 @@
 			<groupId>com.vaadin.external.google</groupId>
 			<artifactId>android-json</artifactId>
 			<version>RELEASE</version>
+    </dependency>
+    <dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>4.2.1.RELEASE</version>
 		</dependency>
 	</dependencies>
 
@@ -126,9 +131,11 @@
                             <destFileName>webapp-runner.jar</destFileName>
                         </artifactItem>
                     </artifactItems>
+					<!-- ???
                     <warSourceDirectory>src/main/webapp</warSourceDirectory>
                     <warName>kewlkvis</warName>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
+                    -->
 
                 </configuration>
             </execution>

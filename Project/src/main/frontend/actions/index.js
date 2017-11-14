@@ -8,6 +8,7 @@ export const LOGIN_USER = 'login_user';
 export const GET_USER = 'get_user';
 export const LOGOUT_USER = 'logout_user';
 export const UPDATE_HIGHSCORE = 'update_highscore';
+export const GET_ERROR = 'get_error';
 
 // const ROOT_URL = 'https://kewlkvis.herokuapp.com/API';
 const ROOT_URL = 'http://localhost:8080/API';
@@ -80,7 +81,6 @@ export function maybeUpdateHighScore(value) {
   };
 }
 
-
 export function getUserPage() {
   const request = axios.get(`${ROOT_URL}/currentuser`);
 
@@ -88,4 +88,13 @@ export function getUserPage() {
     type: GET_USER,
     payload: request,
   };
+}
+
+export function listenForError() {
+    const request = axios.get(`${ROOT_URL}/error`);
+
+    return {
+        type: GET_ERROR,
+        payload: request
+    };
 }

@@ -135,6 +135,21 @@ body {
 
 }
 
+.error-container {
+  text-align: center;
+  margin: 25px auto;
+  max-width: 40vw;
+  animation-delay: .3s;
+}
+
+.error-item {
+  color: tomato;
+  background-color: white;
+  font-size: 2rem;
+  border-radius: 20px;
+  font-family: 'Open Sans', sans-serif;
+}
+
 .login {
   display: none;
 }
