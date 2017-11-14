@@ -17,7 +17,22 @@ class Signup extends Component {
       login: false,
       signup: false,
       loading: false,
+      alrdAccount: false,
     };
+
+    this.handleClick = this.handleClick.bind(this);
+    this.handleClick2 = this.handleClick2.bind(this);
+  }
+  handleClick(event){
+    this.setState({
+      alrdAccount: true,
+    });
+  }
+
+  handleClick2(event){
+    this.setState({
+      alrdAccount: false,
+    });
   }
 
 
@@ -98,6 +113,19 @@ class Signup extends Component {
   }
 
   render() {
+    var divStyle = {
+      textAlign: 'center',
+    };
+
+    var fontStyle = {
+      background: 'linear-gradient(to right, #FFEB3B, #ede96c)',
+      fontSize: '3em',
+      fontFamily: 'Lobster, cursive',
+      margin: '0 auto',
+      backgroundClip: 'text',
+
+    };
+
     if (this.state.loading) {
       return (
             <div>
@@ -112,6 +140,24 @@ class Signup extends Component {
             </div>
           );
     }
+
+    if (this.state.alrdAccount){
+      return(
+        <div>
+          <NavBar />
+          <div className="signup-container">
+            <h1 className="title fade-in">Welcome to kewlkvis</h1>
+            <div className="error-container fade-in">
+              <h3 className="error-item">{this.state.error}</h3>
+            </div>
+            <LoginForm onSubmit={this.submitLogin} />
+            <div onClick={this.handleClick2} style={divStyle}>
+              <a style={fontStyle} className="subtitle">Click here if you need an account!</a>
+            </div>
+          </div>
+        </div>
+      );
+    }
     else {
       return (
             <div>
@@ -121,11 +167,10 @@ class Signup extends Component {
                 <div className="error-container fade-in">
                   <h3 className="error-item">{this.state.error}</h3>
                 </div>
-                <LoginForm onSubmit={this.submitLogin} />
                 <SignuUpInputs onSubmit={this.submitSignup} />
-              </div>
-              <div className="card-footer">
-                <a id="notAlreadyAccount" className="sub-subtitle subtitle">Signup here!</a>
+                <div onClick={this.handleClick} style={divStyle}>
+                  <a style={fontStyle} className="subtitle">Click here if you already have an account!</a>
+                </div>
               </div>
             </div>
           );

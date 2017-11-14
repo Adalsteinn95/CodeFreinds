@@ -8,7 +8,6 @@ let SignuUpInputs = props => {
     <div className = "middle-container">
       <div id="signup" className="form-container fade-in signup">
         <h2 className="subtitle">Sign up to get started!</h2>
-        <a id="alreadyAccount"className="sub-subtitle subtitle">Click here if you're kewl and have an account</a>
 
         <form id="signup-form" className="form" onSubmit={handleSubmit }>
           <div className="form_input-fields">
