@@ -64,13 +64,10 @@ public class User {
     public void setPass(String pass) {
          this.password = pass;
      }
-     public void setScore(int score) {
-        this.score = score;
-     }
+    public void setScore(int score) { this.score = score; }
     public void setEmail(String email) {
         this.email = email;
     }
     public void setLocation(String location) { this.location = location; }
     public void setloginStatus(boolean b) { this.loginStatus = b; }
-    public void setScore(int s) { this.score = s; }
 }

@@ -26,19 +26,40 @@ class Signup extends Component {
       loading: true,
     });
 
-    createUser(values);/*.payload
+    createUser(values).payload
       .then((result) => {
-        console.log(result);
-      });*/
+        let error = listenForError().payload
+          .then((result) => {
+            console.log(result);
+            if (!result.data) {
+              this.setState({
+                login: true,
+                loading: false,
+                error: result.data,
+              });
+            } else {
+              this.setState({
+                login: false,
+                loading: false,
+                error: result.data,
+              });
+            }
+          })
+          .catch((error) => {
+            this.setState({
+              login: false,
+              loading: false,
+            });
+          });
+      })
+      .catch((error) => {
+        this.setState({
+          login: false,
+          loading: false,
+        });
+      });
 
-    console.log(listenForError());
-    //listenForError();
 
-    this.setState({
-      login: true,
-      loading: false,
-
-    });
   }
 
   submitLogin = (values) => {

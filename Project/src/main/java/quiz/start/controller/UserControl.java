@@ -161,15 +161,6 @@ public class UserControl {
     }
 
     @RequestMapping(value = "/updateScore", method = RequestMethod.POST)
-    public void updateScore(@RequestBody User user, int newScore) {
-
-        if (newScore > user.getScore()) {
-            user.setScore(newScore);
-        }
-        userService.update(user);
-    }
-
-    @RequestMapping(value = "/updateScore", method = RequestMethod.POST)
     public void updateScore(@RequestBody String newScore) {
         int intScore = Integer.parseInt(newScore.substring(0, newScore.length() - 1));
 

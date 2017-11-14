@@ -131,9 +131,11 @@
                             <destFileName>webapp-runner.jar</destFileName>
                         </artifactItem>
                     </artifactItems>
+					<!-- ???
                     <warSourceDirectory>src/main/webapp</warSourceDirectory>
                     <warName>kewlkvis</warName>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
+                    -->
 
                 </configuration>
             </execution>
