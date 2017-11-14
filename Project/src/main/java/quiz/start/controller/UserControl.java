@@ -150,12 +150,15 @@ public class UserControl {
         return u;
     }
 
+
     /**
      * returns the object for the current user if logged in
      * @return User
      */
+     
     @RequestMapping(value = "/currentuser", method = RequestMethod.GET)
     public User showCurrentUser() {
+
 
         return currentUser;
     }

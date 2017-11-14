@@ -1,9 +1,14 @@
 package quiz.start.controller;
 
 import org.springframework.web.bind.annotation.*;
+import quiz.start.model.User;
 import quiz.start.repository.QuestionCollection;
 
+import java.io.UnsupportedEncodingException;
+import java.nio.ByteBuffer;
+import java.nio.charset.Charset;
 import java.util.Hashtable;
+
 
 /*
  *  Aðalsteinn Ingi Pálsson
@@ -25,7 +30,7 @@ public class QuestionControl {
     Hashtable convertedQuestion;
 
     public QuestionControl(){
-        this.data = new QuestionCollection("London");
+        //this.data = new QuestionCollection("London");
 
     }
 
@@ -46,6 +51,16 @@ public class QuestionControl {
 
         return convertedQuestion;
     }
+    @RequestMapping(value = "API/userLocation", method = RequestMethod.POST)
+    public void updateScore(@RequestBody String location) throws UnsupportedEncodingException {
+        String result = java.net.URLDecoder.decode(location, "UTF-8");
+        String finalCut = result.substring(0, result.length() - 1);
+          System.out.println(finalCut);
+
+          this.data = new QuestionCollection(finalCut);
+
+
+    }
 
     public Hashtable convertQuestion(final QuestionCollection data) {
         Hashtable<String, String> newQuestion = new Hashtable<String, String>() {{
@@ -56,6 +71,7 @@ public class QuestionControl {
             put("currentCountry", data.getData().getCurrentCountry());
             put("currentCity", data.getData().getCurrentLoc());
             put("score",data.getData().wasPreviousQuestionCorrect());
+            put("correct",data.getData().getCorrectAnswer());
         }};
 
         return newQuestion;

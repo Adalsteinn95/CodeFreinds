@@ -34,7 +34,14 @@ export function postAnswer(value) {
     payload: postrequest,
   };
 }
+export function postLocation(value) {
+  const postrequest = axios.post(`${ROOT_URL}/userLocation`, value);
 
+  return {
+    type: POST_ANSWER,
+    payload: postrequest,
+  };
+}
 
 export function createUser(value) {
   const postRequest = axios.post(`${ROOT_URL}/signup`, value);
