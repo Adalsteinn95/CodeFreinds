@@ -74,7 +74,7 @@ public class RouteControl   implements ErrorController{
      * Birtir heima vefsíðuna
      * @return vefsíðu fyrir heimaslóð
      */
-    @RequestMapping("/heima")
+    @RequestMapping("/")
     public String heima() {
         return "index";
     }
@@ -95,4 +95,3 @@ public class RouteControl   implements ErrorController{
         return "index";
     }
 }
-

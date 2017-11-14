@@ -6,7 +6,8 @@ import { logoutUser } from '../actions';
 
 class DropDown extends Component {
 
-  handleLogout() {
+  handleLogout(e) {
+    e.preventDefault();
     logoutUser(this.props.user.data).payload
       .then((result) => {
         this.setState({
@@ -20,6 +21,7 @@ class DropDown extends Component {
             loading: false,
           });
         });
+    window.location.replace('../');
   }
 
   componentDidMount() {
@@ -34,7 +36,7 @@ class DropDown extends Component {
     }
     else if (this.props.user.data.loginStatus) {
       return (
-          <div>
+          <div className = "dropContain">
             <div className="dropbtn">
               <span className="username">{this.props.user.data.name}</span>
               <div className="dropdown-content">
