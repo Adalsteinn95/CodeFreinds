@@ -26,6 +26,7 @@ class Question extends Component {
       location1: {},
       location2: {},
       score: 0,
+      correct: '',
     };
 
     this.handleClick = this.handleClick.bind(this);
@@ -39,8 +40,16 @@ class Question extends Component {
       city1: this.props.questions.data.city1,
       city2: this.props.questions.data.city2,
       score: this.props.questions.data.score,
+      correct: this.props.questions.data.correct,
     });
-
+    console.log('EVENT.TARGET.INNERHTML ', event.target.innerHTML);
+    console.log('THIS.STATE.CORRECT', this.props.questions.data.correct);
+    if (event.target.innerHTML === this.props.questions.data.correct) {
+      alert('YOU HAVE ANSWERED CORRECTLY!!! :)');
+    }
+    else {
+      alert('YOU SUCK');
+    }
 
     setTimeout(this.props.fetchQuestion, 2000);
 
@@ -65,6 +74,7 @@ class Question extends Component {
 
   render() {
     const value = this.props.questions.data;
+    console.log('VALUE', value);
 
     if (!value || this.state.loading === true) {
       return (
@@ -141,9 +151,10 @@ class Question extends Component {
             <h2 className="question-title fade-in">Which city is closer to {value.currentCity}?</h2>
             <div onClick={this.handleClick} className="answer-container">
               <Answer country={value.country1} city={value.city1} />
-              <Answer onClick={this.handleClick} country={value.country2} city={value.city2} />
+              <Answer country={value.country2} city={value.city2} />
             </div>
             <div>Score: {value.score}</div>
+            <div>Correct: {value.correct}</div>
           </div>
         </div>
       );

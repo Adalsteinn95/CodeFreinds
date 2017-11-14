@@ -129,14 +129,7 @@ public class GeoQuestions extends Question {
 
     public void compareDist(String answer){
 
-        distance1 = api.getDist(currentLoc,dest1);
-        distance2 = api.getDist(currentLoc,dest2);
 
-        if(distance1 >= distance2){
-          answerCity = dest2;
-        } else {
-          answerCity = dest1;
-        };
 
         System.out.println(answerCity);
 
@@ -176,6 +169,14 @@ public class GeoQuestions extends Question {
         destCountry = allcountries[randomNum];
         destCountry2 = allcountries[randomNum2];
 
+        distance1 = api.getDist(currentLoc,dest1);
+        distance2 = api.getDist(currentLoc,dest2);
+        if(distance1 >= distance2){
+          answerCity = dest2;
+        } else {
+          answerCity = dest1;
+        };
+
     }
 
     public String getDest1() {
@@ -203,6 +204,9 @@ public class GeoQuestions extends Question {
     }
     public String wasPreviousQuestionCorrect() {
         return Integer.toString(score);
+    }
+    public String getCorrectAnswer() {
+      return answerCity;
     }
 
 }

@@ -56,6 +56,7 @@ public class QuestionControl {
             put("currentCountry", data.getData().getCurrentCountry());
             put("currentCity", data.getData().getCurrentLoc());
             put("score",data.getData().wasPreviousQuestionCorrect());
+            put("correct",data.getData().getCorrectAnswer());
         }};
 
         return newQuestion;
