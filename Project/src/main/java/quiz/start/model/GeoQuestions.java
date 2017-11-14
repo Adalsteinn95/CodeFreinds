@@ -48,6 +48,13 @@ public class GeoQuestions extends Question {
     int randomNum;
     int randomNum2;
 
+    /*score*/
+    public boolean correct = false;
+    public int score = 0;
+
+    /*Answer country*/
+    public String answerCity;
+
 
 
     public GeoQuestions(String location){
@@ -105,6 +112,16 @@ public class GeoQuestions extends Question {
 
         api = new GeoService();
 
+        distance1 = api.getDist(currentLoc,dest1);
+        distance2 = api.getDist(currentLoc,dest2);
+
+        if(distance1 >= distance2){
+          answerCity = dest2;
+        } else {
+          answerCity = dest1;
+        };
+
+        System.out.println(answerCity);
 
 
     }
@@ -115,22 +132,36 @@ public class GeoQuestions extends Question {
         distance1 = api.getDist(currentLoc,dest1);
         distance2 = api.getDist(currentLoc,dest2);
 
-        System.out.println(distance1);
-        System.out.println(distance2);
+        if(distance1 >= distance2){
+          answerCity = dest2;
+        } else {
+          answerCity = dest1;
+        };
+
+        System.out.println(answerCity);
 
         if(answer.equals(dest1)){
             if(distance2 >= distance1){
+                score++;
                 currentLoc = dest1;
                 currentCountry = allcountries[randomNum];
+            }
+            else {
+              score = 0;
             }
         }
 
         if(answer.equals(dest2)){
             if(distance1 >= distance2){
+                score++;
                 currentLoc = dest2;
                 currentCountry = allcountries[randomNum2];
             }
+            else {
+              score = 0;
+            }
         }
+
 
 
         /*Random generator*/
@@ -169,6 +200,9 @@ public class GeoQuestions extends Question {
 
     public String getCurrentCountry(){
         return currentCountry;
+    }
+    public String wasPreviousQuestionCorrect() {
+        return Integer.toString(score);
     }
 
 }

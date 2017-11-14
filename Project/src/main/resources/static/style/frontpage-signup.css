@@ -27,6 +27,7 @@ body {
   animation-delay: .3s;
 }
 .title {
+  text-align: center;
   margin: 20px auto;
   font-size: 6rem;
   font-family: 'Raleway', cursive;

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { getUserPage } from '../actions';
 import { connect } from 'react-redux';
 import { logoutUser } from '../actions';
@@ -35,11 +36,11 @@ class DropDown extends Component {
       return (
           <div>
             <div className="dropbtn">
-              <img src="https://www.hi.is/sites/default/files/styles/simaskra_stor/public/staffmyndir/sn-snorri_agnarsson1398308014_90x120.jpg" alt="userpic" className="userpic" />
+              <img src="http://gazettereview.com/wp-content/uploads/2016/03/facebook-avatar.jpg" alt="userpic" className="userpic" />
               <span className="username">{this.props.user.data.name}</span>
               <div className="dropdown-content">
-                <a className="dropdown-item" href="#">Userpage</a>
-                <form onSubmit = {this.handleLogout.bind(this)}>
+                <Link className="dropdown-item" to="/profile">Profile</Link>
+                <form className="logout-form" onSubmit = {this.handleLogout.bind(this)}>
                   <button type="submit" className="dropdown-item logout-button">Log out</button>
                 </form>
               </div>

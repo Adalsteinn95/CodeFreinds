@@ -1,4 +1,7 @@
 package quiz.start.controller;
+import com.sun.org.apache.regexp.internal.RE;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -164,5 +167,17 @@ public class UserControl {
             user.setScore(newScore);
         }
         userService.update(user);
+    }
+
+    @RequestMapping(value = "/updateScore", method = RequestMethod.POST)
+    public void updateScore(@RequestBody String newScore) {
+        int intScore = Integer.parseInt(newScore.substring(0, newScore.length() - 1));
+
+        if (intScore > currentUser.getScore()) {
+          currentUser.setScore(intScore);
+        }
+        userService.update(currentUser);
+
+
     }
 }

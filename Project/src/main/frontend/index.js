@@ -13,7 +13,7 @@ import Question from './components/question';
 import NotFound from './components/not_found';
 import UserPage from './components/user_page';
 import NavBar from './components/navbar';
-
+import Profile from './components/profile';
 
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
 
@@ -23,6 +23,7 @@ ReactDOM.render(
       <Switch>
         <Route path="/question" component={Question} />
         <Route path="/userpage" component={UserPage} />
+        <Route path="/profile" component={Profile} />
         <Route path="/" component={Signup} />
         <Route path="*" component={NotFound} />
       </Switch>

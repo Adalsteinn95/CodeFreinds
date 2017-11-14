@@ -39,7 +39,7 @@ body {
 
 .userpic {
   margin: auto 10px;
-  height: 100%;
+  height: 70%;
   flex:1;
 
 }
@@ -49,12 +49,15 @@ body {
   margin: auto 10px auto 0px;
   max-width: 50px;
 }
+.logout-form{
+  padding:0;
+}
 .logout-button {
-  margin-top: 0;
+  margin:0;
+  width: 100%;
   color: black;
-  font-family: 'Lobster', cursive;
   /* margin-top: 20px; */
-  font-size: 1.9rem;
+  font-size: 1.4rem;
   outline: none;
 
 }
@@ -68,13 +71,14 @@ body {
     font-size: 1em;
     border: none;
     cursor: pointer;
-    height: 7vh;
+    height: 100%;
     display: flex;
 }
 
 
 .dropdown-item {
-  width: 100px;;
+  text-align: center;
+  width: 100px;
 }
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content {

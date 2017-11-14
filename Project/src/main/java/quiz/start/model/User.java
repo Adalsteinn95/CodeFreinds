@@ -64,6 +64,9 @@ public class User {
     public void setPass(String pass) {
          this.password = pass;
      }
+     public void setScore(int score) {
+        this.score = score;
+     }
     public void setEmail(String email) {
         this.email = email;
     }

@@ -7,6 +7,7 @@ export const CREATE_USER = 'create_user';
 export const LOGIN_USER = 'login_user';
 export const GET_USER = 'get_user';
 export const LOGOUT_USER = 'logout_user';
+export const UPDATE_HIGHSCORE = 'update_highscore';
 export const GET_ERROR = 'get_error';
 
 // const ROOT_URL = 'https://kewlkvis.herokuapp.com/API';
@@ -60,6 +61,15 @@ export function logoutUser(value) {
 
   return {
     type: LOGOUT_USER,
+    payload: postRequest,
+  };
+}
+export function maybeUpdateHighScore(value) {
+  const postRequest = axios.post(`${ROOT_URL}/updateScore`, value);
+
+
+  return {
+    type: UPDATE_HIGHSCORE,
     payload: postRequest,
   };
 }
