@@ -7,6 +7,7 @@ package quiz.start.services;
  */
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import quiz.start.model.User;
 import quiz.start.repository.UserRepository;
@@ -20,10 +21,12 @@ public class UserServiceImp implements UserService {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
     @Override
     public void addUser(User u) {
         List<User> tmp = userRepository.findAll();
-
         tmp.add(u);
 
         userRepository.save(tmp);
@@ -41,7 +44,7 @@ public class UserServiceImp implements UserService {
 
         User tmp = userRepository.getOne(name);
 
-        if (pass.equals(tmp.getPass())) { return true; }
+        if (passwordEncoder.matches(pass, tmp.getPass())) { return true; }
 
         return false;
     }
@@ -52,11 +55,26 @@ public class UserServiceImp implements UserService {
         List<User> tmp = userRepository.findAll();
 
         Iterator<User> nameIterator = tmp.iterator();
-
         while (nameIterator.hasNext()) {
             User u = nameIterator.next();
+            if (name.equals(u.getName())) {
+                return false;
+            }
+        }
+        return true;
+    }
 
-            if (name.equals(u.getName())) { return false; }
+    @Override
+    public boolean validateEmail(String email) {
+
+        List<User> tmp = userRepository.findAll();
+
+        Iterator<User> mailIterator = tmp.iterator();
+        while (mailIterator.hasNext()) {
+            User u = mailIterator.next();
+            if (email.equals(u.getEmail())) {
+                return false;
+            }
         }
         return true;
     }

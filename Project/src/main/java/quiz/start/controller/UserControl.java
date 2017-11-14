@@ -1,5 +1,8 @@
 package quiz.start.controller;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import quiz.start.model.User;
@@ -7,7 +10,6 @@ import quiz.start.services.UserService;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -28,21 +30,29 @@ public class UserControl {
 
     private User currentUser = new User();
 
-    private List globalErrorMessage = null;
+    private String globalErrorMessage = null;
 
     @Autowired
     UserService userService;
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     /**
      * shows the home page
      * @return String
      */
     @RequestMapping("")
-    public String home() { return "user/home"; }
+    public String home() { return ""; }
 
 
     @RequestMapping(value = "/error", method = RequestMethod.GET)
-    public List errorStatus() {
+    public String errorStatus() {
         return globalErrorMessage;
     }
 
@@ -57,13 +67,22 @@ public class UserControl {
     public void signUp(@Valid @RequestBody User user, BindingResult errors) {
 
         if (!errors.hasErrors()) {
-            currentUser = user;
-            currentUser.setloginStatus(true);
-            userService.addUser(user);
+            if (!userService.validateName(user.getName())) {
+                globalErrorMessage = "Notendanafn er tekið";
+            }
+            else if (!userService.validateEmail(user.getEmail())) {
+                globalErrorMessage = "Netfang er í notkun";
+            }
+            else {
+                currentUser = user;
+                currentUser.setloginStatus(true);
+                currentUser.setPass(passwordEncoder.encode(currentUser.getPass()));
+                userService.addUser(user);
+                globalErrorMessage = "";
+            }
+        } else {
+            globalErrorMessage = errors.getAllErrors().get(0).getDefaultMessage();
         }
-
-        globalErrorMessage = errors.getAllErrors();
-
     }
 
 
@@ -81,10 +100,11 @@ public class UserControl {
             tmp.setloginStatus(true);
             userService.update(tmp);
             currentUser = tmp;
+            globalErrorMessage = "";
         }
 
         else {
-            System.out.println("notendanafn eda lykilord vitlaust");
+            globalErrorMessage = "Notendanafn eða lykilorð er rangt";
         }
     }
 
@@ -94,7 +114,6 @@ public class UserControl {
      */
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
     public void logout(@RequestBody User user) {
-        System.out.println(user.getName());
         user.setloginStatus(false);
         userService.update(user);
 
@@ -108,11 +127,6 @@ public class UserControl {
     public ArrayList<User> showUsers() {
 
         ArrayList<User> tmp = (ArrayList<User>) userService.getAllUsers();
-
-        Iterator<User> iter = tmp.iterator();
-        while (iter.hasNext()) {
-            iter.next().setPass(null);
-        }
 
         return tmp;
     }
@@ -128,7 +142,7 @@ public class UserControl {
 
         User tmp = userService.getUser(name);
 
-        User u = new User(tmp.getName(), tmp.getEmail(), null, tmp.getLocation(), tmp.getScore(), tmp.getLoginStatus());
+        User u = new User(tmp.getName(), tmp.getEmail(), tmp.getPass(), tmp.getLocation(), tmp.getScore(), tmp.getLoginStatus());
 
         return u;
     }

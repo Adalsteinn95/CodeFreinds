@@ -42,6 +42,11 @@ public interface UserService {
     boolean validateName(String name);
 
     /**
+     *
+     */
+    boolean validateEmail(String email);
+
+    /**
      * TODO
      * destroys user
      * @param name
