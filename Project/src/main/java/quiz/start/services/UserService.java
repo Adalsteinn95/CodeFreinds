@@ -42,6 +42,11 @@ public interface UserService {
     boolean validateName(String name);
 
     /**
+     *
+     */
+    boolean validateEmail(String email);
+
+    /**
      * TODO
      * destroys user
      * @param name
@@ -61,11 +66,5 @@ public interface UserService {
      * @return
      */
     void update(User u);
-
-    /**
-     * Checks if the userService is active
-     * @return boolean
-     */
-    boolean isAlive();
 }
 

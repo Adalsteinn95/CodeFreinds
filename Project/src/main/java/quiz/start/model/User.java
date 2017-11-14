@@ -16,6 +16,7 @@ import javax.validation.constraints.*;
 public class User {
 
     @Id
+    @Column(unique = true)
     @Pattern(regexp = ".{4,}", message = "Notendanafn verður að vera a.m.k. 4 stafir")
     private String userName;
     @Column(unique = true)
@@ -71,4 +72,5 @@ public class User {
     }
     public void setLocation(String location) { this.location = location; }
     public void setloginStatus(boolean b) { this.loginStatus = b; }
+    public void setScore(int s) { this.score = s; }
 }

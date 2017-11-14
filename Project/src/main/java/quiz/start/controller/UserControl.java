@@ -4,7 +4,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import quiz.start.model.User;
@@ -12,7 +13,6 @@ import quiz.start.services.UserService;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -33,21 +33,29 @@ public class UserControl {
 
     private User currentUser = new User();
 
-    private List globalErrorMessage = null;
+    private String globalErrorMessage = null;
 
     @Autowired
     UserService userService;
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     /**
      * shows the home page
      * @return String
      */
     @RequestMapping("")
-    public String home() { return "user/home"; }
+    public String home() { return ""; }
 
 
     @RequestMapping(value = "/error", method = RequestMethod.GET)
-    public List errorStatus() {
+    public String errorStatus() {
         return globalErrorMessage;
     }
 
@@ -62,13 +70,22 @@ public class UserControl {
     public void signUp(@Valid @RequestBody User user, BindingResult errors) {
 
         if (!errors.hasErrors()) {
-            currentUser = user;
-            currentUser.setloginStatus(true);
-            userService.addUser(user);
+            if (!userService.validateName(user.getName())) {
+                globalErrorMessage = "Notendanafn er tekið";
+            }
+            else if (!userService.validateEmail(user.getEmail())) {
+                globalErrorMessage = "Netfang er í notkun";
+            }
+            else {
+                currentUser = user;
+                currentUser.setloginStatus(true);
+                currentUser.setPass(passwordEncoder.encode(currentUser.getPass()));
+                userService.addUser(user);
+                globalErrorMessage = "";
+            }
+        } else {
+            globalErrorMessage = errors.getAllErrors().get(0).getDefaultMessage();
         }
-
-        globalErrorMessage = errors.getAllErrors();
-
     }
 
 
@@ -81,15 +98,17 @@ public class UserControl {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public void login(@RequestBody User user){
 
-        if (!userService.userExists(user.getName(), user.getPass())) {
-          //do something
+        if (userService.userExists(user.getName(), user.getPass())) {
+            User tmp = userService.getUser(user.getName());
+            tmp.setloginStatus(true);
+            userService.update(tmp);
+            currentUser = tmp;
+            globalErrorMessage = "";
         }
 
-        User tmp = userService.getUser(user.getName());
-        tmp.setloginStatus(true);
-        userService.update(tmp);
-        currentUser = tmp;
-
+        else {
+            globalErrorMessage = "Notendanafn eða lykilorð er rangt";
+        }
     }
 
     /**
@@ -98,7 +117,6 @@ public class UserControl {
      */
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
     public void logout(@RequestBody User user) {
-        System.out.println(user.getName());
         user.setloginStatus(false);
         userService.update(user);
 
@@ -142,18 +160,13 @@ public class UserControl {
         return currentUser;
     }
 
-    @RequestMapping (value = "/alive", method = RequestMethod.GET)
-    public String alive() {
-        if (userService.isAlive()) {
-            return "alive";
+    @RequestMapping(value = "/updateScore", method = RequestMethod.POST)
+    public void updateScore(@RequestBody User user, int newScore) {
+
+        if (newScore > user.getScore()) {
+            user.setScore(newScore);
         }
-        return "dead";
-    }
-
-    private String cutMessage(String err) {
-
-        return "";
-
+        userService.update(user);
     }
 
     @RequestMapping(value = "/updateScore", method = RequestMethod.POST)
@@ -167,5 +180,4 @@ public class UserControl {
 
 
     }
-
 }

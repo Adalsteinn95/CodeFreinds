@@ -1,4 +1,4 @@
-
+/*
 
 document.getElementById('alreadyAccount').onclick = () => {
   console.log("test0")

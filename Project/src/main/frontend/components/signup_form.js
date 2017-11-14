@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import SignuUpInputs from './sign_up_inputs';
 import LoginForm from './login_form';
-import { createUser, loginUser } from '../actions';
+import { createUser, loginUser, listenForError } from '../actions';
 import { connect } from 'react-redux';
 import UserPage from './user_page';
 import { Link } from 'react-router-dom';
@@ -26,36 +26,54 @@ class Signup extends Component {
       loading: true,
     });
 
+    createUser(values);/*.payload
+      .then((result) => {
+        console.log(result);
+      });*/
 
-    createUser(values);
+    console.log(listenForError());
+    //listenForError();
 
     this.setState({
-      signup: true,
+      login: true,
       loading: false,
 
     });
   }
 
   submitLogin = (values) => {
-    console.log(values);
     this.setState({
       loading: true,
     });
-    console.log(values);
 
     loginUser(values).payload
       .then((result) => {
+        let error = listenForError().payload
+        .then((result) => {
+          if (!result.data) {
+            this.setState({
+              login: true,
+              loading: false,
+              error: result.data,
+            });
+          } else {
+            this.setState({
+              login: false,
+              loading: false,
+              error: result.data,
+            });
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+      })
+      .catch((error) => {
         this.setState({
-          login: true,
+          login: false,
           loading: false,
         });
-      })
-        .catch((error) => {
-          this.setState({
-            login: false,
-            loading: false,
-          });
-        });
+      });
   }
 
   render() {
@@ -79,6 +97,7 @@ class Signup extends Component {
               <NavBar />
               <div className="signup-container">
                 <h1 className="title fade-in">Welcome to kewlkvis</h1>
+                <div>{this.state.error}</div>
                 <LoginForm onSubmit={this.submitLogin} />
                 <SignuUpInputs onSubmit={this.submitSignup} />
               </div>
