@@ -139,11 +139,11 @@ class Question extends Component {
           <div style={mapContainerStyle} className="map-container">
             <div style={mapItemStyle} className="map-item">
               <h2 className="answer" >{this.state.city1}</h2>
-              <GoogleMap address={value.city1} />
+              <GoogleMap address={value.city1} currentAddress={value.currentCity}/>
             </div>
             <div style={mapItemStyle} className="map-item">
               <h2 className="answer" >{this.state.city2}</h2>
-              <GoogleMap address={value.city2} />
+              <GoogleMap address={value.city2} currentAddress={value.currentCity}/>
             </div>
           </div>
         </div>
@@ -151,7 +151,7 @@ class Question extends Component {
     } else {
       return (
         <div>
-          <NavBar />
+        <NavBar />
           <div className = "question-container">
             <h2 className="question-title fade-in">Which city is closer to {value.currentCity}?</h2>
             <div onClick={this.handleClick} className="answer-container">
