@@ -21,35 +21,6 @@ let SignuUpInputs = props => {
         </form>
       </div>
     </div>
-
-
-/*
-    <div className="form-control">
-      <div className="page-signup">
-        <h1>Sign Up</h1>
-      </div>
-      <form onSubmit={ handleSubmit }>
-        <div className="form-group">
-          <label className="name">Name</label>
-          <Field name="name" component="input" type="text" className="form-control" />
-        </div>
-        <div className="form-group">
-          <label className="pass">Password</label>
-          <Field name="pass" component="input" type="password" className="form-control" />
-        </div>
-        <div className="form-group">
-          <label className="email">Email</label>
-          <Field name="email" component="input" type="email" className="form-control" />
-        </div>
-        <div className="form-group">
-          <label className="location">Location</label>
-          <Field name="location" component="input" type="text" className="form-control" />
-        </div>
-        <button type="submit" className="btn btn-primary">Submit</button>
-      </form>
-    </div>
-*/
-
   );
 };
 

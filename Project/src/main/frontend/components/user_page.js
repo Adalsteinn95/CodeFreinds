@@ -7,6 +7,16 @@ import NavBar from './navbar';
 
 class UserPage extends Component {
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      loading: false,
+
+    };
+
+  }
+
 
   componentDidMount() {
     this.props.getUserPage();
@@ -15,13 +25,20 @@ class UserPage extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log(e.target.location.value);
+    this.setState({
+      loading: true,
+    });
+
     postLocation(e.target.location.value);
-    console.log(postLocation(e.target.location.value).payload);
+
+    this.setState({
+      loading: false,
+    });
+
   }
 
   render() {
-    if (!this.props.user.data) {
+    if (!this.props.user.data || this.state.loading) {
       return (
         <div>
           <Loading />

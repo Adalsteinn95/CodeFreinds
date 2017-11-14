@@ -82,6 +82,9 @@ class Signup extends Component {
                 <LoginForm onSubmit={this.submitLogin} />
                 <SignuUpInputs onSubmit={this.submitSignup} />
               </div>
+              <div className="card-footer">
+                <a id="notAlreadyAccount" className="sub-subtitle subtitle">Signup here!</a>
+              </div>
             </div>
           );
     }
