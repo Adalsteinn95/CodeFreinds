@@ -159,9 +159,6 @@ public class UserControl {
     @RequestMapping(value = "/updateScore", method = RequestMethod.POST)
     public void updateScore(@RequestBody String newScore) {
         int intScore = Integer.parseInt(newScore.substring(0, newScore.length() - 1));
-        System.out.println(intScore);
-        //System.out.println(newScore.get("score"));
-        System.out.println(currentUser.getScore());
 
         if (intScore > currentUser.getScore()) {
           currentUser.setScore(intScore);
