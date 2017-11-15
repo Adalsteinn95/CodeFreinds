@@ -1,11 +1,13 @@
 package quiz.start.model;
 
-/*
-Aðalsteinn Ingi Pálsson
-aip7@hi.is
-*/
+/**
+ * Aðalsteinn Ingi Pálsson
+ * aip7@hi.is
+ */
 
-
+/**
+ * Boilerplate class for a Question
+ */
 public class Question {
 
     private String subject;

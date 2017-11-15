@@ -1,22 +1,19 @@
 package quiz.start.services;
 
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
-
 import java.util.Enumeration;
 import java.util.Hashtable;
 
-/*
+/**
  *  Aðalsteinn Ingi Pálsson
  *  aip7@hi.is
  *
  */
 
 
-/*
-Service that manages values from controller
-*/
-
+/**
+ * Service that manages values from controller
+ */
 public class GeoService {
 
     private RestTemplate restTemplate;
@@ -37,20 +34,15 @@ public class GeoService {
     }
 
 
-    /*
-     * @param String
-     * @param String
-     *
+    /***
      * function that takes a name of place a and place b and returns info about them
      * distance between them and more
      *
      * @Return Hashtable
-     *
      */
     public void apiCallBetweenTwoPlaces(){
 
         hash = restTemplate.getForObject("http://www.distance24.org/route.json?stops=" + locationA + "|" + locationB, Hashtable.class);
-
 
         Enumeration names;
         String key;
@@ -64,9 +56,9 @@ public class GeoService {
         }
     }
 
-    /*
-     * @param String
-     * @param String
+    /**
+     * @param a
+     * @param b
      *
      * Returns distance between two places
      *

@@ -8,19 +8,17 @@ package quiz.start.repository;
 
 import org.springframework.stereotype.Repository;
 import quiz.start.model.User;
-
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Implementation of the userRepository
+ */
 @Repository
 public class UserRepositoryImp {
 
     private final List<User> users;
-
-
     public UserRepositoryImp() {
         this.users = new ArrayList<User>();
     }
-
-
 }

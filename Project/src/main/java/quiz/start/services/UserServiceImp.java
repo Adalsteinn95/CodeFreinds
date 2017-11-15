@@ -11,10 +11,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import quiz.start.model.User;
 import quiz.start.repository.UserRepository;
-
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * Implementation of userService.
+ * See userService.java for documentation
+ */
 @Service
 public class UserServiceImp implements UserService {
 
