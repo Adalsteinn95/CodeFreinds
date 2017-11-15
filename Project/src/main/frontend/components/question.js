@@ -43,7 +43,6 @@ class Question extends Component {
       score: this.props.questions.data.score,
       correct: this.props.questions.data.correct,
     });
-    console.log(event.target);
     if (event.target.textContent === this.props.questions.data.correct) {
       this.setState({
         responseText: 'Correct! You are kewl',
@@ -82,7 +81,6 @@ class Question extends Component {
 
   render() {
     const value = this.props.questions.data;
-    console.log('VALUE', value);
 
     if (!value || this.state.loading === true) {
       return (

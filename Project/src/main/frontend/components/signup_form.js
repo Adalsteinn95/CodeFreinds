@@ -45,7 +45,6 @@ class Signup extends Component {
       .then((result) => {
         let error = listenForError().payload
           .then((result) => {
-            console.log(result);
             if (!result.data) {
               this.setState({
                 login: true,
@@ -99,7 +98,6 @@ class Signup extends Component {
           }
         })
         .catch((error) => {
-          console.log(error);
         });
       })
       .catch((error) => {

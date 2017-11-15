@@ -119,7 +119,6 @@ public class GeoQuestions extends Question {
           answerCity = dest1;
         };
 
-        System.out.println(answerCity);
     }
 
 
@@ -128,8 +127,6 @@ public class GeoQuestions extends Question {
      * @param answer
      */
     public void compareDist(String answer){
-
-        System.out.println(answerCity);
 
         if (answer.equals(dest1)) {
             if (distance2 >= distance1) {
