@@ -115,6 +115,7 @@ class Signup extends Component {
   render() {
     var divStyle = {
       textAlign: 'center',
+      cursor: 'pointer',
     };
 
     var fontStyle = {
