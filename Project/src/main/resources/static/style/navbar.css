@@ -38,15 +38,17 @@ body {
 .about:hover {
   background: tomato;
 }
+.dropContain {
+  width: 100%;
+}
 
 .username {
-  text-align: center;
-  margin: auto 5vw;
-  max-width: 50px;
+  margin: 2vh auto;
 }
 .logout-form{
   padding:0;
 }
+
 .logout-button {
   margin:0;
   width: 100%;
