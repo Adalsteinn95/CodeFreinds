@@ -61,7 +61,7 @@ class UserPage extends Component {
             <button type="submit">Select</button>
           </form>
         </div>
-      )
+      );
     } else {
       return (
         <div>
