@@ -22,6 +22,16 @@ class UserPage extends Component {
     this.props.getUserPage();
   }
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      location: false,
+    };
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.comfirmLocation = this.comfirmLocation.bind(this);
+  }
 
   handleSubmit(e) {
     e.preventDefault();
@@ -30,11 +40,18 @@ class UserPage extends Component {
     });
 
     postLocation(e.target.location.value);
-
+    console.log(postLocation(e.target.location.value).payload);
     this.setState({
+      loading: true,
+    });
+    setTimeout(this.comfirmLocation, 2000);
+  }
+
+  comfirmLocation() {
+    this.setState({
+      location: true,
       loading: false,
     });
-
   }
 
   render() {
@@ -44,16 +61,23 @@ class UserPage extends Component {
           <Loading />
         </div>
       );
-    } else {
+    } else if (!this.state.location) {
       return (
         <div>
           <NavBar />
           <h1 className="title fade-in">Welcome to kewlkvis {this.props.user.data.name}</h1>
           <div>Select a starting loaction</div>
-          <form onSubmit={this.handleSubmit.bind(this)}>
+          <form onSubmit={this.handleSubmit}>
             <input name="location" type="text" />
             <button type="submit">Select</button>
           </form>
+        </div>
+      )
+    } else {
+      return (
+        <div>
+          <NavBar />
+          <h1 className="title fade-in">Welcome to kewlkvis {this.props.user.data.name}</h1>
           <Link className="question-title fade-in" to={'/question'} >Click me to get to the fun</Link>
         </div>
       );
