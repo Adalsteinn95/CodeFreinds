@@ -14,7 +14,6 @@ let SignuUpInputs = props => {
               <Field name="name" component="input" className="input form-control" type="text" placeholder="name" />
               <Field name="pass" component="input" className="input form-control" type="password" placeholder="password" />
               <Field name="email" component="input" className="input form-control" type="text" placeholder="email" />
-              <Field name="location" component="input" className="input form-control" type="text" placeholder="location" />
           </div>
             <button id="signupbutton"type="submit" className="btn btn-primary submit-button">All set!</button>
         </form>

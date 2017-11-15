@@ -32,7 +32,10 @@ public class QuestionControl {
     /**
      * Constructor
      */
-    public QuestionControl() {}
+    public QuestionControl(){
+        this.data = new QuestionCollection("London");
+
+    }
 
 
     /**

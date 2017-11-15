@@ -31,6 +31,7 @@ class Question extends Component {
 
     this.handleClick = this.handleClick.bind(this);
     this.getNewQuestion = this.getNewQuestion.bind(this);
+    this.handleLocationClick = this.handleLocationClick.bind(this);
   }
 
   handleClick(event) {
@@ -43,11 +44,15 @@ class Question extends Component {
       correct: this.props.questions.data.correct,
     });
     console.log(event.target);
-    if (event.target.innerHTML === this.props.questions.data.correct) {
-
+    if (event.target.textContent === this.props.questions.data.correct) {
+      this.setState({
+        responseText: 'Correct! You are kewl',
+      });
     }
     else {
-
+      this.setState({
+        responseText: 'Wrong! Correct answer was ' + this.props.questions.data.correct,
+      });
     }
 
     setTimeout(this.props.fetchQuestion, 2000);
@@ -57,6 +62,12 @@ class Question extends Component {
     });
 
     maybeUpdateHighScore(this.props.questions.data.score);
+  }
+  handleLocationClick(e) {
+    var url = e.target.textContent;
+    var finalUrl = 'https://en.wikipedia.org/wiki/' + url;
+    var win = window.open(finalUrl, '_blank');
+    win.focus();
   }
 
 
@@ -124,25 +135,28 @@ class Question extends Component {
     var responseContainer = {
       textAlign: 'center',
     };
+    var error = {
+      margin: '0',
+    };
 
 
     if (this.state.clicked && this.state.loading === false) {
       return (
         <div className="waiting-container">
           <div style={buttonContainer}>
-            <button className="answer" style={button} onClick={this.getNewQuestion}>Get new question</button>
+            <button className="answer" style={button} onClick={this.getNewQuestion}>Next question</button>
           </div>
           <div className="responseContainer" style={responseContainer}>
-            <h1 className = "error-item">{this.state.correct} was correct fucking idiot!</h1>
+            <h1 style={error}className = "question-title">{this.state.responseText}</h1>
           </div>
           <div style={mapContainerStyle} className="map-container">
-            <div style={mapItemStyle} className="map-item">
+            <div onClick={this.handleLocationClick} style={mapItemStyle} className="map-item">
               <h2 className="answer" >{this.state.city1}</h2>
-              <GoogleMap address={value.city1} currentAddress={value.currentCity}/>
+              <GoogleMap address={value.city1} currentAddress={value.currentCity} />
             </div>
-            <div style={mapItemStyle} className="map-item">
+            <div onClick={this.handleLocationClick} style={mapItemStyle} className="map-item">
               <h2 className="answer" >{this.state.city2}</h2>
-              <GoogleMap address={value.city2} currentAddress={value.currentCity}/>
+              <GoogleMap address={value.city2} currentAddress={value.currentCity} />
             </div>
           </div>
         </div>
@@ -157,8 +171,7 @@ class Question extends Component {
               <Answer country={value.country1} city={value.city1} />
               <Answer country={value.country2} city={value.city2} />
             </div>
-            <div>Score: {value.score}</div>
-            <div>Correct: {value.correct}</div>
+            <div className="score-style question-title fade-in">Score: {value.score}</div>
           </div>
         </div>
       );
