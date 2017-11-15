@@ -7,17 +7,6 @@ import NavBar from './navbar';
 
 class UserPage extends Component {
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      loading: false,
-
-    };
-
-  }
-
-
   componentDidMount() {
     this.props.getUserPage();
   }
