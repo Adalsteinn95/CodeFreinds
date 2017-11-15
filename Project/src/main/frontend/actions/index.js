@@ -10,8 +10,8 @@ export const LOGOUT_USER = 'logout_user';
 export const UPDATE_HIGHSCORE = 'update_highscore';
 export const GET_ERROR = 'get_error';
 
-// const ROOT_URL = 'https://kewlkvis.herokuapp.com/API';
-const ROOT_URL = 'http://localhost:8080/API';
+const ROOT_URL = 'https://kewlkvis.herokuapp.com/API';
+// const ROOT_URL = 'http://localhost:8080/API';
 
 export function fetchQuestion() {
   const request = axios.get(`${ROOT_URL}/question`);
