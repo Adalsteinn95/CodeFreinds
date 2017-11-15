@@ -2,7 +2,6 @@ body {
   margin: 0;
   padding: 0;
   max-width: 100%;
-  overflow: visible;
 }
 
 
@@ -25,7 +24,8 @@ body {
 .nav-right-side{
   width: 10vw;
   display: flex;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Overpass', sans-serif;
+  font-weight: 100;
   font-size: 1.2rem;
 
 }
@@ -53,10 +53,11 @@ body {
 .logout-button {
   margin:0;
   width: 100%;
-  color: black;
   /* margin-top: 20px; */
   font-size: 1.4rem;
   outline: none;
+  background-color: tomato;
+  color: white;
 
 }
 
@@ -71,12 +72,12 @@ body {
     cursor: pointer;
     height: 100%;
     display: flex;
+
 }
 
 
 .dropdown-item {
   text-align: center;
-  width: 100%;
 }
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content {
@@ -93,15 +94,22 @@ body {
 
 /* Links inside the dropdown */
 .dropdown-content * {
-    color: black;
+
     padding: 12px 16px;
     display: block;
 }
+.dropdown-content a {
+    color: black;
+}
 
 /* Change color of dropdown links on hover */
-.dropdown-content *:hover {
+.dropdown-content a:hover {
   color: white;
   background-color: tomato
+}
+.dropdown-content button:hover {
+  color: tomato;
+  background-color: white
 }
 
 /* Show the dropdown menu on hover */

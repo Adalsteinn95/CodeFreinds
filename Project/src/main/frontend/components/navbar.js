@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
 import { getUserPage } from '../actions';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import DropDown from './dropdown';
 
 class NavBar extends Component {
+  handleClick() {
+    e.preventDefault();
+    window.location.replace('../');
+  }
 
   render() {
     return (
       <div>
         <nav className="nav-container">
-          <a href="#" className="kewl-subtitle title">kewlkvis</a>
+          <Link to="/" onClick={this.handleClick.bind(this)} className="kewl-subtitle title">kewlkvis</Link>
           <div className="nav-right-side">
             <DropDown />
           </div>

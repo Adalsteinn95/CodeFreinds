@@ -30,7 +30,7 @@ public class QuestionControl {
     Hashtable convertedQuestion;
 
     public QuestionControl(){
-        //this.data = new QuestionCollection("London");
+        this.data = new QuestionCollection("London");
 
     }
 

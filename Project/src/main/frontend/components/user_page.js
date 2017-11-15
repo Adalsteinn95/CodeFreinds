@@ -45,6 +45,17 @@ class UserPage extends Component {
   }
 
   render() {
+    var divAlign = {
+      textAlign: 'center',
+      marginTop: '25vh',
+    };
+    var linkSize = {
+      fontSize: '8rem',
+    };
+    var inputStyle = {
+      width: '100%',
+    };
+
     if (!this.props.user.data || this.state.loading) {
       return (
         <div>
@@ -55,20 +66,22 @@ class UserPage extends Component {
       return (
         <div>
           <NavBar />
-          <h1 className="title fade-in">Welcome to kewlkvis {this.props.user.data.name}</h1>
-          <div>Select a starting loaction</div>
-          <form onSubmit={this.handleSubmit}>
-            <input name="location" type="text" />
-            <button type="submit">Select</button>
-          </form>
+          <div className="form-container fade-in signup">
+            <h2 className="location-subtitle subtitle">Select a kewl starting location {this.props.user.data.name}!</h2>
+            <form className="form" onSubmit={this.handleSubmit}>
+              <input style={inputStyle} className="input form-control" name="location" type="text" />
+              <button className="btn btn-primary submit-button" type="submit">Select</button>
+            </form>
+          </div>
         </div>
       );
     } else {
       return (
         <div>
           <NavBar />
-          <h1 className="title fade-in">Welcome to kewlkvis {this.props.user.data.name}</h1>
-          <Link className="question-title fade-in" to={'/question'} >Click me to get to the fun</Link>
+          <div style={divAlign}>
+            <Link style={linkSize}className="question-title fade-in answer" to={'/question'} >Let's get started!</Link>
+          </div>
         </div>
       );
     }
