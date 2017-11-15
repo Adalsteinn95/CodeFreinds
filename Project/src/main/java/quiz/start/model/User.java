@@ -47,7 +47,9 @@ public class User {
     }
 
     /*get and setters*/
-    public String getName(){ return this.userName; }
+    public String getName(){
+        return this.userName;
+    }
     public String getPass(){
         return this.password;
     }
@@ -55,8 +57,12 @@ public class User {
         return this.email;
     }
     public int getScore() { return this.score; }
-    public String getLocation() { return this.location; }
-    public boolean getLoginStatus() { return this.loginStatus; }
+    public String getLocation() {
+        return this.location;
+    }
+    public boolean getLoginStatus() {
+        return this.loginStatus;
+    }
 
     public void setName(String name) {
          this.userName = name;
@@ -64,10 +70,16 @@ public class User {
     public void setPass(String pass) {
          this.password = pass;
      }
-    public void setScore(int score) { this.score = score; }
+    public void setScore(int score) {
+        this.score = score;
+    }
     public void setEmail(String email) {
         this.email = email;
     }
-    public void setLocation(String location) { this.location = location; }
-    public void setloginStatus(boolean b) { this.loginStatus = b; }
+    public void setLocation(String location) {
+        this.location = location;
+    }
+    public void setloginStatus(boolean b) {
+        this.loginStatus = b;
+    }
 }

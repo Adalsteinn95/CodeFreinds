@@ -11,6 +11,9 @@ class Profile extends Component {
   }
 
   render() {
+    var divStyle = {
+        textAlign: 'center',
+    };
     if (!this.props.user.data) {
       return (
         <div>
@@ -19,7 +22,7 @@ class Profile extends Component {
       );
     } else {
       return (
-        <div>
+        <div style={divStyle}>
           <NavBar />
           <h1 className="title">Hello {this.props.user.data.name}</h1>
           <div className="question-title fade-in">Your highscore is: {this.props.user.data.score}</div>

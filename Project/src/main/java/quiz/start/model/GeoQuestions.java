@@ -1,14 +1,15 @@
-
 package quiz.start.model;
 
 import org.springframework.web.client.RestTemplate;
 import quiz.start.services.GeoService;
-
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * Geography question class
+ */
 public class GeoQuestions extends Question {
 
     private String currentLoc;
@@ -31,18 +32,16 @@ public class GeoQuestions extends Question {
 
     private Random r;
 
-
-    /*API*/
+    /**
+     * API
+     */
     GeoService api;
-
 
     /*Cities and countries */
     private String[] allobjects;
 
-
     private String[] allcountries;
     private String[] allcities;
-
 
     /*random values*/
     int randomNum;
@@ -55,16 +54,15 @@ public class GeoQuestions extends Question {
     /*Answer country*/
     public String answerCity;
 
-
-
+    /**
+     * Constructor for geoquestion
+     * @param location
+     */
     public GeoQuestions(String location){
         super();
 
-
-
         /*API call to get all available cities*/
         RestTemplate restTemplate = new RestTemplate();
-
 
         Hashtable cities = restTemplate.getForObject("https://notendur.hi.is/~aip7/API/countries.json", Hashtable.class);
 
@@ -122,19 +120,19 @@ public class GeoQuestions extends Question {
         };
 
         System.out.println(answerCity);
-
-
     }
 
 
+    /**
+     * Function to calculate distances between cities
+     * @param answer
+     */
     public void compareDist(String answer){
-
-
 
         System.out.println(answerCity);
 
-        if(answer.equals(dest1)){
-            if(distance2 >= distance1){
+        if (answer.equals(dest1)) {
+            if (distance2 >= distance1) {
                 score++;
                 currentLoc = dest1;
                 currentCountry = allcountries[randomNum];
@@ -144,8 +142,8 @@ public class GeoQuestions extends Question {
             }
         }
 
-        if(answer.equals(dest2)){
-            if(distance1 >= distance2){
+        if (answer.equals(dest2)) {
+            if (distance1 >= distance2) {
                 score++;
                 currentLoc = dest2;
                 currentCountry = allcountries[randomNum2];
@@ -154,7 +152,6 @@ public class GeoQuestions extends Question {
               score = 0;
             }
         }
-
 
 
         /*Random generator*/
@@ -176,7 +173,6 @@ public class GeoQuestions extends Question {
         } else {
           answerCity = dest1;
         };
-
     }
 
     public String getDest1() {

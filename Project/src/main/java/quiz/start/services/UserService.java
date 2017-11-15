@@ -6,9 +6,12 @@ package quiz.start.services;
  */
 
 import quiz.start.model.User;
-
 import java.util.List;
 
+
+/**
+ * Service to handle database actions
+ */
 public interface UserService {
 
     /**
@@ -42,7 +45,10 @@ public interface UserService {
     boolean validateName(String name);
 
     /**
+     * @param email
      *
+     * Checks if email exists in the database
+     * @return boolean
      */
     boolean validateEmail(String email);
 
