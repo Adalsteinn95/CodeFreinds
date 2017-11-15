@@ -38,7 +38,7 @@ public class HttpRequestTest {
      */
     @Test
     public void HttpRequestTest() throws Exception {
-        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/heima",
+        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/",
                 String.class)).contains("container");
     }
 }
