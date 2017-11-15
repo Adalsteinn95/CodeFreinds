@@ -23,13 +23,13 @@ class Signup extends Component {
     this.handleClick = this.handleClick.bind(this);
     this.handleClick2 = this.handleClick2.bind(this);
   }
-  handleClick(event){
+  handleClick(event) {
     this.setState({
       alrdAccount: true,
     });
   }
 
-  handleClick2(event){
+  handleClick2(event) {
     this.setState({
       alrdAccount: false,
     });
@@ -73,8 +73,6 @@ class Signup extends Component {
           loading: false,
         });
       });
-
-
   }
 
   submitLogin = (values) => {
@@ -102,7 +100,7 @@ class Signup extends Component {
         })
         .catch((error) => {
           console.log(error);
-        })
+        });
       })
       .catch((error) => {
         this.setState({
@@ -144,8 +142,8 @@ class Signup extends Component {
           );
     }
 
-    if (this.state.alrdAccount){
-      return(
+    if (this.state.alrdAccount) {
+      return (
         <div>
           <NavBar />
           <div className="signup-container">
@@ -172,7 +170,7 @@ class Signup extends Component {
                 </div>
                 <SignuUpInputs onSubmit={this.submitSignup} />
                 <div onClick={this.handleClick} style={divStyle}>
-                  <a style={fontStyle} className="subtitle">Click here if you already have an account!</a>
+                  <a style={fontStyle} className="subtitle">Click here if you're kewl and already have an account!</a>
                 </div>
               </div>
             </div>
