@@ -1,7 +1,5 @@
 package quiz.start.controller;
-import com.sun.org.apache.regexp.internal.RE;
-import org.json.JSONException;
-import org.json.JSONObject;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -10,10 +8,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import quiz.start.model.User;
 import quiz.start.services.UserService;
-
 import javax.validation.Valid;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author Aðalsteinn Ingi Pálsson - aip7@hi.is
@@ -21,7 +17,8 @@ import java.util.List;
  *                    Fannar Gauti Guðmundsson - fgg2@hi.is
  *                    Daníel Guðnason - dag27@hi.is
  *
- * Control class for user functions
+ * User control API
+ *
  * @date october 2017
  */
 
@@ -29,31 +26,57 @@ import java.util.List;
 @RequestMapping("/API")
 public class UserControl {
 
+    /**
+     * Constructor
+     */
     public UserControl() {}
 
+    /**
+     * Current logged-in user
+     */
     private User currentUser = new User();
 
+    /**
+     * Error message for user-related errors.
+     * Hosted on /API/error
+     */
     private String globalErrorMessage = null;
 
+    /**
+     * Service for handling user database actions
+     */
     @Autowired
     UserService userService;
 
+    /**
+     * Password encoder constructor
+     * @return BCryptPasswordEncoder
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    /**
+     * PasswordEncoder
+     */
     @Autowired
     private PasswordEncoder passwordEncoder;
 
     /**
-     * shows the home page
+     * Nothing displayed on the url /API
      * @return String
      */
     @RequestMapping("")
-    public String home() { return ""; }
+    public String home() {
+        return "";
+    }
 
 
+    /**
+     * Handler for the frontend to check for a user related error
+     * @return String
+     */
     @RequestMapping(value = "/error", method = RequestMethod.GET)
     public String errorStatus() {
         return globalErrorMessage;
@@ -62,9 +85,10 @@ public class UserControl {
 
     /**
      * @param user
+     * @param errors
      *
-     * function to handle user signups
-     * @return String
+     * Function that handles and user signups.
+     * Calls userService for validation and updates /API/error accordingly.
      */
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public void signUp(@Valid @RequestBody User user, BindingResult errors) {
@@ -91,9 +115,8 @@ public class UserControl {
 
     /**
      * @param user
-     *
-     * logs in user, will be void or boolean in the future
-     * @return String
+     * Function to handle user logins. Calls userService for validation
+     * and updates /API/error accordingly.
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public void login(@RequestBody User user){
@@ -105,73 +128,75 @@ public class UserControl {
             currentUser = tmp;
             globalErrorMessage = "";
         }
-
         else {
             globalErrorMessage = "Notendanafn eða lykilorð er rangt";
         }
     }
 
     /**
-     * logs out user
      * @param user
+     *
+     * Function to log out active user. Updates currentUser to a empty User.
      */
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
     public void logout(@RequestBody User user) {
+
         user.setloginStatus(false);
         userService.update(user);
-
         currentUser = new User();
     }
 
     /**
+     * Displays all users and userdata
+     *
      * @return Arraylist<User>
      */
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public ArrayList<User> showUsers() {
 
         ArrayList<User> tmp = (ArrayList<User>) userService.getAllUsers();
-
         return tmp;
     }
 
     /**
      * @param name
      *
-     * displays User object as json
-     * @return
+     * Displays the User object of a given user
+     * @return User
      */
     @RequestMapping(value = "/users/{userName}", method = RequestMethod.GET)
     public User showUser(@PathVariable(value = "userName") String name) {
 
         User tmp = userService.getUser(name);
-
         User u = new User(tmp.getName(), tmp.getEmail(), tmp.getPass(), tmp.getLocation(), tmp.getScore(), tmp.getLoginStatus());
-
         return u;
     }
 
 
     /**
-     * returns the object for the current user if logged in
+     * Returns the User object for the current user if logged in
      * @return User
      */
      
     @RequestMapping(value = "/currentuser", method = RequestMethod.GET)
     public User showCurrentUser() {
 
-
         return currentUser;
     }
 
+    /**
+     * @param newScore
+     *
+     * Updates score in the database if the new score is higher
+     */
     @RequestMapping(value = "/updateScore", method = RequestMethod.POST)
     public void updateScore(@RequestBody String newScore) {
+
         int intScore = Integer.parseInt(newScore.substring(0, newScore.length() - 1));
 
         if (intScore > currentUser.getScore()) {
           currentUser.setScore(intScore);
         }
         userService.update(currentUser);
-
-
     }
 }
