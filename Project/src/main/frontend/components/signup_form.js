@@ -119,11 +119,13 @@ class Signup extends Component {
     };
 
     var fontStyle = {
+      color: '#FFEB3B',
       background: 'linear-gradient(to right, #FFEB3B, #ede96c)',
       fontSize: '3em',
       fontFamily: 'Lobster, cursive',
       margin: '0 auto',
-      backgroundClip: 'text',
+      WebkitBackgroundClip: 'text',
+      WebkitTextFillColor: 'transparent',
 
     };
 

@@ -7,7 +7,6 @@ import NavBar from './navbar';
 
 class UserPage extends Component {
 
-
   componentDidMount() {
     this.props.getUserPage();
   }
