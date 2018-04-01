@@ -34,7 +34,7 @@ mvn spring-boot:run
 ## Built With
 
 * [React](https://reactjs.org/) - The front end framework used
-* [Spring](https://spring.io/) - the back end framewaork used
+* [Spring](https://spring.io/) - the back end framework used
 * [Maven](https://maven.apache.org/) - Dependency Management
 * [Redux](https://redux.js.org/) - Used as an middleware with react and spring 
 
